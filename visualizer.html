@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Algorithm Visualizer | Algorithm Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="visualizer.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+
+            <span class="logo-icon">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Algorithm<span class="logo-highlight">Hub</span>
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links" id="navLinks">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="algorithms.html">
+                Algorithms
+            </a>
+
+            <a href="explanation.html" data-auth="required">
+                Explanation
+            </a>
+
+            <a href="visualizer.html" class="active" data-auth="required">
+                Visualizer
+            </a>
+
+            <a href="practice.html" data-auth="required">
+                Practice
+            </a>
+            <a href="about.html">
+                About
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <button
+                class="theme-btn"
+                id="themeBtn"
+                aria-label="Toggle theme"
+            >
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+
+            <a
+                href="signin.html"
+                class="nav-button"
+                id="navAccountLink"
+            >
+                Sign In
+            </a>
+
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     VISUALIZER HERO
+===================================================== -->
+
+<main>
+
+
+<section class="visualizer-hero">
+
+    <div class="visualizer-grid-bg"></div>
+
+    <div class="visualizer-glow"></div>
+
+
+    <div class="visualizer-heading">
+
+        <div class="visualizer-badge">
+
+            <span></span>
+
+            INTERACTIVE LAB
+
+        </div>
+
+
+        <h1>
+
+            Algorithm
+            <span>Visualizer</span>
+
+        </h1>
+
+
+        <p>
+
+            Don't just read algorithms.
+            Watch every operation happen in real time.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VISUALIZER WORKSPACE
+===================================================== -->
+
+<section class="visualizer-section">
+
+
+    <!-- TOP CONTROL BAR -->
+
+    <div class="visualizer-toolbar">
+
+
+        <div class="algorithm-selector">
+
+            <label>
+                ALGORITHM
+            </label>
+
+
+            <div class="select-wrapper">
+
+                <i class="fa-solid fa-code-branch"></i>
+
+                <select id="algorithmSelect">
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="input-control">
+
+            <label>
+                ARRAY
+            </label>
+
+            <input
+                type="text"
+                id="arrayInput"
+                value="8, 3, 6, 2, 9, 4, 7"
+                placeholder="8, 3, 6, 2..."
+            >
+
+        </div>
+
+        <div class="input-control target-control" id="targetControl" hidden>
+            <label for="targetInput">SEARCH TARGET</label>
+            <input type="number" id="targetInput" value="7" step="1">
+        </div>
+
+        <div class="visualizer-mode-note" id="modeNote">Array mode · use Start, Step, Pause, or Reset.</div>
+
+        <button
+            class="generate-btn"
+            id="generateBtn"
+        >
+
+            <i class="fa-solid fa-shuffle"></i>
+
+            Generate
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         MAIN WORKSPACE
+    ================================================= -->
+
+    <div class="visualizer-layout">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="visualizer-main">
+
+
+            <!-- STATUS -->
+
+            <div class="visualizer-status">
+
+
+                <div class="status-left">
+
+                    <span
+                        class="status-indicator"
+                        id="statusIndicator"
+                    ></span>
+
+
+                    <div>
+
+                        <strong id="statusText">
+                            Ready to visualize
+                        </strong>
+
+                        <small id="stepText">
+                            Step 0 of 0
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="operation-stats">
+
+                    <div>
+
+                        <span>
+                            Comparisons
+                        </span>
+
+                        <strong id="comparisonCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Swaps
+                        </span>
+
+                        <strong id="swapCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ARRAY VISUALIZATION -->
+
+            <div class="visualizer-canvas">
+
+
+                <div class="canvas-grid"></div>
+
+
+                <div
+                    class="array-container"
+                    id="arrayContainer"
+                ></div>
+
+
+                <div class="empty-state" id="emptyState" role="status" aria-live="polite">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <span id="emptyStateText">Enter values to begin</span>
+
+                </div>
+
+
+                <!-- Pointer labels -->
+
+                <div
+                    class="pointer-label pointer-left"
+                    id="pointerLeft"
+                >
+                    i
+                </div>
+
+
+                <div
+                    class="pointer-label pointer-right"
+                    id="pointerRight"
+                >
+                    j
+                </div>
+
+
+            </div>
+
+
+
+            <!-- CONTROLS -->
+
+            <div class="control-panel">
+
+
+                <button
+                    class="control-btn primary-control"
+                    id="startBtn"
+                >
+
+                    <i class="fa-solid fa-play"></i>
+
+                    <span>
+                        Start
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="control-btn"
+                    id="stepBtn"
+                >
+
+                    <i class="fa-solid fa-forward-step"></i>
+
+                    Step
+
+                </button>
+
+
+                <button
+                    class="control-btn"
+                    id="pauseBtn"
+                >
+
+                    <i class="fa-solid fa-pause"></i>
+
+                    Pause
+
+                </button>
+
+
+                <button
+                    class="control-btn"
+                    id="resetBtn"
+                >
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Reset
+
+                </button>
+
+
+                <div class="speed-control">
+
+                    <label>
+                        SPEED
+                    </label>
+
+                    <input
+                        type="range"
+                        id="speedRange"
+                        min="100"
+                        max="1500"
+                        value="700"
+                    >
+
+                    <span id="speedValue">
+                        700ms
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LEGEND -->
+
+            <div class="visualizer-legend">
+
+
+                <div>
+
+                    <span class="legend-box default-box"></span>
+
+                    Unsorted
+
+                </div>
+
+
+                <div>
+
+                    <span class="legend-box compare-box"></span>
+
+                    Comparing
+
+                </div>
+
+
+                <div>
+
+                    <span class="legend-box swap-box"></span>
+
+                    Swapping
+
+                </div>
+
+
+                <div>
+
+                    <span class="legend-box sorted-box"></span>
+
+                    Sorted
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             RIGHT SIDEBAR
+        ================================================= -->
+
+        <aside class="visualizer-sidebar">
+
+
+            <!-- ALGORITHM INFO -->
+
+            <div class="info-card">
+
+
+                <div class="info-card-header">
+
+                    <span class="info-icon">
+
+                        <i class="fa-solid fa-terminal"></i>
+
+                    </span>
+
+
+                    <div>
+
+                        <span>
+                            CURRENT ALGORITHM
+                        </span>
+
+                        <h2 id="algorithmTitle">
+                            Bubble Sort
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <p id="algorithmDescription">
+
+                    Repeatedly compares adjacent elements
+                    and swaps them when they are in the
+                    wrong order.
+
+                </p>
+
+
+                <div class="complexity-box">
+
+
+                    <div>
+
+                        <span>
+                            BEST
+                        </span>
+
+                        <strong id="bestComplexity">
+                            O(n)
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            AVERAGE
+                        </span>
+
+                        <strong id="averageComplexity">
+                            O(n²)
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            WORST
+                        </span>
+
+                        <strong id="worstComplexity">
+                            O(n²)
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            SPACE
+                        </span>
+
+                        <strong id="spaceComplexity">
+                            O(1)
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PSEUDOCODE -->
+
+            <div class="info-card pseudocode-card">
+
+
+                <div class="card-title">
+
+                    <span>
+                        <i class="fa-solid fa-code"></i>
+                        PSEUDOCODE
+                    </span>
+
+                    <span class="language-tag">
+                        LOGIC
+                    </span>
+
+                </div>
+
+
+                <pre id="pseudocode"><code>for each element
+    compare adjacent values
+    if left > right
+        swap them
+repeat until sorted</code></pre>
+
+            </div>
+
+
+
+            <!-- LIVE OPERATION -->
+
+            <div class="operation-card">
+
+
+                <span class="operation-label">
+                    LIVE OPERATION
+                </span>
+
+
+                <div
+                    class="operation-text"
+                    id="operationText"
+                >
+
+                    Press Start to begin
+
+                </div>
+
+
+                <div class="operation-progress">
+
+                    <div
+                        id="progressBar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+    </div>
+
+
+
+    <!-- =================================================
+         LEARNING SECTION
+    ================================================= -->
+
+    <section class="visualizer-learning">
+
+
+        <div class="learning-heading">
+
+            <span class="section-label">
+                LEARN WHILE VISUALIZING
+            </span>
+
+            <h2>
+                Understand the
+                <span>logic.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="learning-grid">
+
+
+            <article class="learning-card">
+
+                <div class="learning-number">
+                    01
+                </div>
+
+                <i class="fa-solid fa-eye"></i>
+
+                <h3>
+                    Watch
+                </h3>
+
+                <p>
+                    Observe each comparison and movement
+                    instead of imagining the process.
+                </p>
+
+            </article>
+
+
+            <article class="learning-card">
+
+                <div class="learning-number">
+                    02
+                </div>
+
+                <i class="fa-solid fa-brain"></i>
+
+                <h3>
+                    Understand
+                </h3>
+
+                <p>
+                    Connect the visual movement with the
+                    algorithm's actual logic.
+                </p>
+
+            </article>
+
+
+            <article class="learning-card">
+
+                <div class="learning-number">
+                    03
+                </div>
+
+                <i class="fa-solid fa-code"></i>
+
+                <h3>
+                    Practice
+                </h3>
+
+                <p>
+                    Change the input array and experiment
+                    with different algorithm behaviours.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <div class="footer-brand">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <span class="logo-icon">
+                    &lt;/&gt;
+                </span>
+
+                <span>
+                    Algorithm<span class="logo-highlight">
+                        Hub
+                    </span>
+                </span>
+
+            </a>
+
+
+            <p>
+                Learn. Visualize. Practice.
+                Master algorithms.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+
+            <div>
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="algorithms.html">
+                    Algorithms
+                </a>
+
+                <a href="visualizer.html">
+                    Visualizer
+                </a>
+
+                <a href="#">
+                    Practice
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Learn
+                </h4>
+
+                <a href="#">
+                    Sorting
+                </a>
+
+                <a href="#">
+                    Searching
+                </a>
+
+                <a href="#">
+                    Graphs
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Algorithm Hub
+                </h4>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="#">
+                    About
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 Algorithm Hub.
+            Built for learners.
+        </span>
+
+
+        <span>
+            Learn
+            <i class="fa-solid fa-code"></i>
+            Visualize
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<script type="module" src="script.js"></script>
+<script src="data/arrays-strings.js"></script>
+<script src="data/searching.js"></script>
+<script src="data/sorting.js"></script>
+<script src="data/recursion.js"></script>
+<script src="data/linked-lists.js"></script>
+<script src="data/stack-queue.js"></script>
+<script src="data/trees.js"></script>
+<script src="data/graphs.js"></script>
+<script src="data/dynamic-programming.js"></script>
+<script src="data/greedy.js"></script>
+<script src="data/math-bit.js"></script>
+<script src="data/advanced.js"></script>
+<script src="data/explanations.js"></script>
+<script type="module" src="visualizer-core.js"></script>
+
+</body>
+
+</html>

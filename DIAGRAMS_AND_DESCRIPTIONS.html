@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Hub — Software Engineering Diagrams & Descriptions</title>
+  <!-- Mermaid.js for live vector diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    header {
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      margin-bottom: 36px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 28px;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+    header p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+      overflow: hidden;
+      page-break-inside: avoid;
+    }
+    .section-header {
+      padding: 20px 28px;
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-header h2 {
+      font-size: 20px;
+      color: #1e293b;
+    }
+    .section-header .tag {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+      background: #eff6ff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #bfdbfe;
+    }
+    .image-container {
+      padding: 24px;
+      text-align: center;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .mermaid-box {
+      margin-top: 15px;
+      padding: 20px;
+      background: #f8fafc;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    .description-container {
+      padding: 28px;
+      background: #fafafa;
+    }
+    .description-container h3 {
+      font-size: 17px;
+      color: #0f172a;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--primary);
+      display: inline-block;
+    }
+    .description-container p {
+      color: #334155;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+    .description-container ul, .description-container ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+      color: #334155;
+      font-size: 14px;
+    }
+    .description-container li {
+      margin-bottom: 6px;
+    }
+    .copy-btn {
+      float: right;
+      padding: 6px 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .copy-btn:hover {
+      background: var(--primary-dark);
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .section-card { box-shadow: none; border: 1px solid #ccc; margin-bottom: 25px; }
+      .copy-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Algorithm Hub — Software Engineering Report Artifacts</h1>
+    <p>Complete Architecture Diagrams & Academic Descriptions for Sections 3.6 & 3.7</p>
+    <span class="badge">B.Tech / MCA Project Submission Ready</span>
+  </header>
+
+  <!-- 3.6 SDLC -->
+  <div class="section-card" id="sec-3-6">
+    <div class="section-header">
+      <h2>3.6 Detailed Project Life Cycle (SDLC)</h2>
+      <span class="tag">Process Model</span>
+    </div>
+    <div class="image-container">
+      <img src="https://raw.githubusercontent.com/mermaid-js/mermaid/develop/packages/mermaid/src/assets/logo.svg" style="display:none;" alt="">
+      <div class="mermaid-box">
+        <div class="mermaid">
+flowchart LR
+    A["1. Requirement Analysis & Feasibility"] --> B["2. System & Architecture Design"]
+    B --> C["3. Iterative Implementation"]
+    C --> D["4. Verification & Testing"]
+    D --> E["5. Deployment & Packaging"]
+    E --> F["6. Maintenance & Enhancement"]
+    F -. Iterative Loop .-> C
+        </div>
+      </div>
+    </div>
+    <div class="description-container">
+      <h3>Description: Software Development Life Cycle (SDLC)</h3>
+      <p>The engineering of <strong>Algorithm Hub</strong> adopted an <strong>Iterative and Incremental Agile Life Cycle Model</strong>. Due to the high interaction complexity between the dynamic DOM/Canvas algorithm visualization, the external compiler proxy, and the sequential learning management database, an iterative approach offered significant advantages over traditional linear models (such as Waterfall).</p>
+      <ul>
+        <li><strong>Phase 1 — Requirement Analysis & Planning:</strong> Identified student requirements in data structures and algorithms pedagogy. Curated a comprehensive catalog of 93 algorithms across 12 distinct DSA domains, and planned the 30-day sequential syllabus.</li>
+        <li><strong>Phase 2 — System & Architectural Design:</strong> Designed the RESTful API contract, multi-page frontend routing, and a normalized relational database schema in SQLite enforcing foreign key cascades. Formulated the animation pipeline for step-by-step state playback.</li>
+        <li><strong>Phase 3 — Iterative Implementation:</strong> Executed across 5 dedicated development sprints, delivering the catalog library, interactive visualizers (Bubble, Merge, Quick, Dijkstra, BST), the remote compiler integration via Wandbox API, and the student learning management engine.</li>
+        <li><strong>Phase 4 — Verification & Testing:</strong> Executed automated backend integration tests validating sequential day unlock logic, activity test case checks, passing score thresholds (&ge; 70%), and JWT token revocation upon logout.</li>
+        <li><strong>Phase 5 — Packaging & Deployment:</strong> Built optimized production assets using Vite and provided one-click initialization scripts (<code>START-ALGORITHM-HUB.bat</code>) for portable execution.</li>
+        <li><strong>Phase 6 — Maintenance & Evolution:</strong> Monitored catalog complexity bounds, corrected recursion stack analysis, and mapped future extensions for containerized cloud deployment.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3.7.1 DFD -->
+  <div class="section-card" id="sec-3-7-1">
+    <div class="section-header">
+      <h2>3.7.1 Data Flow Diagrams (DFD)</h2>
+      <span class="tag">Level 0 & Level 1</span>
+    </div>
+    <div class="image-container">
+      <div class="mermaid-box">
+        <div class="mermaid">
+flowchart TD
+    User([Student / Learner])
+    Compiler([Wandbox Remote Compiler API])
+
+    D1[(D1: Users Store)]
+    D2[(D2: Learning Progress Store)]
+    D3[(D3: Quiz & Assessment Attempts)]
+    D4[(D4: Notifications)]
+
+    User -->|Credentials| P1[1.0 User Authentication & Session]
+    P1 -->|Register / Check Hash| D1
+    P1 -->|Issue JWT Token| User
+
+    User -->|Algorithm Search & Views| P2[2.0 Catalog & Explanation Engine]
+    P2 -->|Content & Complexity| User
+
+    User -->|Animation Play/Step Controls| P3[3.0 Interactive Visualizer Engine]
+    P3 -->|Rendered State Frames| User
+
+    User -->|Code, Lang & Input| P4[4.0 Practice Lab Compiler Relay]
+    P4 -->|HTTP Request| Compiler
+    Compiler -->|Stdout / Errors| P4
+    P4 -->|Terminal Output| User
+
+    User -->|Progress / Complete Concept| P5[5.0 30-Day Curriculum Tracker]
+    P5 <-->|Read & Update State| D2
+    P5 -->|Generate Alerts| D4
+    D4 -->|Alerts Drawer| User
+
+    User -->|10 Answers / Activity| P6[6.0 Quiz & Assessment Grader]
+    P6 -->|Compute Score & Grade| P6
+    P6 -->|Record Score & Unlock| D3
+    P6 -->|Update Pass Status| D2
+    P6 -->|Result & Explanation| User
+        </div>
+      </div>
+    </div>
+    <div class="description-container">
+      <h3>Description: Data Flow Architecture</h3>
+      <p>The <strong>Data Flow Diagram (DFD)</strong> depicts the movement and transformation of data across Algorithm Hub's modular subsystems, illustrating how input provided by external entities produces concrete system responses and updates persistent stores:</p>
+      <ul>
+        <li><strong>Process 1.0 (Authentication & Session):</strong> Receives student signup/signin requests. Passwords are securely hashed with <code>bcrypt</code> and verified against datastore <code>D1 (Users)</code>. Valid sessions receive a signed JSON Web Token (JWT).</li>
+        <li><strong>Process 2.0 & 3.0 (Catalog & Visualizer Engine):</strong> Serves static algorithmic metadata, pseudocode, and structured time/space bounds. The Visualizer processes client control inputs (play, pause, step forward, animation speed) and computes state transitions.</li>
+        <li><strong>Process 4.0 (Practice Lab Compiler Relay):</strong> Encapsulates client source code, language choice, and standard input, relaying it securely via HTTPS to the remote Wandbox compiler service. Execution results, errors, and execution timings are streamed back to the student terminal.</li>
+        <li><strong>Process 5.0 & 6.0 (Curriculum Tracker & Grader):</strong> Enforces the strict sequential unlock rules of the 30-day curriculum. Submissions for daily activities and 10-question multiple-choice quizzes are evaluated against server-side answer keys. Passing scores (&ge; 70%) trigger milestone evaluation and write unlock events to <code>D2 (Learning Progress)</code> and <code>D4 (Notifications)</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3.7.2 ERD -->
+  <div class="section-card" id="sec-3-7-2">
+    <div class="section-header">
+      <h2>3.7.2 Entity Relationship Diagram (ERD)</h2>
+      <span class="tag">Database Relational Schema</span>
+    </div>
+    <div class="image-container">
+      <div class="mermaid-box">
+        <div class="mermaid">
+erDiagram
+    USERS ||--o{ LEARNING_PROGRESS : tracks
+    USERS ||--o{ QUIZ_ATTEMPTS : submits
+    USERS ||--o{ ACTIVITY_ATTEMPTS : records
+    USERS ||--o{ ASSESSMENT_ATTEMPTS : undertakes
+    USERS ||--o{ NOTIFICATIONS : receives
+
+    USERS {
+        TEXT id PK
+        TEXT name
+        TEXT email UK
+        TEXT password
+        TEXT createdAt
+    }
+
+    LEARNING_PROGRESS {
+        TEXT userId PK, FK
+        INTEGER day PK
+        TEXT startedAt
+        TEXT conceptCompletedAt
+        TEXT activityCompletedAt
+        INTEGER dailyQuizPassed
+        REAL latestScore
+        TEXT completedAt
+    }
+
+    QUIZ_ATTEMPTS {
+        TEXT id PK
+        TEXT userId FK
+        INTEGER day
+        REAL score
+        INTEGER passed
+        TEXT submittedAt
+    }
+
+    ACTIVITY_ATTEMPTS {
+        TEXT id PK
+        TEXT userId FK
+        INTEGER day
+        TEXT answer
+        INTEGER accepted
+        TEXT submittedAt
+    }
+
+    ASSESSMENT_ATTEMPTS {
+        TEXT id PK
+        TEXT userId FK
+        TEXT assessmentId
+        REAL score
+        INTEGER passed
+        TEXT submittedAt
+    }
+
+    NOTIFICATIONS {
+        TEXT id PK
+        TEXT notificationKey UK
+        TEXT userId FK
+        INTEGER day
+        TEXT message
+        TEXT createdAt
+        TEXT readAt
+    }
+
+    REVOKED_TOKENS {
+        TEXT tokenHash PK
+        TEXT expiresAt
+    }
+        </div>
+      </div>
+    </div>
+    <div class="description-container">
+      <h3>Description: Relational Schema & Entity Relationships</h3>
+      <p>The <strong>Entity Relationship Diagram (ERD)</strong> documents the physical data model implemented in the SQLite database (<code>backend/data/algorithm-hub.db</code>). Relational integrity is enforced using primary keys, foreign keys, and <code>ON DELETE CASCADE</code> actions:</p>
+      <ul>
+        <li><strong>USERS Entity:</strong> The central identity table storing UUIDs (<code>id</code>), student names, unique verified email addresses, bcrypt-hashed credentials, and creation timestamps.</li>
+        <li><strong>LEARNING_PROGRESS Entity:</strong> Maintains composite primary key <code>(userId, day)</code> where <code>day &isin; [1, 30]</code>. Tracks stage completion timestamps (<code>startedAt</code>, <code>conceptCompletedAt</code>, <code>activityCompletedAt</code>, <code>completedAt</code>), quiz status flag (<code>dailyQuizPassed</code>), and recent percentage scores.</li>
+        <li><strong>QUIZ_ATTEMPTS & ASSESSMENT_ATTEMPTS Entities:</strong> Store historical logs of all daily 10-question quiz attempts and separate milestone assessments (Days 7, 14, 21, and 30), enabling longitudinal score trend analysis.</li>
+        <li><strong>ACTIVITY_ATTEMPTS Entity:</strong> Preserves student submissions for hands-on programming challenges, recording the submitted answer and validation outcome (<code>accepted = 1 or 0</code>).</li>
+        <li><strong>NOTIFICATIONS Entity:</strong> Persists personalized alerts and milestone notifications per student with an unread/read state tracker (<code>readAt</code>).</li>
+        <li><strong>REVOKED_TOKENS Entity:</strong> Maintains SHA-256 hashes of invalidated JWT session tokens to prevent replay attacks following user sign-out.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3.7.3 Activity Diagram -->
+  <div class="section-card" id="sec-3-7-3">
+    <div class="section-header">
+      <h2>3.7.3 Activity Diagram</h2>
+      <span class="tag">Behavioral Workflow</span>
+    </div>
+    <div class="image-container">
+      <div class="mermaid-box">
+        <div class="mermaid">
+flowchart TD
+    Start((Start)) --> AuthCheck{Authenticated?}
+    AuthCheck -- No --> SignIn[Sign In / Sign Up]
+    SignIn --> ValidateCreds{Credentials Valid?}
+    ValidateCreds -- No --> SignIn
+    ValidateCreds -- Yes --> IssueToken[Issue JWT Token]
+    IssueToken --> Dashboard[Open 30-Day Dashboard]
+    AuthCheck -- Yes --> Dashboard
+
+    Dashboard --> SelectDay[Select Available Day N]
+    SelectDay --> S1[Stage 1: Read Concept]
+    S1 --> S2[Stage 2: Study Pseudocode & Complexity]
+    S2 --> S3[Stage 3: Interactive Visualizer]
+    S3 --> S4[Stage 4: Complete Hands-on Practice]
+    
+    S4 --> SubmitAct[Submit Activity Expected Output]
+    SubmitAct --> CheckAct{Matches Server Test Case?}
+    CheckAct -- No --> S4
+    CheckAct -- Yes --> S5[Stage 5: Attempt 10-Question Daily Quiz]
+    
+    S5 --> GradeQuiz{Quiz Score >= 70%?}
+    GradeQuiz -- No (Failed) --> S5
+    GradeQuiz -- Yes (Passed) --> MilestoneCheck{Is Milestone Day?\n(Day 7, 14, 21, 30)}
+    
+    MilestoneCheck -- Yes --> MilestoneAssessment[Take 10-Question Milestone Assessment]
+    MilestoneAssessment --> GradeMilestone{Milestone Score >= 70%?}
+    GradeMilestone -- No --> MilestoneAssessment
+    GradeMilestone -- Yes --> S6[Stage 6: Review Key Takeaways]
+    
+    MilestoneCheck -- No --> S6
+    S6 --> CompleteDay[Mark Day Completed in DB]
+    CompleteDay --> UnlockNext[Unlock Day N+1 & Issue Notification]
+    UnlockNext --> EndState(((Day Cleared)))
+        </div>
+      </div>
+    </div>
+    <div class="description-container">
+      <h3>Description: End-to-End Activity Flow</h3>
+      <p>The <strong>UML Activity Diagram</strong> maps the dynamic behavioral logic and sequential workflow experienced by students on the platform:</p>
+      <ul>
+        <li><strong>Authentication Gate:</strong> Visitors can browse the catalog and run visualizers freely. Entering the 30-day curriculum triggers an authentication check; valid JWT tokens grant direct entry to the dashboard.</li>
+        <li><strong>6-Stage Daily Pedagogical Loop:</strong> Every day adheres to a structured learning pipeline: (1) Concept Overview &rarr; (2) Detailed Pseudocode & Invariants &rarr; (3) Interactive Canvas/DOM Visualizer &rarr; (4) Hands-on Challenge &rarr; (5) Graded Quiz &rarr; (6) Summary Review.</li>
+        <li><strong>Verification Gate (Activity):</strong> Stage 4 requires the student to compute or predict an algorithm's output on a concrete test case. Progress is blocked until the output matches the server-side test result.</li>
+        <li><strong>Grading Gate (Daily Quiz):</strong> The student attempts 10 authored multiple-choice questions. A strict threshold (&ge; 70%) must be satisfied to pass; failing attempts display hints and allow retries.</li>
+        <li><strong>Milestone Gate:</strong> On Days 7, 14, 21, and 30, a separate comprehensive assessment is required. The day completes only when both the daily quiz and the milestone exam achieve passing grades, after which Day N+1 unlocks automatically.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3.7.4 Class Diagram -->
+  <div class="section-card" id="sec-3-7-4">
+    <div class="section-header">
+      <h2>3.7.4 Class Diagram</h2>
+      <span class="tag">Static Object-Oriented Structure</span>
+    </div>
+    <div class="image-container">
+      <div class="mermaid-box">
+        <div class="mermaid">
+classDiagram
+    class ServerApp {
+        -int PORT
+        -string JWT_SECRET
+        -sqlite3.Database db
+        +initializeDb() void
+        +setupRoutes() void
+        +start() void
+    }
+
+    class UserController {
+        +register(req, res) void
+        +login(req, res) void
+        +logout(req, res) void
+        +getMe(req, res) void
+    }
+
+    class CurriculumController {
+        +getLearningProgress(req, res) void
+        +startDay(req, res) void
+        +completeConcept(req, res) void
+        +submitActivity(req, res) void
+        +getNotifications(req, res) void
+    }
+
+    class AssessmentController {
+        +submitQuiz(req, res) void
+        +submitAssessment(req, res) void
+        -gradeAnswers(submitted, bank) GradeResult
+    }
+
+    class DatabaseService {
+        -sqlite3.Database db
+        +runDb(sql, params) Promise
+        +getDb(sql, params) Promise
+        +allDb(sql, params) Promise
+    }
+
+    class VisualizerCore {
+        -Array stateArray
+        -int speed
+        -boolean isPlaying
+        +play() void
+        +pause() void
+        +stepForward() void
+        +reset() void
+    }
+
+    class SortingVisualizer {
+        +bubbleSort() void
+        +mergeSort() void
+        +quickSort() void
+    }
+
+    class GraphVisualizer {
+        -Map nodes
+        -Map edges
+        +bfs() void
+        +dfs() void
+        +dijkstra() void
+    }
+
+    class PracticeCompilerClient {
+        -string wandboxUrl
+        -string selectedLang
+        +compileAndRun(code, stdin) Promise
+    }
+
+    class LearningDashboardApp {
+        -string authToken
+        -object studentProfile
+        +loadDashboard() void
+        +renderProgressBar() void
+        +renderRadarChart() void
+    }
+
+    ServerApp --> UserController : dispatches
+    ServerApp --> CurriculumController : dispatches
+    ServerApp --> AssessmentController : dispatches
+    UserController --> DatabaseService : queries
+    CurriculumController --> DatabaseService : queries
+    AssessmentController --> DatabaseService : queries
+
+    VisualizerCore <|-- SortingVisualizer : inherits
+    VisualizerCore <|-- GraphVisualizer : inherits
+    LearningDashboardApp ..> CurriculumController : consumes API
+    PracticeCompilerClient ..> VisualizerCore : complements
+        </div>
+      </div>
+    </div>
+    <div class="description-container">
+      <h3>Description: System Class Structure</h3>
+      <p>The <strong>UML Class Diagram</strong> defines the modular architecture of the codebase across both the backend REST service and frontend client modules:</p>
+      <ul>
+        <li><strong>Backend Controller & Service Layer:</strong> <code>ServerApp</code> orchestrates Express routes and database initialization. Specialized controllers (<code>UserController</code>, <code>CurriculumController</code>, <code>AssessmentController</code>) handle business logic and interact asynchronously with SQLite via <code>DatabaseService</code> wrapper methods.</li>
+        <li><strong>Frontend Visualizer Hierarchy:</strong> <code>VisualizerCore</code> encapsulates animation timers, frame sequencing, and state transitions. Concrete subclasses (<code>SortingVisualizer</code>, <code>GraphVisualizer</code>) inherit core playback capabilities while implementing domain-specific algorithms like Quick Sort, Dijkstra, and BST Traversal.</li>
+        <li><strong>Client Services:</strong> <code>PracticeCompilerClient</code> handles network serialization to the Wandbox remote compiler API, and <code>LearningDashboardApp</code> manages client-side profile caching, progress rendering, and radar chart generation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3.7.5 Object Diagram -->
+  <div class="section-card" id="sec-3-7-5">
+    <div class="section-header">
+      <h2>3.7.5 Object Diagram</h2>
+      <span class="tag">Runtime Instance Snapshot</span>
+    </div>
+    <div class="image-container">
+      <div class="mermaid-box">
+        <div class="mermaid">
+classDiagram
+    class currentUser_usr8491 {
+        id = "usr-8491-b3f2"
+        name = "Piyush Sharma"
+        email = "piyush@example.com"
+        createdAt = "2026-10-15T09:30:00Z"
+    }
+
+    class activeSession_jwt {
+        tokenHash = "a7f49c0182bd..."
+        expiresAt = "2026-11-05T09:30:00Z"
+        isValid = true
+    }
+
+    class day1Progress {
+        userId = "usr-8491-b3f2"
+        day = 1
+        dailyQuizPassed = 1
+        latestScore = 90.0
+        completedAt = "2026-10-15T10:25:00Z"
+    }
+
+    class day2Progress {
+        userId = "usr-8491-b3f2"
+        day = 2
+        dailyQuizPassed = 0
+        latestScore = 0.0
+        completedAt = null
+    }
+
+    class quizAttempt_qz312 {
+        id = "qa-3120"
+        day = 1
+        score = 90.0
+        passed = 1
+    }
+
+    class activityAttempt_act99 {
+        id = "act-9941"
+        day = 1
+        answer = "3"
+        accepted = 1
+    }
+
+    class notif_welcome {
+        id = "notif-0182"
+        day = 1
+        message = "Day 1 completed! Day 2 is unlocked."
+    }
+
+    currentUser_usr8491 ..> activeSession_jwt : holds
+    currentUser_usr8491 --> day1Progress : tracks
+    currentUser_usr8491 --> day2Progress : tracks
+    day1Progress --> activityAttempt_act99 : verified by
+    day1Progress --> quizAttempt_qz312 : cleared by
+    currentUser_usr8491 --> notif_welcome : receives
+        </div>
+      </div>
+    </div>
+    <div class="description-container">
+      <h3>Description: Concrete Runtime Snapshot</h3>
+      <p>The <strong>UML Object Diagram</strong> models a live runtime snapshot of the system, illustrating actual instances and concrete memory/database values during an active student session:</p>
+      <ul>
+        <li><strong>Student Identity (<code>currentUser_usr8491</code>):</strong> Represents student Piyush Sharma with assigned UUID <code>usr-8491-b3f2</code> and email <code>piyush@example.com</code>.</li>
+        <li><strong>Session State (<code>activeSession_jwt</code>):</strong> An active cryptographically signed JWT token with valid expiry date and an intact SHA-256 hash not present in the revocation list.</li>
+        <li><strong>Sequential Progression Objects:</strong> <code>day1Progress</code> has reached completion (<code>dailyQuizPassed = 1</code>, <code>completedAt = "2026-10-15T10:25:00Z"</code>), successfully unlocking <code>day2Progress</code> which is initialized but pending completion.</li>
+        <li><strong>Attempt Artifacts:</strong> Shows <code>activityAttempt_act99</code> with verified answer <code>"3"</code> and <code>quizAttempt_qz312</code> with an authenticated passing score of 90%.</li>
+        <li><strong>Alert Notification:</strong> <code>notif_welcome</code> confirms the automated emission of an unlock notification for Day 2 upon Day 1 clearance.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3.7.6 Use Case Diagram -->
+  <div class="section-card" id="sec-3-7-6">
+    <div class="section-header">
+      <h2>3.7.6 Use Case Diagram</h2>
+      <span class="tag">Functional Scope & User Actors</span>
+    </div>
+    <div class="image-container">
+      <div class="mermaid-box">
+        <div class="mermaid">
+flowchart LR
+    Visitor((Unregistered Visitor))
+    Student((Authenticated Student))
+    WandboxSystem((Wandbox API\nExternal System))
+
+    subgraph Platform [Algorithm Hub Application Boundary]
+        UC1[Browse 93 Algorithm Catalog]
+        UC2[Read Explanations & Complexity]
+        UC3[Interact with Sorting & Graph Visualizers]
+        UC4[Write Code in Practice Workspace]
+        UC5[Execute & Compile Code]
+        UC6[Register Student Account]
+        UC7[Sign In / Authenticate]
+        UC8[View 30-Day Learning Dashboard]
+        UC9[Progress through 6-Stage Lessons]
+        UC10[Submit Activity for Test Matching]
+        UC11[Attempt 10-Question Daily Quiz]
+        UC12[Attempt Milestone Assessment Days 7,14,21,30]
+        UC13[View Performance Radar & Analytics]
+        UC14[Receive Notifications & Alerts]
+        UC15[Logout & Invalidate Session Token]
+    end
+
+    Visitor --> UC1
+    Visitor --> UC2
+    Visitor --> UC3
+    Visitor --> UC4
+    Visitor --> UC6
+    Visitor --> UC7
+
+    Student --> UC1
+    Student --> UC2
+    Student --> UC3
+    Student --> UC4
+    Student --> UC7
+    Student --> UC8
+    Student --> UC9
+    Student --> UC10
+    Student --> UC11
+    Student --> UC12
+    Student --> UC13
+    Student --> UC14
+    Student --> UC15
+
+    UC4 -.->|&lt;&lt;include&gt;&gt;| UC5
+    UC5 <--> WandboxSystem
+
+    UC9 -.->|&lt;&lt;include&gt;&gt;| UC10
+    UC9 -.->|&lt;&lt;include&gt;&gt;| UC11
+    UC11 -.->|&lt;&lt;extend: score &ge; 70%&gt;&gt;| UC8
+    UC12 -.->|&lt;&lt;extend: milestone days&gt;&gt;| UC9
+    UC8 -.->|&lt;&lt;include&gt;&gt;| UC13
+        </div>
+      </div>
+    </div>
+    <div class="description-container">
+      <h3>Description: Functional Actors & Use Case Interactions</h3>
+      <p>The <strong>UML Use Case Diagram</strong> outlines the functional boundary of the application and the capabilities afforded to each actor:</p>
+      <ul>
+        <li><strong>Actors:</strong>
+          <ul>
+            <li><strong>Unregistered Visitor:</strong> Can access public educational features including searching the 93-algorithm library, reading complexity analysis, running interactive animations, and practicing in the online compiler.</li>
+            <li><strong>Authenticated Student:</strong> Holds an authenticated account with permission to enroll in the 30-day curriculum, track stage milestones, submit answers for server verification, undertake graded quizzes and milestone exams, and view personalized analytics.</li>
+            <li><strong>Wandbox Remote Compiler (External System):</strong> Provides multi-language cloud compilation services invoked transparently by the practice lab.</li>
+          </ul>
+        </li>
+        <li><strong>Key Relationships:</strong>
+          <ul>
+            <li><code>UC4 (Write Code)</code> <strong>&lt;&lt;includes&gt;&gt;</strong> <code>UC5 (Execute & Compile)</code> through the Wandbox API interface.</li>
+            <li><code>UC9 (Progress Lessons)</code> <strong>&lt;&lt;includes&gt;&gt;</strong> <code>UC10 (Submit Activity)</code> and <code>UC11 (Attempt Quiz)</code>.</li>
+            <li><code>UC11 (Daily Quiz)</code> <strong>&lt;&lt;extends&gt;&gt;</strong> the dashboard unlock mechanism only when the threshold (&ge; 70%) is achieved.</li>
+            <li><code>UC12 (Milestone Assessment)</code> <strong>&lt;&lt;extends&gt;&gt;</strong> the lesson completion flow specifically on milestone evaluation days (7, 14, 21, and 30).</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

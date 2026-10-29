@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Algorithm Hub | Learn. Visualize. Master.</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="#home" class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span>Algorithm<span class="logo-highlight">Hub</span></span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" class="active">Home</a>
+                <a href="algorithms.html">Algorithms</a>
+                <a href="explanation.html" data-auth="required">Explanation</a>
+                <a href="visualizer.html" data-auth="required">Visualizer</a>
+                <a href="practice.html" data-auth="required">Practice</a>
+                <a href="about.html">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <a href="signin.html" class="nav-button" id="navAccountLink">
+                    Sign In
+                </a>
+
+                <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-grid"></div>
+
+            <div class="floating-code code-one">
+                for(i = 0; i &lt; n; i++)
+            </div>
+
+            <div class="floating-code code-two">
+                O(log n)
+            </div>
+
+            <div class="floating-code code-three">
+                { algorithm }
+            </div>
+
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        <span class="pulse-dot"></span>
+                        Interactive Algorithm Learning Platform
+                    </div>
+
+                    <h1>
+                        <span>MASTER</span>
+                        <strong>ALGORITHMS.</strong>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Learn algorithms through interactive visualization,
+                        simple explanations, coding examples, and hands-on
+                        practice.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="algorithms.html" class="primary-btn">
+                            Explore Algorithms
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="#roadmap" class="secondary-btn">
+                            <i class="fa-solid fa-play"></i>
+                            See How It Works
+                        </a>
+
+                    </div>
+
+                    <div class="hero-tech">
+
+                        <span>Built for learners</span>
+
+                        <div class="tech-list">
+                            <span><i class="fa-brands fa-java"></i> Java</span>
+                            <span><i class="fa-brands fa-python"></i> Python</span>
+                            <span><i class="fa-solid fa-code"></i> C++</span>
+                            <span><i class="fa-brands fa-js"></i> JavaScript</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Algorithm visual card -->
+
+                <div class="hero-visual">
+
+                    <div class="visual-glow"></div>
+
+                    <div class="visual-card">
+
+                        <div class="visual-header">
+                            <div class="window-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <span class="visual-title">
+                                Bubble Sort Visualization
+                            </span>
+
+                            <span class="visual-status">
+                                <i class="fa-solid fa-circle"></i>
+                                LIVE
+                            </span>
+                        </div>
+
+
+                        <div class="array-area">
+
+                            <div class="bar" style="height: 90px;">
+                                <span>8</span>
+                            </div>
+
+                            <div class="bar active-bar" style="height: 150px;">
+                                <span>14</span>
+                            </div>
+
+                            <div class="bar" style="height: 65px;">
+                                <span>5</span>
+                            </div>
+
+                            <div class="bar" style="height: 120px;">
+                                <span>11</span>
+                            </div>
+
+                            <div class="bar active-bar" style="height: 175px;">
+                                <span>18</span>
+                            </div>
+
+                            <div class="bar" style="height: 105px;">
+                                <span>9</span>
+                            </div>
+
+                            <div class="bar" style="height: 75px;">
+                                <span>6</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="visual-info">
+
+                            <div>
+                                <small>Comparisons</small>
+                                <strong id="comparisonCount">24</strong>
+                            </div>
+
+                            <div>
+                                <small>Swaps</small>
+                                <strong id="swapCount">08</strong>
+                            </div>
+
+                            <div>
+                                <small>Complexity</small>
+                                <strong>O(n²)</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="visual-controls">
+
+                            <button id="playBtn">
+                                <i class="fa-solid fa-play"></i>
+                                Visualize
+                            </button>
+
+                            <button>
+                                <i class="fa-solid fa-rotate-right"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats-section">
+
+            <div class="stats-container">
+
+                <div class="stat-item">
+                    <strong class="counter" data-target="93">0</strong>
+                    <span>Algorithms</span>
+                </div>
+
+                <div class="stat-line"></div>
+
+                <div class="stat-item">
+                    <strong class="counter" data-target="30">0</strong>
+                    <span>Guided Lessons</span>
+                </div>
+
+                <div class="stat-line"></div>
+
+                <div class="stat-item">
+                    <strong class="counter" data-target="4">0</strong>
+                    <span>Milestone Assessments</span>
+                </div>
+
+                <div class="stat-line"></div>
+
+                <div class="stat-item">
+                    <strong class="counter" data-target="5">0</strong>
+                    <span>Languages</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+
+        <!-- ================= ROADMAP ================= -->
+
+        <section class="roadmap-section section" id="roadmap">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">YOUR JOURNEY</span>
+
+                    <h2>
+                        Algorithm
+                        <span>Roadmap.</span>
+                    </h2>
+                </div>
+
+                <p>
+                    Follow a structured path from fundamentals to
+                    advanced algorithmic problem solving.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap">
+
+                <div class="road-line"></div>
+
+
+                <div class="road-step">
+
+                    <div class="road-dot">
+                        01
+                    </div>
+
+                    <div class="road-content">
+
+                        <span>START HERE</span>
+
+                        <h3>Foundations</h3>
+
+                        <p>
+                            Arrays, Strings, Variables, Loops,
+                            Functions and basic problem solving.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="road-step">
+
+                    <div class="road-dot">
+                        02
+                    </div>
+
+                    <div class="road-content">
+
+                        <span>BUILD SKILLS</span>
+
+                        <h3>Searching & Sorting</h3>
+
+                        <p>
+                            Linear Search, Binary Search, Bubble Sort,
+                            Selection Sort, Insertion Sort and Merge Sort.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="road-step">
+
+                    <div class="road-dot">
+                        03
+                    </div>
+
+                    <div class="road-content">
+
+                        <span>GO DEEPER</span>
+
+                        <h3>Data Structures</h3>
+
+                        <p>
+                            Stack, Queue, Linked List, Trees, Graphs
+                            and Hash Tables.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="road-step">
+
+                    <div class="road-dot">
+                        04
+                    </div>
+
+                    <div class="road-content">
+
+                        <span>MASTER</span>
+
+                        <h3>Advanced Algorithms</h3>
+
+                        <p>
+                            Greedy Algorithms, Dynamic Programming,
+                            Graph Algorithms and advanced problem solving.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="cta-section" id="get-started">
+
+            <div class="cta-grid"></div>
+
+            <div class="cta-content">
+
+                <span class="section-label">
+                    READY TO START?
+                </span>
+
+                <h2>
+                    Turn Code Into
+                    <span>Understanding.</span>
+                </h2>
+
+                <p>
+                    Stop memorizing algorithms. Start visualizing,
+                    practicing, and mastering them.
+                </p>
+
+                <a href="algorithms.html" class="primary-btn">
+                    Start Learning Free
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <a href="#home" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span>Algorithm<span class="logo-highlight">Hub</span></span>
+                </a>
+
+                <p>
+                    Learn. Visualize. Practice. Master algorithms.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Explore</h4>
+                    <a href="algorithms.html">Algorithms</a>
+                    <a href="#roadmap">Roadmap</a>
+                    <a href="algorithms.html">Start learning</a>
+                </div>
+
+                <div>
+                    <h4>Learn</h4>
+                    <a href="algorithms.html">Sorting</a>
+                    <a href="algorithms.html">Searching</a>
+                    <a href="algorithms.html">Graphs</a>
+                </div>
+
+                <div>
+                    <h4>Project</h4>
+                    <a href="about.html">About</a>
+                    <a href="signin.html">Sign In</a>
+                    <a href="signup.html">Create Account</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Algorithm Hub. Built for learners.
+            </span>
+
+            <span>
+                Learn <i class="fa-solid fa-code"></i> Visualize
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>

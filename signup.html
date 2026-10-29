@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Algorithm Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-shell">
+        <aside class="auth-hero">
+            <a href="index.html" class="logo auth-brand">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span>Algorithm<span class="logo-highlight">Hub</span></span>
+            </a>
+
+            <div class="auth-content">
+                <span class="section-label">CREATE ACCOUNT</span>
+                <h1>Build your learning profile.</h1>
+                <p>
+                    Start your interview prep, track your progress, and learn with an
+                    experience tailored to your coding goals.
+                </p>
+            </div>
+
+            <ul class="auth-points">
+                <li><i class="fa-solid fa-check"></i> Personalized learning dashboard</li>
+                <li><i class="fa-solid fa-check"></i> Save your practice progress</li>
+                <li><i class="fa-solid fa-check"></i> Join a modern coding workflow</li>
+            </ul>
+        </aside>
+
+        <main class="auth-card-wrap">
+            <form id="signupForm" class="auth-card" novalidate>
+                <div class="auth-header">
+                    <span class="chip">Create account</span>
+                    <h2>Sign up</h2>
+                </div>
+
+                <label class="auth-field">
+                    <span>Full name</span>
+                    <input type="text" name="name" placeholder="Your full name" required>
+                </label>
+
+                <label class="auth-field">
+                    <span>Email address</span>
+                    <input type="email" name="email" placeholder="you@example.com" required>
+                </label>
+
+                <label class="auth-field">
+                    <span>Password</span>
+                    <div class="password-field">
+                        <input type="password" name="password" placeholder="Create a password" required>
+                        <button type="button" class="toggle-password" aria-label="Show password">Show</button>
+                    </div>
+                </label>
+
+                <label class="auth-field">
+                    <span>Confirm password</span>
+                    <div class="password-field">
+                        <input type="password" name="confirmPassword" placeholder="Confirm your password" required>
+                        <button type="button" class="toggle-password" aria-label="Show password">Show</button>
+                    </div>
+                </label>
+
+                <button type="submit" class="auth-submit">Create Account</button>
+
+                <p id="signupStatus" class="status-message" aria-live="polite"></p>
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="signin.html">Sign in</a>
+                </p>
+            </form>
+        </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

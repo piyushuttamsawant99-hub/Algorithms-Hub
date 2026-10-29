@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Algorithm Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-shell">
+        <aside class="auth-hero">
+            <a href="index.html" class="logo auth-brand">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span>Algorithm<span class="logo-highlight">Hub</span></span>
+            </a>
+
+            <div class="auth-content">
+                <span class="section-label">WELCOME BACK</span>
+                <h1>Continue your algorithm journey.</h1>
+                <p>
+                    Learn faster with guided explanations, interactive visualizations,
+                    and focus-driven practice for coding interviews and problem solving.
+                </p>
+            </div>
+
+            <ul class="auth-points">
+                <li><i class="fa-solid fa-check"></i> Guided learning roadmap</li>
+                <li><i class="fa-solid fa-check"></i> Step-by-step visualizers</li>
+                <li><i class="fa-solid fa-check"></i> Practice and fast feedback loops</li>
+            </ul>
+
+            <div class="auth-stats">
+                <div>
+                    <strong>50+</strong>
+                    <span>Algorithms</span>
+                </div>
+                <div>
+                    <strong>20+</strong>
+                    <span>Visuals</span>
+                </div>
+                <div>
+                    <strong>5</strong>
+                    <span>Languages</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="auth-card-wrap">
+            <form id="signinForm" class="auth-card" novalidate>
+                <div class="auth-header">
+                    <span class="chip">Secure Sign In</span>
+                    <h2>Sign in</h2>
+                </div>
+
+                <label class="auth-field">
+                    <span>Email address</span>
+                    <input type="email" name="email" placeholder="you@example.com" required>
+                </label>
+
+                <label class="auth-field">
+                    <span>Password</span>
+                    <div class="password-field">
+                        <input type="password" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" aria-label="Show password">Show</button>
+                    </div>
+                </label>
+
+                <div class="auth-row">
+                    <label class="checkbox-wrap">
+                        <input type="checkbox" name="remember">
+                        <span>Keep me signed in</span>
+                    </label>
+                    <a href="#" id="forgotPasswordLink">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="auth-submit">Sign In</button>
+
+                <p id="signinStatus" class="status-message" aria-live="polite"></p>
+
+                <p class="auth-switch">
+                    New to Algorithm Hub?
+                    <a href="signup.html">Create an account</a>
+                </p>
+            </form>
+        </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

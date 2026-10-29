@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Algorithm Hub — Comprehensive algorithm explanations with YouTube video tutorials, step-by-step walkthroughs, worked dry-run examples, real-world analogies, and multi-language code.">
+  <title>Algorithm Explanation | Algorithm Hub</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="explanation.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo" aria-label="Algorithm Hub home">
+      <span class="logo-icon">&lt;/&gt;</span>
+      <span>Algorithm<span class="logo-highlight">Hub</span></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="algorithms.html">Algorithms</a>
+      <a href="explanation.html" class="active" data-auth="required">Explanation</a>
+      <a href="visualizer.html" data-auth="required">Visualizer</a>
+      <a href="practice.html" data-auth="required">Practice</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <a href="signin.html" class="nav-button" id="navAccountLink">Sign In</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MAIN CONTENT WRAPPER ================= -->
+<main class="explanation-main">
+
+  <!-- Breadcrumbs & Quick Bar -->
+  <div class="explanation-top-bar">
+    <div class="top-bar-inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <i class="fa-solid fa-chevron-right separator"></i>
+        <a href="algorithms.html">Algorithms</a>
+        <i class="fa-solid fa-chevron-right separator"></i>
+        <span class="breadcrumb-category" id="breadcrumbCategory">Searching</span>
+        <i class="fa-solid fa-chevron-right separator"></i>
+        <span class="breadcrumb-current" id="breadcrumbName">Binary Search</span>
+      </nav>
+
+      <div class="top-bar-actions">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle algorithm list sidebar">
+          <i class="fa-solid fa-list-ul"></i> <span>All Algorithms</span>
+        </button>
+        <div class="nav-shortcuts">
+          <button class="prev-algo-btn" id="topPrevBtn" title="Previous Algorithm"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+          <button class="next-algo-btn" id="topNextBtn" title="Next Algorithm">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="explanation-layout">
+
+    <!-- ================= SIDEBAR / ALGORITHM SWITCHER ================= -->
+    <aside class="algo-sidebar" id="algoSidebar" aria-label="Algorithm catalog switcher">
+      <div class="sidebar-header">
+        <div class="sidebar-title">
+          <i class="fa-solid fa-layer-group"></i>
+          <h3>Algorithm Catalog</h3>
+        </div>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close algorithm sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" id="sidebarSearchInput" placeholder="Search 93 algorithms..." autocomplete="off">
+        <button class="sidebar-search-clear" id="sidebarSearchClear" style="display:none;" aria-label="Clear search">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-category-filter">
+        <select id="sidebarCategorySelect" aria-label="Filter by category">
+          <option value="all">All Categories (12)</option>
+          <option value="searching">Searching</option>
+          <option value="sorting">Sorting</option>
+          <option value="arrays">Arrays &amp; Strings</option>
+          <option value="recursion">Recursion &amp; Backtracking</option>
+          <option value="linked-lists">Linked Lists</option>
+          <option value="stack-queue">Stack &amp; Queue</option>
+          <option value="tree">Trees</option>
+          <option value="graph">Graphs</option>
+          <option value="dynamic">Dynamic Programming</option>
+          <option value="greedy">Greedy Algorithms</option>
+          <option value="math-bit">Mathematical &amp; Bit</option>
+          <option value="advanced">Advanced Algorithms</option>
+        </select>
+      </div>
+
+      <div class="sidebar-count" id="sidebarCount">Showing 93 algorithms</div>
+
+      <div class="sidebar-list" id="sidebarList">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ================= MAIN EXPLANATION BODY ================= -->
+    <section class="explanation-body" id="explanationBody">
+
+      <!-- HERO BANNER -->
+      <article class="explain-hero-card">
+        <div class="hero-glow-bg"></div>
+        <div class="hero-meta-row">
+          <div class="hero-badges">
+            <span class="category-pill" id="heroCategory">Searching</span>
+            <span class="difficulty-pill easy" id="heroDifficulty">EASY</span>
+            <span class="paradigm-pill" id="heroParadigm">Divide &amp; Conquer</span>
+          </div>
+          <div class="hero-quick-complexities">
+            <div class="quick-stat">
+              <span>Time</span>
+              <strong id="heroTime">O(log n)</strong>
+            </div>
+            <div class="quick-stat">
+              <span>Space</span>
+              <strong id="heroSpace">O(1)</strong>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="hero-algo-title" id="heroTitle">Binary Search</h1>
+        <p class="hero-algo-summary" id="heroSummary">
+          A highly efficient search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search interval in half.
+        </p>
+
+        <div class="hero-action-toolbar">
+          <a href="visualizer.html" class="primary-action-btn" id="heroVisualizeBtn">
+            <i class="fa-solid fa-play"></i>
+            <span>Interactive Visualizer</span>
+          </a>
+          <a href="practice.html" class="secondary-action-btn" id="heroPracticeBtn">
+            <i class="fa-solid fa-code"></i>
+            <span>Practice Code</span>
+          </a>
+          <a href="#videoSection" class="tertiary-action-btn">
+            <i class="fa-brands fa-youtube"></i>
+            <span>Watch Video</span>
+          </a>
+          <a href="#codeSection" class="tertiary-action-btn">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>View Code</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- 1. YOUTUBE VIDEO SECTION -->
+      <section class="explain-section" id="videoSection">
+        <div class="section-badge">
+          <i class="fa-brands fa-youtube"></i> VIDEO MASTERCLASS
+        </div>
+        <h2 class="section-title">Video <span>Explanation.</span></h2>
+        <p class="section-sub">Watch a visual, step-by-step video breakdown of this algorithm.</p>
+
+        <div class="video-card">
+          <div class="video-embed-container">
+            <iframe id="videoIframe"
+                    src="https://www.youtube-nocookie.com/embed/MFhxShGxHWc"
+                    title="Algorithm Explanation Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+            </iframe>
+            <div class="video-fallback" id="videoFallback" hidden>
+              <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+              <p>No curated video is available for this algorithm yet.</p>
+              <a id="videoSearchLink" href="https://www.youtube.com/results?search_query=algorithm+tutorial" target="_blank" rel="noopener noreferrer">Search YouTube tutorials</a>
+            </div>
+          </div>
+          <div class="video-info-bar">
+            <div class="video-title-wrap">
+              <i class="fa-brands fa-youtube video-brand-icon"></i>
+              <div>
+                <h3 id="videoTitleText">Binary Search Algorithm in 100 Seconds</h3>
+                <span class="video-channel-tag"><i class="fa-solid fa-circle-check"></i> Curated Learning Resource</span>
+              </div>
+            </div>
+            <a id="videoExternalLink" href="https://www.youtube.com/watch?v=MFhxShGxHWc" target="_blank" rel="noopener noreferrer" class="video-open-yt-btn">
+              <span>Open on YouTube</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+          <p class="video-help">If playback is blocked, <a id="videoHelpSearchLink" href="https://www.youtube.com/results?search_query=algorithm+tutorial" target="_blank" rel="noopener noreferrer">find this algorithm on YouTube</a>.</p>
+        </div>
+      </section>
+
+      <!-- 2. STEP-BY-STEP ALGORITHM LOGIC -->
+      <section class="explain-section" id="stepsSection">
+        <div class="section-badge">
+          <i class="fa-solid fa-list-check"></i> ALGORITHM LOGIC
+        </div>
+        <h2 class="section-title">How it <span>Works (Steps).</span></h2>
+        <p class="section-sub">Follow the clear, sequential phases required to execute this algorithm.</p>
+
+        <div class="steps-container" id="stepsContainer">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- 3. WORKED DRY-RUN EXAMPLE & STATE TRACE -->
+      <section class="explain-section" id="exampleSection">
+        <div class="section-badge">
+          <i class="fa-solid fa-magnifying-glass-chart"></i> WORKED EXAMPLE
+        </div>
+        <h2 class="section-title">Dry-Run <span>Trace &amp; Example.</span></h2>
+        <p class="section-sub">Step-by-step state transformation on a sample input.</p>
+
+        <div class="example-card">
+          <div class="example-input-box">
+            <div class="input-header">
+              <span class="input-tag"><i class="fa-solid fa-arrow-right-to-bracket"></i> SAMPLE INPUT</span>
+            </div>
+            <div class="input-content" id="exampleInputText">
+              Array = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91], Target = 23
+            </div>
+          </div>
+
+          <div class="trace-timeline-wrap">
+            <h4 class="trace-title"><i class="fa-solid fa-clock-rotate-left"></i> Execution Trace</h4>
+            <div class="trace-steps-list" id="traceStepsList">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="example-output-box">
+            <div class="output-header">
+              <span class="output-tag"><i class="fa-solid fa-circle-check"></i> FINAL OUTPUT</span>
+            </div>
+            <div class="output-content" id="exampleOutputText">
+              Index 5 (Found in only 3 comparisons)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. REAL-LIFE ANALOGY & APPLICATIONS -->
+      <section class="explain-section" id="realLifeSection">
+        <div class="section-badge">
+          <i class="fa-solid fa-earth-americas"></i> REAL-WORLD CONTEXT
+        </div>
+        <h2 class="section-title">Real-Life <span>Analogy &amp; Applications.</span></h2>
+        <p class="section-sub">Connect the abstract algorithmic logic with tangible real-world intuition.</p>
+
+        <div class="real-life-grid">
+          <div class="real-life-card analogy-card">
+            <div class="card-top-icon">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h3 id="analogyTitle">Opening a Physical Dictionary</h3>
+            <p id="analogyText">
+              When looking up "Quantum" in a dictionary, you open directly to the middle. Seeing "M", you immediately eliminate the entire first half of the book and jump halfway into the second half.
+            </p>
+          </div>
+
+          <div class="real-life-card practical-card">
+            <div class="card-top-icon">
+              <i class="fa-solid fa-server"></i>
+            </div>
+            <h3>Industrial Production Use</h3>
+            <p id="practicalAppText">
+              Database B-Tree indexing, Git bisect (finding bug-introducing commits), numerical root finding, search engine index lookups, and compiler symbol tables.
+            </p>
+          </div>
+
+          <div class="real-life-card funfact-card">
+            <div class="card-top-icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h3>Did You Know?</h3>
+            <p id="funFactText">
+              Binary Search can search through 4 billion sorted records in at most 32 comparisons!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. COMPLEXITY ANALYSIS -->
+      <section class="explain-section" id="complexitySection">
+        <div class="section-badge">
+          <i class="fa-solid fa-chart-line"></i> TIME &amp; SPACE
+        </div>
+        <h2 class="section-title">Complexity <span>Analysis.</span></h2>
+        <p class="section-sub">Formal asymptotic bounds and resource consumption breakdown.</p>
+
+        <div class="complexity-grid">
+          <div class="complexity-card">
+            <span class="complexity-label">BEST CASE</span>
+            <strong class="complexity-value best-val" id="compBest">O(1)</strong>
+            <p class="complexity-desc" id="compBestDesc">Target is located at the first midpoint calculation.</p>
+          </div>
+          <div class="complexity-card">
+            <span class="complexity-label">AVERAGE CASE</span>
+            <strong class="complexity-value avg-val" id="compAvg">O(log n)</strong>
+            <p class="complexity-desc" id="compAvgDesc">Each step cuts search space in half, requiring ~log2(n) comparisons.</p>
+          </div>
+          <div class="complexity-card">
+            <span class="complexity-label">WORST CASE</span>
+            <strong class="complexity-value worst-val" id="compWorst">O(log n)</strong>
+            <p class="complexity-desc" id="compWorstDesc">Search narrows down to a single element before finding or exhausting.</p>
+          </div>
+          <div class="complexity-card">
+            <span class="complexity-label">SPACE COMPLEXITY</span>
+            <strong class="complexity-value space-val" id="compSpace">O(1)</strong>
+            <p class="complexity-desc" id="compSpaceDesc">Iterative version uses O(1) auxiliary space.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. MULTI-LANGUAGE CODE IMPLEMENTATIONS -->
+      <section class="explain-section" id="codeSection">
+        <div class="section-badge">
+          <i class="fa-solid fa-code"></i> MULTI-LANGUAGE CODE
+        </div>
+        <h2 class="section-title">Source Code <span>Implementations.</span></h2>
+        <p class="section-sub">Production-ready code with clean syntax across popular programming languages.</p>
+
+        <div class="code-box-card">
+          <div class="code-box-header">
+            <div class="code-lang-tabs" id="codeLangTabs">
+              <button class="code-tab active" data-lang="python"><i class="fa-brands fa-python"></i> Python</button>
+              <button class="code-tab" data-lang="javascript"><i class="fa-brands fa-js"></i> JavaScript</button>
+              <button class="code-tab" data-lang="java"><i class="fa-brands fa-java"></i> Java</button>
+              <button class="code-tab" data-lang="cpp"><i class="fa-solid fa-c"></i> C++</button>
+              <button class="code-tab" data-lang="pseudocode"><i class="fa-solid fa-file-code"></i> Pseudocode</button>
+            </div>
+            <button class="copy-code-btn" id="copyCodeBtn" title="Copy code to clipboard">
+              <i class="fa-regular fa-copy"></i> <span>Copy Code</span>
+            </button>
+          </div>
+          <div class="code-box-body">
+            <pre><code id="codeDisplay" class="language-code"></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. CHARACTERISTICS & PROS/CONS -->
+      <section class="explain-section" id="characteristicsSection">
+        <div class="section-badge">
+          <i class="fa-solid fa-sliders"></i> CHARACTERISTICS &amp; TRADE-OFFS
+        </div>
+        <h2 class="section-title">Trade-offs &amp; <span>Properties.</span></h2>
+        <p class="section-sub">Algorithmic behavior, structural stability, and pros &amp; cons.</p>
+
+        <div class="tradeoffs-grid">
+          <div class="properties-box">
+            <h4><i class="fa-solid fa-dna"></i> Algorithmic Properties</h4>
+            <div class="property-item">
+              <span>Paradigm:</span>
+              <strong id="propParadigm">Divide and Conquer</strong>
+            </div>
+            <div class="property-item">
+              <span>In-Place:</span>
+              <strong id="propInPlace">Yes</strong>
+            </div>
+            <div class="property-item">
+              <span>Stable Sort:</span>
+              <strong id="propStable">N/A</strong>
+            </div>
+            <div class="property-item">
+              <span>Data Structure:</span>
+              <strong id="propDataStructure">Sorted Array</strong>
+            </div>
+          </div>
+
+          <div class="pros-cons-box">
+            <div class="pros-col">
+              <h4><i class="fa-solid fa-circle-check"></i> Advantages</h4>
+              <ul id="prosList">
+                <li>Extremely fast logarithmic time O(log n)</li>
+                <li>Minimal space overhead O(1)</li>
+                <li>Ideal for large read-heavy datasets</li>
+              </ul>
+            </div>
+            <div class="cons-col">
+              <h4><i class="fa-solid fa-triangle-exclamation"></i> Limitations</h4>
+              <ul id="consList">
+                <li>Requires array to be pre-sorted</li>
+                <li>Inefficient for linked lists without random access indexing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. INTERVIEW QUESTIONS & PRACTICE -->
+      <section class="explain-section" id="practiceSection">
+        <div class="section-badge">
+          <i class="fa-solid fa-laptop-code"></i> INTERVIEW QUESTIONS
+        </div>
+        <h2 class="section-title">Recommended <span>Interview Problems.</span></h2>
+        <p class="section-sub">Sharpen your understanding with standard coding interview challenges.</p>
+
+        <div class="problems-grid" id="problemsGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- 9. BOTTOM PREV / NEXT NAVIGATION -->
+      <nav class="bottom-algo-nav" aria-label="Adjacent algorithm navigation">
+        <a href="#" class="bottom-nav-btn prev-btn" id="bottomPrevBtn">
+          <i class="fa-solid fa-arrow-left"></i>
+          <div>
+            <span>PREVIOUS ALGORITHM</span>
+            <strong id="bottomPrevName">Linear Search</strong>
+          </div>
+        </a>
+        <a href="visualizer.html" class="bottom-visualize-cta" id="bottomVisualizeCta">
+          <i class="fa-solid fa-play"></i> Open in Visualizer
+        </a>
+        <a href="#" class="bottom-nav-btn next-btn" id="bottomNextBtn">
+          <div>
+            <span>NEXT ALGORITHM</span>
+            <strong id="bottomNextName">Jump Search</strong>
+          </div>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </nav>
+
+    </section>
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">&lt;/&gt;</span>
+        <span>Algorithm<span class="logo-highlight">Hub</span></span>
+      </a>
+      <p>Learn. Visualize. Practice. Master algorithms with deep video explanations and dry runs.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="algorithms.html">Algorithms</a>
+      <a href="explanation.html">Explanation</a>
+      <a href="visualizer.html">Visualizer</a>
+      <a href="practice.html">Practice</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Algorithm Hub &copy; 2026</span>
+    <span>Interactive DSA Learning &amp; Explanation Platform</span>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script type="module" src="script.js"></script>
+<script src="data/searching.js"></script>
+<script src="data/sorting.js"></script>
+<script src="data/arrays-strings.js"></script>
+<script src="data/recursion.js"></script>
+<script src="data/linked-lists.js"></script>
+<script src="data/stack-queue.js"></script>
+<script src="data/trees.js"></script>
+<script src="data/graphs.js"></script>
+<script src="data/dynamic-programming.js"></script>
+<script src="data/greedy.js"></script>
+<script src="data/math-bit.js"></script>
+<script src="data/advanced.js"></script>
+<script src="data/explanations.js"></script>
+<script type="module" src="explanation.js"></script>
+
+</body>
+</html>

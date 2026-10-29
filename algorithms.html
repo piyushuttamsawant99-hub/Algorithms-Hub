@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Algorithm Hub — explore sorting, searching, graph, tree, greedy, dynamic programming and recursion algorithms.">
+  <title>Algorithms Library | Algorithm Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="algorithms.css">
+</head>
+<body>
+<header class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo" aria-label="Algorithm Hub home">
+      <span class="logo-icon">&lt;/&gt;</span><span>Algorithm<span class="logo-highlight">Hub</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="algorithms.html" class="active">Algorithms</a>
+      <a href="explanation.html" data-auth="required">Explanation</a>
+      <a href="visualizer.html" data-auth="required">Visualizer</a>
+      <a href="practice.html" data-auth="required">Practice</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+      <a href="signin.html" class="nav-button" id="navAccountLink">Sign In</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="library-hero">
+  <div class="library-grid-bg"></div>
+  <div class="library-glow glow-one"></div><div class="library-glow glow-two"></div>
+  <div class="library-code code-a">graph.addEdge(u, v)</div>
+  <div class="library-code code-b">T(n) = O(n log n)</div>
+  <div class="library-code code-c">DP[i] = max(...)</div>
+  <div class="library-hero-content">
+    <div class="library-badge"><span class="badge-dot"></span> COMPLETE ALGORITHM LIBRARY</div>
+    <h1>Explore <span>Algorithms.</span></h1>
+    <p>Study the idea, compare complexity, open an interactive visualizer, and practice the same concept with code.</p>
+    <div class="hero-mini-stats">
+      <div><strong>93</strong><span>Algorithms</span></div>
+      <div><strong>13</strong><span>Categories</span></div>
+      <div><strong>3</strong><span>Difficulty Levels</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="library-section" id="categories">
+  <div class="library-top">
+    <div><span class="section-label">ALGORITHM LIBRARY</span><h2>Choose your <span>path.</span></h2></div>
+    <span class="result-info" id="resultCount">Showing 93 algorithms</span>
+  </div>
+
+  <div class="search-container">
+    <label class="search-box" aria-label="Search algorithms">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input id="algorithmSearch" type="search" placeholder="Search by algorithm, category, or concept..." autocomplete="off">
+      <kbd>/</kbd>
+    </label>
+    <button class="clear-btn" id="clearBtn" type="button"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-label"><i class="fa-solid fa-layer-group"></i> CATEGORY</div>
+    <div class="filter-buttons" id="categoryFilters">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="searching">Searching</button>
+      <button class="filter-btn" data-category="sorting">Sorting</button>
+      <button class="filter-btn" data-category="arrays">Arrays &amp; Strings</button>
+      <button class="filter-btn" data-category="recursion">Recursion</button>
+      <button class="filter-btn" data-category="linked-lists">Linked Lists</button>
+      <button class="filter-btn" data-category="stack-queue">Stack &amp; Queue</button>
+      <button class="filter-btn" data-category="tree">Trees</button>
+      <button class="filter-btn" data-category="graph">Graphs</button>
+      <button class="filter-btn" data-category="dynamic">Dynamic Programming</button>
+      <button class="filter-btn" data-category="greedy">Greedy</button>
+      <button class="filter-btn" data-category="math-bit">Math &amp; Bit</button>
+      <button class="filter-btn" data-category="advanced">Advanced</button>
+    </div>
+  </div>
+  <div class="difficulty-filter">
+    <div class="filter-label"><i class="fa-solid fa-signal"></i> DIFFICULTY</div>
+    <div class="difficulty-buttons">
+      <button class="difficulty-btn active" data-difficulty="all">All</button>
+      <button class="difficulty-btn" data-difficulty="easy">Easy</button>
+      <button class="difficulty-btn" data-difficulty="medium">Medium</button>
+      <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+    </div>
+  </div>
+
+  <div class="library-grid" id="algorithmGrid">
+    <article class="library-card" data-category="sorting" data-difficulty="easy" data-name="Bubble Sort Repeatedly compares adjacent values and swaps them when they are out of order.">
+      <div class="card-visual bar-visual"><div class="visual-bars"><span style="height:35%"></span><span class="visual-active" style="height:75%"></span><span style="height:50%"></span><span class="visual-active" style="height:90%"></span><span style="height:60%"></span></div><span class="visual-label">COMPARE → SWAP</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag sorting-tag"><i class="fa-solid fa-arrow-down-wide-short"></i> SORTING</span><span class="level easy-level">EASY</span></div>
+        <h3>Bubble Sort</h3><p>Repeatedly compares adjacent values and swaps them when they are out of order.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n²)</strong></div><div><span>Space</span><strong>O(1)</strong></div></div>
+        <a href="visualizer.html?algorithm=bubble-sort" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="sorting" data-difficulty="easy" data-name="Selection Sort Finds the smallest remaining value and places it into the next sorted position.">
+      <div class="card-visual select-visual"><div class="selection-lines"><span></span><span class="active-line"></span><span></span><span></span></div><span class="visual-label">MIN → POSITION</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag sorting-tag"><i class="fa-solid fa-arrow-down-wide-short"></i> SORTING</span><span class="level easy-level">EASY</span></div>
+        <h3>Selection Sort</h3><p>Finds the smallest remaining value and places it into the next sorted position.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n²)</strong></div><div><span>Space</span><strong>O(1)</strong></div></div>
+        <a href="visualizer.html?algorithm=selection-sort" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="sorting" data-difficulty="easy" data-name="Insertion Sort Builds a sorted section by inserting each new value into its correct position.">
+      <div class="card-visual insert-visual"><div class="insert-visual"><span>3</span><span class="active-node">7</span><span>9</span><i class="fa-solid fa-arrow-left"></i></div><span class="visual-label">INSERT IN ORDER</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag sorting-tag"><i class="fa-solid fa-arrow-down-wide-short"></i> SORTING</span><span class="level easy-level">EASY</span></div>
+        <h3>Insertion Sort</h3><p>Builds a sorted section by inserting each new value into its correct position.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n²)</strong></div><div><span>Space</span><strong>O(1)</strong></div></div>
+        <a href="visualizer.html?algorithm=insertion-sort" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="sorting" data-difficulty="medium" data-name="Merge Sort Divides an array, sorts the halves, then merges them efficiently.">
+      <div class="card-visual merge-visual"><div class="merge-box">ARRAY</div><div class="merge-arrow">↓</div><div class="merge-small-boxes"><span></span><span></span></div><span class="visual-label">DIVIDE → MERGE</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag sorting-tag"><i class="fa-solid fa-arrow-down-wide-short"></i> SORTING</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>Merge Sort</h3><p>Divides an array, sorts the halves, then merges them efficiently.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n log n)</strong></div><div><span>Space</span><strong>O(n)</strong></div></div>
+        <a href="visualizer.html?algorithm=merge-sort" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="sorting" data-difficulty="medium" data-name="Quick Sort Partitions values around a pivot and recursively sorts both partitions.">
+      <div class="card-visual quick-visual"><div class="pivot">PIVOT</div><div class="quick-arrows">← PARTITION →</div></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag sorting-tag"><i class="fa-solid fa-arrow-down-wide-short"></i> SORTING</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>Quick Sort</h3><p>Partitions values around a pivot and recursively sorts both partitions.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n log n)</strong></div><div><span>Space</span><strong>O(log n)</strong></div></div>
+        <a href="visualizer.html?algorithm=quick-sort" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="sorting" data-difficulty="medium" data-name="Heap Sort Builds a heap and repeatedly extracts the maximum or minimum value.">
+      <div class="card-visual heap-visual"><div class="tree-mini"><span class="root">9</span><span>6</span><span>4</span><span>2</span></div><span class="visual-label">MAX HEAP</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag sorting-tag"><i class="fa-solid fa-arrow-down-wide-short"></i> SORTING</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>Heap Sort</h3><p>Builds a heap and repeatedly extracts the maximum or minimum value.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n log n)</strong></div><div><span>Space</span><strong>O(1)</strong></div></div>
+        <a href="visualizer.html?algorithm=heap-sort" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="searching" data-difficulty="easy" data-name="Linear Search Checks values one by one until the target is found or the list ends.">
+      <div class="card-visual search-visual"><div class="linear-pointers"><span>→</span><span>→</span><span class="pointer-active">→</span><span>→</span></div><span class="visual-label">CHECK → FOUND</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag searching-tag"><i class="fa-solid fa-magnifying-glass"></i> SEARCHING</span><span class="level easy-level">EASY</span></div>
+        <h3>Linear Search</h3><p>Checks values one by one until the target is found or the list ends.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n)</strong></div><div><span>Space</span><strong>O(1)</strong></div></div>
+        <a href="visualizer.html?algorithm=linear-search" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="searching" data-difficulty="easy" data-name="Binary Search Halves a sorted search range after every comparison.">
+      <div class="card-visual binary-visual"><div class="binary-range"><span>L</span><b>M</b><span>R</span></div><span class="visual-label">HALVE RANGE</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag searching-tag"><i class="fa-solid fa-magnifying-glass"></i> SEARCHING</span><span class="level easy-level">EASY</span></div>
+        <h3>Binary Search</h3><p>Halves a sorted search range after every comparison.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(log n)</strong></div><div><span>Space</span><strong>O(1)</strong></div></div>
+        <a href="visualizer.html?algorithm=binary-search" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="graph" data-difficulty="medium" data-name="Breadth-First Search Explores a graph level by level using a queue.">
+      <div class="card-visual graph-bfs-visual"><div class="graph-mini"><span>A</span><i></i><span>B</span><i></i><span>C</span><b>QUEUE</b></div></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag graph-tag"><i class="fa-solid fa-share-nodes"></i> GRAPH</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>Breadth-First Search</h3><p>Explores a graph level by level using a queue.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(V + E)</strong></div><div><span>Space</span><strong>O(V)</strong></div></div>
+        <a href="visualizer.html?algorithm=bfs" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="graph" data-difficulty="medium" data-name="Depth-First Search Explores as far as possible before backtracking.">
+      <div class="card-visual graph-dfs-visual"><div class="graph-mini dfs"><span>A</span><i></i><span>B</span><i></i><span>D</span><b>DEPTH</b></div></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag graph-tag"><i class="fa-solid fa-share-nodes"></i> GRAPH</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>Depth-First Search</h3><p>Explores as far as possible before backtracking.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(V + E)</strong></div><div><span>Space</span><strong>O(V)</strong></div></div>
+        <a href="visualizer.html?algorithm=dfs" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="graph" data-difficulty="hard" data-name="Dijkstra’s Algorithm Finds shortest paths from a source in a graph with non-negative weights.">
+      <div class="card-visual dijkstra-visual"><div class="graph-mini weighted"><span>A</span><small>4</small><span>B</span><small>2</small><span>C</span><b>SHORTEST PATH</b></div></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag graph-tag"><i class="fa-solid fa-share-nodes"></i> GRAPH</span><span class="level hard-level">HARD</span></div>
+        <h3>Dijkstra’s Algorithm</h3><p>Finds shortest paths from a source in a graph with non-negative weights.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O((V+E) log V)</strong></div><div><span>Space</span><strong>O(V)</strong></div></div>
+        <a href="visualizer.html?algorithm=dijkstra" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="graph" data-difficulty="hard" data-name="Floyd-Warshall Computes shortest paths between every pair of vertices.">
+      <div class="card-visual matrix-visual"><div class="matrix-mini"><span>0</span><span>3</span><span>8</span><span>3</span><span>0</span><span>2</span><span>8</span><span>2</span><span>0</span></div></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag graph-tag"><i class="fa-solid fa-share-nodes"></i> GRAPH</span><span class="level hard-level">HARD</span></div>
+        <h3>Floyd-Warshall</h3><p>Computes shortest paths between every pair of vertices.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(V³)</strong></div><div><span>Space</span><strong>O(V²)</strong></div></div>
+        <a href="visualizer.html?algorithm=floyd-warshall" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="tree" data-difficulty="easy" data-name="BST Inorder Traversal Visits a binary search tree in left-root-right order.">
+      <div class="card-visual tree-visual"><div class="tree-mini"><span class="root">8</span><span>4</span><span>12</span><span>2</span><span>6</span></div><span class="visual-label">LEFT → ROOT → RIGHT</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag category-tag"><i class="fa-solid fa-sitemap"></i> TREE</span><span class="level easy-level">EASY</span></div>
+        <h3>BST Inorder Traversal</h3><p>Visits a binary search tree in left-root-right order.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n)</strong></div><div><span>Space</span><strong>O(h)</strong></div></div>
+        <a href="visualizer.html?algorithm=bst-inorder" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="tree" data-difficulty="medium" data-name="BST Level Order Traverses tree nodes level by level using a queue.">
+      <div class="card-visual tree-level-visual"><div class="tree-mini level"><span class="root">8</span><span>4</span><span>12</span><span>2</span><span>6</span></div><span class="visual-label">LEVEL BY LEVEL</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag category-tag"><i class="fa-solid fa-sitemap"></i> TREE</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>BST Level Order</h3><p>Traverses tree nodes level by level using a queue.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n)</strong></div><div><span>Space</span><strong>O(n)</strong></div></div>
+        <a href="visualizer.html?algorithm=bst-level-order" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="greedy" data-difficulty="medium" data-name="Activity Selection Selects the maximum number of compatible activities by earliest finish time.">
+      <div class="card-visual greedy-visual"><div class="greedy-items"><span></span><span class="greedy-active"></span><span></span><span></span></div><small>BEST LOCAL CHOICE</small></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag greedy-tag"><i class="fa-solid fa-bolt"></i> GREEDY</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>Activity Selection</h3><p>Selects the maximum number of compatible activities by earliest finish time.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(n log n)</strong></div><div><span>Space</span><strong>O(n)</strong></div></div>
+        <a href="visualizer.html?algorithm=activity-selection" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="dynamic" data-difficulty="medium" data-name="0/1 Knapsack Chooses items to maximize value without exceeding a capacity.">
+      <div class="card-visual dp-visual"><div class="dp-table"><span>0</span><span>4</span><span>7</span><span>9</span><span>10</span><span>12</span></div><span class="visual-label">DP TABLE</span></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag dp-tag"><i class="fa-solid fa-table-cells"></i> DYNAMIC</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>0/1 Knapsack</h3><p>Chooses items to maximize value without exceeding a capacity.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(nW)</strong></div><div><span>Space</span><strong>O(nW)</strong></div></div>
+        <a href="visualizer.html?algorithm=knapsack" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="dynamic" data-difficulty="medium" data-name="Longest Common Subsequence Finds the longest sequence appearing in two strings in the same order.">
+      <div class="card-visual lcs-visual"><div class="matrix-mini lcs"><span>A</span><span>B</span><span>C</span><span>A</span><span>B</span><span>C</span><span>0</span><span>1</span><span>2</span></div></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag dp-tag"><i class="fa-solid fa-table-cells"></i> DYNAMIC</span><span class="level medium-level">MEDIUM</span></div>
+        <h3>Longest Common Subsequence</h3><p>Finds the longest sequence appearing in two strings in the same order.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(mn)</strong></div><div><span>Space</span><strong>O(mn)</strong></div></div>
+        <a href="visualizer.html?algorithm=lcs" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+    <article class="library-card" data-category="recursion" data-difficulty="easy" data-name="Fibonacci Generates Fibonacci values recursively or with dynamic programming.">
+      <div class="card-visual recursion-visual"><div class="recursion-mini"><span>F(n)</span><b>↙</b><b>↘</b><span>F(n-1)</span><span>F(n-2)</span></div></div>
+      <div class="library-card-body">
+        <div class="card-meta"><span class="category-tag category-tag"><i class="fa-solid fa-rotate"></i> RECURSION</span><span class="level easy-level">EASY</span></div>
+        <h3>Fibonacci</h3><p>Generates Fibonacci values recursively or with dynamic programming.</p>
+        <div class="card-complexity"><div><span>Time</span><strong>O(2ⁿ) naive</strong></div><div><span>Space</span><strong>O(n)</strong></div></div>
+        <a href="visualizer.html?algorithm=fibonacci" class="explore-link">Open Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
+  </div>
+  <div class="no-results" id="noResults"><div class="no-results-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h3>No algorithms found</h3><p>Try another search term or reset the filters.</p><button class="clear-btn" id="resetSearch" type="button">Show all algorithms</button></div>
+</section>
+</main>
+<footer class="footer"><div class="footer-container"><div class="footer-brand"><a href="index.html" class="logo"><span class="logo-icon">&lt;/&gt;</span><span>Algorithm<span class="logo-highlight">Hub</span></span></a><p>Learn. Visualize. Practice. Master algorithms.</p></div><div class="footer-links"><a href="index.html">Home</a><a href="algorithms.html">Algorithms</a><a href="explanation.html">Explanation</a><a href="visualizer.html">Visualizer</a><a href="practice.html">Practice</a><a href="about.html">About</a></div></div><div class="footer-bottom"><span>Algorithm Hub</span><span>Frontend Learning Platform</span></div></footer>
+<script type="module" src="script.js"></script>
+<script src="data/searching.js"></script>
+<script src="data/sorting.js"></script>
+<script src="data/arrays-strings.js"></script>
+<script src="data/recursion.js"></script>
+<script src="data/linked-lists.js"></script>
+<script src="data/stack-queue.js"></script>
+<script src="data/trees.js"></script>
+<script src="data/graphs.js"></script>
+<script src="data/dynamic-programming.js"></script>
+<script src="data/greedy.js"></script>
+<script src="data/math-bit.js"></script>
+<script src="data/advanced.js"></script>
+<script src="data/explanations.js"></script>
+<script type="module" src="algorithms.js"></script>
+</body></html>

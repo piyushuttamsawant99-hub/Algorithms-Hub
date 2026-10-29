@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practice Lab | Algorithm Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="practice.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+
+            <span class="logo-icon">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Algorithm<span class="logo-highlight">Hub</span>
+            </span>
+
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+
+            <a href="index.html">Home</a>
+
+            <a href="algorithms.html">Algorithms</a>
+
+            <a href="explanation.html" data-auth="required">Explanation</a>
+
+            <a href="visualizer.html" data-auth="required">Visualizer</a>
+
+            <a href="practice.html" class="active" data-auth="required">
+                Practice
+            </a>
+
+            <a href="about.html">About</a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <button
+                class="theme-btn"
+                id="themeBtn"
+            >
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+            <a
+                href="signin.html"
+                class="nav-button"
+                id="navAccountLink"
+            >
+                Sign In
+            </a>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+<section class="practice-hero">
+
+    <div class="practice-grid"></div>
+
+    <div class="practice-glow"></div>
+
+    <div class="practice-heading">
+
+        <div class="practice-badge">
+
+            <span></span>
+
+            CODING PRACTICE LAB
+
+        </div>
+
+        <h1>
+            Code.
+            <span>Run.</span>
+            Master.
+        </h1>
+
+        <p>
+            Write algorithms, test your logic,
+            fix errors, and build real problem-solving skills.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="practice-workspace" id="practiceApp" aria-label="Algorithm practice workspace"></section>
+
+<!-- =====================================================
+     PRACTICE WORKSPACE
+===================================================== -->
+
+<section class="practice-section">
+
+
+    <!-- TOP CONTROLS -->
+
+    <div class="practice-toolbar">
+
+        <div class="practice-select">
+
+            <label>
+                ALGORITHM
+            </label>
+
+            <select id="practiceAlgorithm">
+
+                <option value="bubble-sort">
+                    Bubble Sort
+                </option>
+
+                <option value="selection-sort">
+                    Selection Sort
+                </option>
+
+                <option value="insertion-sort">
+                    Insertion Sort
+                </option>
+
+                <option value="linear-search">
+                    Linear Search
+                </option>
+
+                <option value="binary-search">
+                    Binary Search
+                </option>
+
+                <option value="factorial">
+                    Factorial
+                </option>
+
+                <option value="fibonacci">
+                    Fibonacci
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="practice-select">
+
+            <label>
+                LANGUAGE
+            </label>
+
+            <select id="languageSelect">
+
+                <option value="python">
+                    Python
+                </option>
+
+                <option value="java">
+                    Java
+                </option>
+
+                <option value="cpp">
+                    C++
+                </option>
+
+                <option value="c">
+                    C
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="reset-code-btn"
+            id="resetCodeBtn"
+        >
+
+            <i class="fa-solid fa-rotate-left"></i>
+
+            Reset Code
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         PROBLEM + EDITOR
+    ================================================= -->
+
+    <div class="practice-layout">
+
+
+        <!-- LEFT -->
+        <aside class="problem-panel">
+
+            <div class="problem-header">
+
+                <div>
+
+                    <span>
+                        PROBLEM
+                    </span>
+
+                    <h2 id="problemTitle">
+                        Bubble Sort
+                    </h2>
+
+                </div>
+
+                <span class="difficulty easy">
+                    EASY
+                </span>
+
+            </div>
+
+
+            <div class="problem-description">
+
+                <p id="problemDescription">
+
+                    Write a program to sort an array
+                    of integers using Bubble Sort.
+
+                </p>
+
+            </div>
+
+
+            <div class="example-box">
+
+                <div class="example-title">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    Example
+                </div>
+
+                <div class="example-row">
+
+                    <span>
+                        Input
+                    </span>
+
+                    <code id="exampleInput">
+                        [5, 2, 8, 1, 3]
+                    </code>
+
+                </div>
+
+                <div class="example-row">
+
+                    <span>
+                        Output
+                    </span>
+
+                    <code id="exampleOutput">
+                        [1, 2, 3, 5, 8]
+                    </code>
+
+                </div>
+
+            </div>
+
+
+            <div class="hint-box">
+
+                <i class="fa-regular fa-lightbulb"></i>
+
+                <div>
+
+                    <strong>
+                        Hint
+                    </strong>
+
+                    <p id="hintText">
+
+                        Compare adjacent elements and
+                        swap them when necessary.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="complexity-mini">
+
+                <div>
+
+                    <span>
+                        TIME
+                    </span>
+
+                    <strong id="timeComplexity">
+                        O(n²)
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        SPACE
+                    </span>
+
+                    <strong id="spaceComplexity">
+                        O(1)
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- RIGHT -->
+        <section class="editor-panel">
+
+
+            <!-- EDITOR HEADER -->
+
+            <div class="editor-header">
+
+                <div class="editor-file">
+
+                    <span class="file-dot"></span>
+
+                    <span id="fileName">
+                        solution.py
+                    </span>
+
+                </div>
+
+
+                <div class="editor-actions">
+
+                    <span
+                        class="editor-status"
+                        id="editorStatus"
+                    >
+                        Ready
+                    </span>
+
+                    <button
+                        class="run-btn"
+                        id="runBtn"
+                    >
+
+                        <i class="fa-solid fa-play"></i>
+
+                        Run Code
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CODE AREA -->
+
+            <div class="code-editor">
+
+                <div
+                    class="line-numbers"
+                    id="lineNumbers"
+                >
+                    1<br>
+                    2<br>
+                    3<br>
+                    4<br>
+                    5<br>
+                    6<br>
+                    7<br>
+                    8<br>
+                    9<br>
+                    10<br>
+                    11<br>
+                    12<br>
+                    13<br>
+                    14<br>
+                    15
+                </div>
+
+
+                <textarea
+                    id="legacyCodeEditor"
+                    spellcheck="false"
+                ></textarea>
+
+            </div>
+
+
+            <!-- OUTPUT -->
+
+            <div class="output-panel">
+
+                <div class="output-header">
+
+                    <div>
+
+                        <i class="fa-solid fa-terminal"></i>
+
+                        OUTPUT
+
+                    </div>
+
+                    <span id="executionTime">
+                        0 ms
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="output-content"
+                    id="outputContent"
+                >
+
+                    <span class="output-muted">
+                        Click "Run Code" to execute
+                        your solution.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =================================================
+         TEST CASES
+    ================================================= -->
+
+    <section class="test-section">
+
+        <div class="test-heading">
+
+            <div>
+
+                <span class="section-label">
+                    VALIDATION
+                </span>
+
+                <h2>
+                    Test Cases
+                </h2>
+
+            </div>
+
+            <span
+                class="test-summary"
+                id="testSummary"
+            >
+                0 / 3 Passed
+            </span>
+
+        </div>
+
+
+        <div class="test-grid">
+
+
+            <div
+                class="test-card"
+                id="test1"
+            >
+
+                <div class="test-card-top">
+
+                    <span>
+                        TEST 01
+                    </span>
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+                </div>
+
+                <div class="test-input">
+                    Input: [5, 2, 8, 1, 3]
+                </div>
+
+                <div class="test-output">
+                    Expected: [1, 2, 3, 5, 8]
+                </div>
+
+                <div class="test-result">
+                    Not Run
+                </div>
+
+            </div>
+
+
+            <div
+                class="test-card"
+                id="test2"
+            >
+
+                <div class="test-card-top">
+
+                    <span>
+                        TEST 02
+                    </span>
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+                </div>
+
+                <div class="test-input">
+                    Input: [9, 4, 6, 2]
+                </div>
+
+                <div class="test-output">
+                    Expected: [2, 4, 6, 9]
+                </div>
+
+                <div class="test-result">
+                    Not Run
+                </div>
+
+            </div>
+
+
+            <div
+                class="test-card"
+                id="test3"
+            >
+
+                <div class="test-card-top">
+
+                    <span>
+                        TEST 03
+                    </span>
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+                </div>
+
+                <div class="test-input">
+                    Input: [7, 1, 5]
+                </div>
+
+                <div class="test-output">
+                    Expected: [1, 5, 7]
+                </div>
+
+                <div class="test-result">
+                    Not Run
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SUCCESS CARD
+    ================================================= -->
+
+    <section
+        class="success-card"
+        id="successCard"
+    >
+
+        <div class="success-icon">
+
+            <i class="fa-solid fa-check"></i>
+
+        </div>
+
+        <div>
+
+            <span>
+                GREAT WORK
+            </span>
+
+            <h2>
+                All test cases passed!
+            </h2>
+
+            <p>
+                Your solution produced the expected output.
+            </p>
+
+        </div>
+
+        <a
+            href="visualizer.html"
+            class="success-btn"
+        >
+
+            Visualize Algorithm
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </section>
+
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <span class="logo-icon">
+                    &lt;/&gt;
+                </span>
+
+                <span>
+                    Algorithm<span class="logo-highlight">
+                        Hub
+                    </span>
+                </span>
+
+            </a>
+
+            <p>
+                Learn. Visualize. Practice.
+                Master algorithms.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <div>
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="algorithms.html">
+                    Algorithms
+                </a>
+
+                <a href="visualizer.html">
+                    Visualizer
+                </a>
+
+                <a href="practice.html">
+                    Practice
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Learn
+                </h4>
+
+                <a href="#">
+                    Sorting
+                </a>
+
+                <a href="#">
+                    Searching
+                </a>
+
+                <a href="#">
+                    Graphs
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Algorithm Hub
+                </h4>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="#">
+                    About
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 Algorithm Hub.
+            Built for learners.
+        </span>
+
+        <span>
+            Learn
+            <i class="fa-solid fa-code"></i>
+            Practice
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script type="module" src="script.js"></script>
+<script src="data/arrays-strings.js"></script>
+<script src="data/searching.js"></script>
+<script src="data/sorting.js"></script>
+<script src="data/recursion.js"></script>
+<script src="data/linked-lists.js"></script>
+<script src="data/stack-queue.js"></script>
+<script src="data/trees.js"></script>
+<script src="data/graphs.js"></script>
+<script src="data/dynamic-programming.js"></script>
+<script src="data/greedy.js"></script>
+<script src="data/math-bit.js"></script>
+<script src="data/advanced.js"></script>
+<script src="data/explanations.js"></script>
+<script type="module" src="practice-app.js"></script>
+
+</body>
+</html>

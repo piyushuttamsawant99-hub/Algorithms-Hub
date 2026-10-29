@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Hub - Section 3.11 Important Source Code</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 20mm 20mm 20mm 20mm;
+      @bottom-right {
+        content: counter(page);
+        font-family: "Times New Roman", serif;
+        font-size: 11pt;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 11.5pt;
+      line-height: 1.5;
+      color: #111;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .report-paper {
+      background: #fff;
+      max-width: 210mm;
+      margin: 0 auto 30px auto;
+      padding: 20mm;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    @media print {
+      body { background: transparent; padding: 0; }
+      .report-paper { max-width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+    }
+
+    .page-break {
+      page-break-before: always;
+      margin-top: 30pt;
+      padding-top: 15pt;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    @media print {
+      .page-break { margin-top: 0; padding-top: 0; border-top: none; }
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Times New Roman", Times, serif;
+      font-weight: bold;
+      color: #000;
+      margin-top: 18pt;
+      margin-bottom: 6pt;
+    }
+
+    h1 { font-size: 18pt; text-align: center; text-transform: uppercase; margin-bottom: 16pt; }
+    h2 { font-size: 14pt; border-bottom: 1.5pt solid #000; padding-bottom: 3pt; margin-top: 20pt; }
+    h3 { font-size: 12.5pt; margin-top: 14pt; color: #0f172a; }
+    h4 { font-size: 11.5pt; font-style: italic; }
+
+    p {
+      text-align: justify;
+      margin-bottom: 8pt;
+      text-indent: 20pt;
+    }
+    .no-indent { text-indent: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12pt 0;
+      font-size: 10pt;
+    }
+    th, td {
+      border: 1pt solid #000;
+      padding: 5pt 7pt;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    pre {
+      background: #f8fafc;
+      border: 1pt solid #cbd5e1;
+      border-left: 3pt solid #0284c7;
+      padding: 8pt 10pt;
+      font-family: "Fira Code", monospace;
+      font-size: 9pt;
+      line-height: 1.35;
+      overflow-x: auto;
+      margin: 10pt 0;
+      border-radius: 4px;
+    }
+    code {
+      font-family: "Fira Code", monospace;
+      font-size: 9.5pt;
+      background: #f1f5f9;
+      padding: 1pt 3pt;
+      border-radius: 2px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2pt 6pt;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 4px;
+      font-family: "Inter", sans-serif;
+      font-size: 8.5pt;
+      font-weight: 600;
+    }
+
+    .action-bar {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 9999;
+      background: #0284c7;
+      color: white;
+      padding: 9px 16px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      font-family: "Inter", sans-serif;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .action-bar:hover { background: #0369a1; }
+  </style>
+</head>
+<body>
+
+<div class="action-bar no-print" onclick="window.print()">
+  🖨️ Print / Save as PDF
+</div>
+
+<div class="report-paper">
+
+  <p style="text-align: center; font-size: 13pt; font-weight: bold; margin: 0; text-indent: 0;">ALGORITHM HUB — PROJECT DOCUMENTATION</p>
+  <h1>3.11 IMPORTANT SOURCE CODE OF THE PROJECT</h1>
+  
+  <p>This section documents the foundational source-code architecture, module divisions, and critical implementation files used in <strong>Algorithm Hub</strong>. The structure decouples client-side presentation from algorithmic data, visual animation engines, external compiler relays, and secure SQLite server operations.</p>
+
+  <!-- ==================== 3.11.1 ==================== -->
+  <h2>3.11.1 Frontend Structure</h2>
+  <p>The frontend contains the HTML5 pages and ES6 JavaScript modules responsible for rendering the responsive user interface, managing local state, and providing interactive algorithm demonstrations.</p>
+
+  <p class="no-indent"><strong>Important Frontend Files:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">File / Module</th>
+        <th style="width: 75%;">Purpose in System Architecture</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>index.html</code></td>
+        <td>Main landing page showcasing platform overview, feature highlights, language capabilities, and a live animated Bubble Sort teaser.</td>
+      </tr>
+      <tr>
+        <td><code>algorithms.html</code></td>
+        <td>Searchable and filterable algorithm directory categorizing 93 algorithms across 12 distinct computer science domains.</td>
+      </tr>
+      <tr>
+        <td><code>explanation.html</code></td>
+        <td>Educational explanation viewer providing problem definitions, step-by-step invariant analyses, Big-O tables, and video walkthroughs.</td>
+      </tr>
+      <tr>
+        <td><code>visualizer.html</code></td>
+        <td>Interactive algorithm visualizer interface supporting sorting, searching, binary search trees, and graph traversal animations.</td>
+      </tr>
+      <tr>
+        <td><code>practice.html</code></td>
+        <td>Online programming practice workspace with problem descriptions, sample test cases, and multi-language compiler integration.</td>
+      </tr>
+      <tr>
+        <td><code>profile.html</code></td>
+        <td>Authenticated student learning dashboard displaying the 30-day curriculum, sequential stage stepper, attempt history, and radar analytics.</td>
+      </tr>
+      <tr>
+        <td><code>signin.html</code></td>
+        <td>Secure login interface validating email format, verifying bcrypt password hashes via backend API, and saving session tokens.</td>
+      </tr>
+      <tr>
+        <td><code>signup.html</code></td>
+        <td>User registration interface capturing student name, email, and password with client-side validation and conflict handling.</td>
+      </tr>
+      <tr>
+        <td><code>about.html</code></td>
+        <td>Project background, pedagogical mission, technology stack summary, and academic attribution.</td>
+      </tr>
+      <tr>
+        <td><code>script.js</code></td>
+        <td>Global frontend utility module managing navigation bar responsiveness, theme toggling, auth state checks, and mobile menus.</td>
+      </tr>
+      <tr>
+        <td><code>algorithms.js</code></td>
+        <td>Search and filtering logic for the algorithm catalog, dynamic DOM card rendering, and difficulty badge mapping.</td>
+      </tr>
+      <tr>
+        <td><code>visualizer.js</code></td>
+        <td>Visualizer UI controller handling user controls (play, pause, step forward, array size, animation speed) and canvas bindings.</td>
+      </tr>
+      <tr>
+        <td><code>visualizer-core.js</code></td>
+        <td>Core algorithmic visualization engine containing frame buffers, playback loops, bar swapping animations, and pseudocode trackers.</td>
+      </tr>
+      <tr>
+        <td><code>practice.js</code></td>
+        <td>Practice workspace event controller managing tab selections, code template generation, and input synchronization.</td>
+      </tr>
+      <tr>
+        <td><code>practice-app.js</code></td>
+        <td>Practice application client handling network communication with the remote Wandbox compiler API and stdout terminal rendering.</td>
+      </tr>
+      <tr>
+        <td><code>explanation.js</code></td>
+        <td>Explanation viewer controller managing language tab switches (Pseudocode, C++, Java, Python, JS) and copy-to-clipboard functionality.</td>
+      </tr>
+      <tr>
+        <td><code>Algorithm Category Data Modules</code></td>
+        <td>Twelve modular ES6 data files (<code>data/*.js</code>) organizing algorithm metadata, descriptions, invariants, and complexity bounds.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== 3.11.2 ==================== -->
+  <div class="page-break"></div>
+  <h2>3.11.2 Algorithm Data Modules</h2>
+  <p>The algorithm data modules isolate educational content from page structure and rendering code. This separation of concerns ensures that new algorithms, complexity bounds, or pseudocode translations can be added without altering the visual presentation layer.</p>
+
+  <p class="no-indent"><strong>Key References:</strong> <code>data/sorting.js</code>, <code>data/searching.js</code>, <code>data/graphs.js</code>, and <code>data/explanations.js</code>.</p>
+
+  <h3>Source Code: Sorting Algorithm Data Module (<code>data/sorting.js</code>)</h3>
+  <pre><code>// data/sorting.js - Modular Algorithm Taxonomy and Complexity Bounds
+window.algorithmGroups = window.algorithmGroups || {};
+window.algorithmGroups.sorting = {
+  label: 'Sorting',
+  items: [
+    [
+      'Bubble Sort', 
+      'Compares adjacent values and swaps them when out of order.', 
+      'Best O(n) with early exit; average/worst O(n²)', 
+      'O(1) auxiliary space'
+    ],
+    [
+      'Selection Sort', 
+      'Finds the smallest remaining value and places it next.', 
+      'O(n²) in all cases', 
+      'O(1) auxiliary space'
+    ],
+    [
+      'Insertion Sort', 
+      'Builds a sorted prefix by inserting each new value.', 
+      'Best O(n); average/worst O(n²)', 
+      'O(1) auxiliary space'
+    ],
+    [
+      'Merge Sort', 
+      'Divides the array, sorts halves, and merges them.', 
+      'O(n log n) in all cases', 
+      'O(n) standard array merge auxiliary space'
+    ],
+    [
+      'Quick Sort', 
+      'Partitions around a pivot and sorts both partitions recursively.', 
+      'Average O(n log n); worst O(n²)', 
+      'Average O(log n); worst O(n) recursion stack'
+    ],
+    [
+      'Heap Sort', 
+      'Builds a binary heap and repeatedly extracts the maximum element.', 
+      'O(n log n) in all cases', 
+      'O(1) in-place auxiliary space'
+    ]
+  ]
+};</code></pre>
+
+  <p><strong>Architecture Notes:</strong></p>
+  <ul>
+    <li>The global namespace <code>window.algorithmGroups</code> aggregates items across all 12 domains.</li>
+    <li>Each algorithm record contains: <code>[Name, One-line Conceptual Summary, Time Complexity, Auxiliary Space Complexity]</code>.</li>
+    <li>Edge-case complexities (such as the recursion-stack auxiliary space for Quick Sort) are explicitly preserved for academic accuracy.</li>
+  </ul>
+
+  <!-- ==================== 3.11.3 ==================== -->
+  <div class="page-break"></div>
+  <h2>3.11.3 Algorithm Visualizer Modules</h2>
+  <p>The visualizer system implements a deterministic, discrete animation state machine. Rather than using arbitrary `setTimeout` delays during execution, algorithms execute upfront to generate a <strong>History Frame Buffer</strong>. The playback controller then navigates forward or backward through this buffer at the user's chosen animation speed.</p>
+
+  <p class="no-indent"><strong>Key References:</strong> <code>visualizer.js</code> and <code>visualizer-core.js</code>.</p>
+
+  <h3>Source Code: Visualizer Core Animation Loop (<code>visualizer-core.js</code>)</h3>
+  <pre><code>// visualizer-core.js - Deterministic Step & Playback Engine
+export class VisualizerCore {
+  constructor(canvasContainer, options = {}) {
+    this.container = typeof canvasContainer === 'string' 
+      ? document.querySelector(canvasContainer) 
+      : canvasContainer;
+    this.speed = options.speed || 300; // Animation delay in milliseconds
+    this.historyFrames = [];
+    this.currentFrameIdx = 0;
+    this.isPlaying = false;
+    this.timer = null;
+  }
+
+  // Push a discrete state snapshot to the animation buffer
+  pushFrame(snapshot) {
+    this.historyFrames.push({
+      array: [...snapshot.array],
+      highlightIndices: [...(snapshot.highlights || [])],
+      swappingIndices: [...(snapshot.swaps || [])],
+      sortedIndices: [...(snapshot.sorted || [])],
+      codeLine: snapshot.line || null
+    });
+  }
+
+  // Continuous Playback Loop
+  play() {
+    if (this.isPlaying) return;
+    this.isPlaying = true;
+    this.runLoop();
+  }
+
+  pause() {
+    this.isPlaying = false;
+    clearTimeout(this.timer);
+  }
+
+  stepForward() {
+    if (this.currentFrameIdx < this.historyFrames.length - 1) {
+      this.currentFrameIdx++;
+      this.renderFrame(this.historyFrames[this.currentFrameIdx]);
+    }
+  }
+
+  stepBackward() {
+    if (this.currentFrameIdx > 0) {
+      this.currentFrameIdx--;
+      this.renderFrame(this.historyFrames[this.currentFrameIdx]);
+    }
+  }
+
+  runLoop() {
+    if (!this.isPlaying) return;
+    if (this.currentFrameIdx < this.historyFrames.length - 1) {
+      this.stepForward();
+      this.timer = setTimeout(() => this.runLoop(), this.speed);
+    } else {
+      this.pause();
+    }
+  }
+
+  // Render DOM Bar Canvas with dynamic styles
+  renderFrame(frame) {
+    if (!frame || !this.container) return;
+    this.container.innerHTML = '';
+    const maxVal = Math.max(...frame.array, 1);
+
+    frame.array.forEach((val, idx) => {
+      const bar = document.createElement('div');
+      bar.className = 'visualizer-bar';
+      bar.style.height = `${(val / maxVal) * 100}%`;
+      
+      if (frame.sortedIndices.includes(idx)) {
+        bar.classList.add('is-sorted'); // Green color
+      } else if (frame.swappingIndices.includes(idx)) {
+        bar.classList.add('is-swapping'); // Red color
+      } else if (frame.highlightIndices.includes(idx)) {
+        bar.classList.add('is-comparing'); // Yellow color
+      }
+
+      const label = document.createElement('span');
+      label.innerText = val;
+      bar.appendChild(label);
+      this.container.appendChild(bar);
+    });
+  }
+}</code></pre>
+
+  <!-- ==================== 3.11.4 ==================== -->
+  <div class="page-break"></div>
+  <h2>3.11.4 Practice Modules</h2>
+  <p>The practice module enables learners to write and execute code directly in their browser without requiring local compiler installations. The client maps language selections to specific containerized compilers on the public Wandbox API and displays standard output, compiler warnings, or runtime errors.</p>
+
+  <p class="no-indent"><strong>Key Reference:</strong> <code>practice-app.js</code>.</p>
+
+  <h3>Source Code: Wandbox Remote Compiler Client (<code>practice-app.js</code>)</h3>
+  <pre><code>// practice-app.js - Multi-Language Remote Compiler Relay
+export class PracticeCompilerClient {
+  constructor() {
+    this.apiEndpoint = 'https://wandbox.org/api/compile.json';
+    this.compilerByLanguage = {
+      python: { compiler: 'cpython-3.13.8', file: 'main.py' },
+      javascript: { compiler: 'nodejs-20.17.0', file: 'main.js' },
+      java: { compiler: 'openjdk-jdk-21+35', file: 'Main.java' },
+      c: { compiler: 'gcc-13.2.0-c', file: 'main.c' },
+      cpp: { compiler: 'gcc-13.2.0', file: 'main.cpp' }
+    };
+  }
+
+  async compileAndRun(language, sourceCode, stdinInput = '') {
+    const config = this.compilerByLanguage[language];
+    if (!config) throw new Error(`Unsupported programming language: ${language}`);
+
+    const payload = {
+      compiler: config.compiler,
+      code: sourceCode,
+      stdin: stdinInput,
+      'compiler-option-raw': language === 'cpp' ? '-O2\n-std=c++20' : ''
+    };
+
+    const startTime = performance.now();
+    try {
+      const response = await fetch(this.apiEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Compiler API returned HTTP status ${response.status}`);
+      }
+
+      const result = await response.json();
+      const elapsedMs = Math.round(performance.now() - startTime);
+
+      return {
+        status: result.status === '0' ? 'SUCCESS' : 'RUNTIME_ERROR',
+        stdout: result.program_output || result.program_message || '',
+        stderr: result.compiler_error || result.program_error || '',
+        executionTimeMs: elapsedMs
+      };
+    } catch (error) {
+      return {
+        status: 'CONNECTION_FAILURE',
+        stdout: '',
+        stderr: `Failed to communicate with compiler service: ${error.message}`,
+        executionTimeMs: Math.round(performance.now() - startTime)
+      };
+    }
+  }
+}</code></pre>
+
+  <!-- ==================== 3.11.5 ==================== -->
+  <div class="page-break"></div>
+  <h2>3.11.5 Backend Server</h2>
+  <p>The backend is developed with Node.js and Express. It acts as the centralized coordinator, handling RESTful routes, validating payloads, enforcing authentication, interacting with SQLite, and grading student submissions.</p>
+
+  <p class="no-indent"><strong>Key Reference:</strong> <code>backend/server.js</code>.</p>
+
+  <p class="no-indent"><strong>Verified Backend REST Routes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 35%;">Endpoint & HTTP Method</th>
+        <th style="width: 20%;">Access Type</th>
+        <th style="width: 45%;">Functional Responsibility</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>GET /api/health</code></td>
+        <td><span class="badge">Public</span></td>
+        <td>Returns <code>{"status":"ok"}</code> confirming backend availability.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/register</code></td>
+        <td><span class="badge">Public</span></td>
+        <td>Registers new student account with bcrypt password hashing.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/login</code></td>
+        <td><span class="badge">Public</span></td>
+        <td>Authenticates student credentials and returns a 7-day signed JWT.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/logout</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Revokes session token by inserting SHA-256 hash into revocation table.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/dashboard</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Returns 30-day curriculum progress, statistics, and alert notifications.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/learning/:day</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Retrieves lesson content, activity test cases, and quiz items for Day N.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/learning/:day/start</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Initializes lesson start timestamp (<code>startedAt</code>) in SQLite.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/learning/:day/concept</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Marks the conceptual reading stage completed.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/learning/:day/activity</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Validates student's computed result against server expected output.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/learning/:day/quiz</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Evaluates 10-question daily quiz; unlocks next day if score &ge; 70%.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/assessments/:assessmentId</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Retrieves 10 authored milestone assessment questions (Days 7, 14, 21, 30).</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/assessments/:assessmentId/quiz</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Grades milestone assessment; milestone day completes only when both pass.</td>
+      </tr>
+      <tr>
+        <td><code>PATCH /api/notifications/:id/read</code></td>
+        <td><span class="badge">Bearer Auth</span></td>
+        <td>Updates <code>readAt</code> timestamp on personalized in-app notifications.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== 3.11.6 ==================== -->
+  <div class="page-break"></div>
+  <h2>3.11.6 Authentication and Password Handling</h2>
+  <p>Algorithm Hub prioritizes credential security. Passwords are never stored in plaintext; registration applies <code>bcryptjs</code> with 10 salt rounds. Protected endpoints verify a signed 7-day JSON Web Token (JWT). To prevent replay attacks after logout, the server computes a SHA-256 hash of the token and checks it against an active revocation table.</p>
+
+  <p class="no-indent"><strong>Key Reference:</strong> <code>backend/server.js</code>.</p>
+
+  <h3>Source Code: Auth Middleware & Password Hashing (<code>backend/server.js</code>)</h3>
+  <pre><code>// backend/server.js - Password Hashing, JWT Issuance & Token Revocation
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import { createHash } from 'node:crypto';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'local-development-secret-key';
+
+// Issue 7-Day Signed Token
+export const createToken = (user) => jwt.sign(
+  { id: user.id, email: user.email },
+  JWT_SECRET,
+  { expiresIn: '7d' }
+);
+
+// Protected Route Authentication Middleware
+export const requireAuth = async (req, res, next) => {
+  const header = req.get('authorization') || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7) : '';
+  if (!token) {
+    return res.status(401).json({ message: 'Sign in to access your learning dashboard.' });
+  }
+
+  try {
+    const payload = jwt.verify(token, JWT_SECRET);
+    
+    // Check if token hash exists in revoked_tokens table
+    const tokenHash = createHash('sha256').update(token).digest('hex');
+    const revoked = await getDb('SELECT tokenHash FROM revoked_tokens WHERE tokenHash = ?', [tokenHash]);
+    if (revoked) {
+      return res.status(401).json({ message: 'This session has been signed out. Please sign in again.' });
+    }
+
+    // Verify user exists in database
+    const user = await getDb('SELECT id, name, email FROM users WHERE id = ?', [payload.id]);
+    if (!user) {
+      return res.status(401).json({ message: 'Your session is no longer valid.' });
+    }
+
+    req.user = user;
+    req.token = token;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Your session is invalid or expired.' });
+  }
+};
+
+// Logout Handler - Invalidate Token
+app.post('/api/logout', requireAuth, async (req, res) => {
+  const tokenHash = createHash('sha256').update(req.token).digest('hex');
+  const payload = jwt.decode(req.token);
+  const expiresAt = payload?.exp ? new Date(payload.exp * 1000).toISOString() : new Date().toISOString();
+
+  await runDb('INSERT OR IGNORE INTO revoked_tokens (tokenHash, expiresAt) VALUES (?, ?)',
+    [tokenHash, expiresAt]);
+
+  res.json({ message: 'Signed out successfully.' });
+});</code></pre>
+
+  <!-- ==================== 3.11.7 ==================== -->
+  <div class="page-break"></div>
+  <h2>3.11.7 Database Integration</h2>
+  <p>The backend persists user accounts, progress, attempts, and notifications in SQLite using parameterized queries. Parameterization strictly prevents SQL injection attacks by ensuring user inputs are treated solely as literal values rather than executable SQL statements.</p>
+
+  <p class="no-indent"><strong>Key Reference:</strong> <code>backend/server.js</code>.</p>
+
+  <h3>Source Code: SQLite Initialization & Parameterized Helpers (<code>backend/server.js</code>)</h3>
+  <pre><code>// backend/server.js - SQLite Database Driver and Table Initialization
+import sqlite3 from 'sqlite3';
+
+const DB_PATH = process.env.DB_PATH || './data/algorithm-hub.db';
+const db = new sqlite3.Database(DB_PATH);
+
+// Promise-Based Parameterized SQL Wrappers
+export const runDb = (sql, params = []) => new Promise((resolve, reject) => {
+  db.run(sql, params, function (err) {
+    if (err) return reject(err);
+    resolve({ id: this.lastID, changes: this.changes });
+  });
+});
+
+export const getDb = (sql, params = []) => new Promise((resolve, reject) => {
+  db.get(sql, params, (err, row) => {
+    if (err) return reject(err);
+    resolve(row);
+  });
+});
+
+export const allDb = (sql, params = []) => new Promise((resolve, reject) => {
+  db.all(sql, params, (err, rows) => {
+    if (err) return reject(err);
+    resolve(rows);
+  });
+});
+
+// Initialize 7 SQLite Tables
+export const initializeDb = async () => {
+  await runDb(`
+    CREATE TABLE IF NOT EXISTS users (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      password TEXT NOT NULL,
+      createdAt TEXT NOT NULL
+    )
+  `);
+
+  await runDb(`
+    CREATE TABLE IF NOT EXISTS learning_progress (
+      userId TEXT NOT NULL,
+      day INTEGER NOT NULL CHECK(day BETWEEN 1 AND 30),
+      startedAt TEXT,
+      conceptCompletedAt TEXT,
+      activityCompletedAt TEXT,
+      dailyQuizPassed INTEGER NOT NULL DEFAULT 0,
+      latestScore REAL NOT NULL DEFAULT 0,
+      completedAt TEXT,
+      PRIMARY KEY (userId, day),
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  await runDb(`
+    CREATE TABLE IF NOT EXISTS quiz_attempts (
+      id TEXT PRIMARY KEY,
+      userId TEXT NOT NULL,
+      day INTEGER NOT NULL CHECK(day BETWEEN 1 AND 30),
+      score REAL NOT NULL,
+      passed INTEGER NOT NULL,
+      submittedAt TEXT NOT NULL,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  await runDb(`
+    CREATE TABLE IF NOT EXISTS activity_attempts (
+      id TEXT PRIMARY KEY,
+      userId TEXT NOT NULL,
+      day INTEGER NOT NULL CHECK(day BETWEEN 1 AND 30),
+      answer TEXT NOT NULL,
+      accepted INTEGER NOT NULL,
+      submittedAt TEXT NOT NULL,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  await runDb(`
+    CREATE TABLE IF NOT EXISTS assessment_attempts (
+      id TEXT PRIMARY KEY,
+      userId TEXT NOT NULL,
+      assessmentId TEXT NOT NULL,
+      score REAL NOT NULL,
+      passed INTEGER NOT NULL,
+      submittedAt TEXT NOT NULL,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  await runDb(`
+    CREATE TABLE IF NOT EXISTS notifications (
+      id TEXT PRIMARY KEY,
+      notificationKey TEXT NOT NULL UNIQUE,
+      userId TEXT NOT NULL,
+      day INTEGER NOT NULL CHECK(day BETWEEN 1 AND 30),
+      message TEXT NOT NULL,
+      createdAt TEXT NOT NULL,
+      readAt TEXT,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  await runDb(`
+    CREATE TABLE IF NOT EXISTS revoked_tokens (
+      tokenHash TEXT PRIMARY KEY,
+      expiresAt TEXT NOT NULL
+    )
+  `);
+};</code></pre>
+
+  <!-- ==================== 3.11.8 ==================== -->
+  <div class="page-break"></div>
+  <h2>3.11.8 Project Configuration</h2>
+  <p>The project's dependency manifest and build configurations define the tooling pipeline. Vite manages the frontend bundle and reverse proxy, while the backend package manages Node.js dependencies and automated test scripts.</p>
+
+  <p class="no-indent"><strong>Key References:</strong> <code>package.json</code>, <code>backend/package.json</code>, and <code>vite.config.mjs</code>.</p>
+
+  <h3>Frontend Configuration (<code>package.json</code> & <code>vite.config.mjs</code>)</h3>
+  <pre><code>// package.json (Frontend Root)
+{
+  "name": "algorithm-hub-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}</code></pre>
+
+  <pre><code>// vite.config.mjs - Reverse Proxy and Asset Bundling
+import { defineConfig } from "vite";
+import { resolve } from "node:path";
+
+export default defineConfig({
+  server: {
+    proxy: {
+      "/api": "http://localhost:5000" // Transparent proxy to Express backend
+    }
+  },
+  preview: {
+    proxy: {
+      "/api": "http://localhost:5000"
+    }
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        index: resolve(process.cwd(), "index.html"),
+        about: resolve(process.cwd(), "about.html"),
+        algorithms: resolve(process.cwd(), "algorithms.html"),
+        explanation: resolve(process.cwd(), "explanation.html"),
+        practice: resolve(process.cwd(), "practice.html"),
+        profile: resolve(process.cwd(), "profile.html"),
+        signin: resolve(process.cwd(), "signin.html"),
+        signup: resolve(process.cwd(), "signup.html"),
+        visualizer: resolve(process.cwd(), "visualizer.html")
+      }
+    }
+  }
+});</code></pre>
+
+  <h3>Backend Configuration (<code>backend/package.json</code>)</h3>
+  <pre><code>// backend/package.json (Express & SQLite Service)
+{
+  "name": "algorithm-hub-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.7"
+  }
+}</code></pre>
+
+  <p><strong>Script Execution Summary:</strong></p>
+  <ul>
+    <li><code>npm run dev</code> (root): Starts the Vite development server on port 3000 with hot-reload and proxying to port 5000.</li>
+    <li><code>npm run dev</code> (backend): Starts the Express server using Node's native file-watcher (<code>--watch</code>) on port 5000.</li>
+    <li><code>npm test</code> (backend): Executes automated integration test suites validating all authentication rules, daily stage completions, and milestone evaluations from Day 1 to Day 30.</li>
+    <li><code>npm run build</code> (root): Compiles optimized HTML/CSS/JS distribution assets into the <code>dist/</code> folder.</li>
+  </ul>
+
+</div>
+
+</body>
+</html>

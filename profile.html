@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1018">
+    <title>Member Dashboard | Algorithm Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body class="profile-page user-logged-in">
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span>Algorithm<span class="logo-highlight">Hub</span></span>
+            </a>
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="algorithms.html">Algorithms</a>
+                <a href="explanation.html">Explanation</a>
+                <a href="visualizer.html">Visualizer</a>
+                <a href="practice.html">Practice</a>
+                <a href="about.html">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <button class="nav-signout-btn" id="signOutButton" title="Sign Out" aria-label="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+
+                <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN DASHBOARD ================= -->
+    <main class="dashboard" id="profileDashboard">
+
+        <section class="learning-dashboard" id="learningDashboard" aria-live="polite">
+            <div class="learning-dashboard-loading">Loading your private learning dashboard…</div>
+        </section>
+
+        <!-- Welcome Banner -->
+        <section class="dashboard-intro" aria-labelledby="profileGreeting">
+            <div>
+                <span class="section-label"><i class="fa-solid fa-bolt"></i> MEMBER LEARNING DASHBOARD</span>
+                <h1 id="profileGreeting">Welcome back, Learner</h1>
+                <p>Track your algorithm mastery, explore interactive tools, and continue your interview preparation.</p>
+            </div>
+            <div class="dashboard-mark" aria-hidden="true">A<span>H</span></div>
+        </section>
+
+        <!-- Stats Overview Cards -->
+        <div class="dashboard-stats-grid">
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon flame">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <strong id="dashStreakValue">7 Days</strong>
+                    <span>Daily Streak</span>
+                </div>
+            </div>
+
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon star">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <strong id="dashXpValue">850 XP</strong>
+                    <span id="dashLevelTitle">Level 4 Scholar</span>
+                </div>
+            </div>
+
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon book">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <strong id="dashExploredCount">28 / 93</strong>
+                    <span>Algorithms Explored</span>
+                </div>
+            </div>
+
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon code">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <strong id="dashSolvedCount">14 / 93</strong>
+                    <span>Problems Solved</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="dashboard-layout" aria-label="Account and learning links">
+            
+            <!-- Left: Account Details & Daily Check-in -->
+            <article class="account-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-kicker">AUTHENTICATED USER</span>
+                        <h2>Your Profile</h2>
+                    </div>
+                    <i class="fa-regular fa-id-card" aria-hidden="true"></i>
+                </div>
+
+                <div class="account-identity">
+                    <div class="profile-avatar" id="profileInitials" aria-hidden="true">AL</div>
+                    <div class="account-copy">
+                        <strong id="profileName">Alex Learner</strong>
+                        <span id="profileEmail">learner@algorithmhub.io</span>
+                    </div>
+                </div>
+
+                <div class="account-details">
+                    <div>
+                        <span>Account Access</span>
+                        <strong><i class="status-dot" aria-hidden="true"></i> Full Member Access Unlocked</strong>
+                    </div>
+                    <div>
+                        <span>Learning Focus</span>
+                        <strong>Data Structures, Algorithms &amp; Interviews</strong>
+                    </div>
+                </div>
+
+                <!-- Daily Streak Check-in -->
+                <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border);">
+                    <button type="button" class="demo-signin-btn" id="dashCheckInBtn" style="margin-top: 0;">
+                        <i class="fa-solid fa-calendar-check"></i> Check-In Today (+50 XP)
+                    </button>
+                    <p id="dashCheckInMsg" style="font-size: 11px; color: var(--success); text-align: center; margin-top: 8px;"></p>
+                </div>
+            </article>
+
+            <!-- Right: Achievements & Badges -->
+            <section class="learning-panel" aria-labelledby="achieveTitle">
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-kicker">PORTFOLIO</span>
+                        <h2 id="achieveTitle">Mastery Badges &amp; Milestones</h2>
+                    </div>
+                    <i class="fa-solid fa-trophy" aria-hidden="true" style="color: var(--warning);"></i>
+                </div>
+
+                <div class="badges-mini-collection" style="grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px;">
+                    <div class="badge-mini-item unlocked" style="padding: 14px 10px;">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 22px; color: var(--secondary);"></i>
+                        <strong style="color: #fff; font-size: 12px; margin-top: 4px;">Sorting Champion</strong>
+                        <span style="font-size: 10px; color: var(--text-muted);">Bubble, Merge &amp; Quick Sort</span>
+                    </div>
+
+                    <div class="badge-mini-item unlocked" style="padding: 14px 10px;">
+                        <i class="fa-solid fa-bolt" style="font-size: 22px; color: var(--warning);"></i>
+                        <strong style="color: #fff; font-size: 12px; margin-top: 4px;">Search Master</strong>
+                        <span style="font-size: 10px; color: var(--text-muted);">Binary &amp; Linear Search</span>
+                    </div>
+
+                    <div class="badge-mini-item unlocked" style="padding: 14px 10px;">
+                        <i class="fa-solid fa-diagram-project" style="font-size: 22px; color: var(--success);"></i>
+                        <strong style="color: #fff; font-size: 12px; margin-top: 4px;">Graph Pioneer</strong>
+                        <span style="font-size: 10px; color: var(--text-muted);">BFS, DFS &amp; Dijkstra</span>
+                    </div>
+
+                    <div class="badge-mini-item unlocked" style="padding: 14px 10px;">
+                        <i class="fa-solid fa-fire" style="font-size: 22px; color: var(--danger);"></i>
+                        <strong style="color: #fff; font-size: 12px; margin-top: 4px;">Streak Flame</strong>
+                        <span style="font-size: 10px; color: var(--text-muted);">7 Consecutive Days</span>
+                    </div>
+
+                    <div class="badge-mini-item locked" style="padding: 14px 10px;">
+                        <i class="fa-solid fa-layer-group" style="font-size: 22px;"></i>
+                        <strong style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">DP Explorer</strong>
+                        <span style="font-size: 10px; color: var(--text-muted);">Solve 2 more DP challenges</span>
+                    </div>
+
+                    <div class="badge-mini-item locked" style="padding: 14px 10px;">
+                        <i class="fa-solid fa-code-branch" style="font-size: 22px;"></i>
+                        <strong style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Tree Architect</strong>
+                        <span style="font-size: 10px; color: var(--text-muted);">Master BST &amp; AVL Traversals</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px; color: var(--text-secondary);">Daily Practice Suggestion: <strong>Two Pointers on Sorted Array</strong></span>
+                    <a href="practice.html" class="feature-launch-btn">Solve Now <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </section>
+
+        </section>
+
+        <!-- ================= INTERACTIVE ALGORITHM MASTERY TRACKER ================= -->
+        <section class="dash-tracker-section" id="dashTrackerSection" aria-labelledby="trackerTitle">
+            <div class="tracker-header-row">
+                <div>
+                    <span class="section-label"><i class="fa-solid fa-bullseye"></i> INTERACTIVE PROGRESS</span>
+                    <h2 id="trackerTitle" style="font-size: 24px; margin-top: 6px;">Your Core Algorithm Checklist</h2>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                        Click "Mark Mastered" to update your progress, track your stats in real-time, or launch into the lab.
+                    </p>
+                </div>
+                <div class="dash-filter-tabs">
+                    <button type="button" class="dash-filter-btn active" data-filter="all">All (6)</button>
+                    <button type="button" class="dash-filter-btn" data-filter="mastered">Mastered</button>
+                    <button type="button" class="dash-filter-btn" data-filter="progress">In Progress</button>
+                </div>
+            </div>
+
+            <div class="dash-algo-grid" id="dashAlgoGrid">
+                <!-- Card 1 -->
+                <div class="dash-algo-card is-mastered" data-id="binary-search" data-status="mastered">
+                    <div>
+                        <div class="dash-algo-top">
+                            <span class="dash-algo-title">Binary Search</span>
+                            <span class="dash-algo-tag tag-searching">Searching • Easy</span>
+                        </div>
+                        <p class="dash-algo-desc">Divide and conquer logarithmic search on sorted arrays in O(log n).</p>
+                    </div>
+                    <div class="dash-algo-actions">
+                        <button type="button" class="dash-master-btn" data-id="binary-search">
+                            <i class="fa-solid fa-check"></i> Mastered
+                        </button>
+                        <a href="visualizer.html?algorithm=binary-search" class="dash-algo-link">Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="dash-algo-card is-mastered" data-id="merge-sort" data-status="mastered">
+                    <div>
+                        <div class="dash-algo-top">
+                            <span class="dash-algo-title">Merge Sort</span>
+                            <span class="dash-algo-tag tag-sorting">Sorting • Medium</span>
+                        </div>
+                        <p class="dash-algo-desc">Stable divide-and-conquer sorting with guaranteed O(n log n) runtime.</p>
+                    </div>
+                    <div class="dash-algo-actions">
+                        <button type="button" class="dash-master-btn" data-id="merge-sort">
+                            <i class="fa-solid fa-check"></i> Mastered
+                        </button>
+                        <a href="visualizer.html?algorithm=merge-sort" class="dash-algo-link">Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="dash-algo-card is-mastered" data-id="two-pointers" data-status="mastered">
+                    <div>
+                        <div class="dash-algo-top">
+                            <span class="dash-algo-title">Two Pointers Pattern</span>
+                            <span class="dash-algo-tag tag-patterns">Patterns • Medium</span>
+                        </div>
+                        <p class="dash-algo-desc">Converging pointers to find pairs, partition values, and eliminate quadratic scans.</p>
+                    </div>
+                    <div class="dash-algo-actions">
+                        <button type="button" class="dash-master-btn" data-id="two-pointers">
+                            <i class="fa-solid fa-check"></i> Mastered
+                        </button>
+                        <a href="practice.html" class="dash-algo-link">Practice <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="dash-algo-card" data-id="bfs-graph" data-status="progress">
+                    <div>
+                        <div class="dash-algo-top">
+                            <span class="dash-algo-title">Breadth-First Search (BFS)</span>
+                            <span class="dash-algo-tag tag-graphs">Graphs • Medium</span>
+                        </div>
+                        <p class="dash-algo-desc">Level-order queue traversal to find the shortest path in unweighted graphs.</p>
+                    </div>
+                    <div class="dash-algo-actions">
+                        <button type="button" class="dash-master-btn" data-id="bfs-graph">
+                            <i class="fa-regular fa-circle"></i> In Progress
+                        </button>
+                        <a href="visualizer.html?algorithm=bfs" class="dash-algo-link">Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="dash-algo-card" data-id="climbing-stairs" data-status="progress">
+                    <div>
+                        <div class="dash-algo-top">
+                            <span class="dash-algo-title">Climbing Stairs (DP)</span>
+                            <span class="dash-algo-tag tag-dp">DP • Easy</span>
+                        </div>
+                        <p class="dash-algo-desc">Fibonacci-based overlapping subproblems with 1D memoization caching.</p>
+                    </div>
+                    <div class="dash-algo-actions">
+                        <button type="button" class="dash-master-btn" data-id="climbing-stairs">
+                            <i class="fa-regular fa-circle"></i> In Progress
+                        </button>
+                        <a href="explanation.html" class="dash-algo-link">Explain <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="dash-algo-card" data-id="invert-tree" data-status="progress">
+                    <div>
+                        <div class="dash-algo-top">
+                            <span class="dash-algo-title">Invert Binary Tree</span>
+                            <span class="dash-algo-tag tag-trees">Trees • Easy</span>
+                        </div>
+                        <p class="dash-algo-desc">Recursive left/right child mirror swap across all tree nodes in O(n).</p>
+                    </div>
+                    <div class="dash-algo-actions">
+                        <button type="button" class="dash-master-btn" data-id="invert-tree">
+                            <i class="fa-regular fa-circle"></i> In Progress
+                        </button>
+                        <a href="practice.html" class="dash-algo-link">Practice <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DASHBOARD QUICK SANDBOX SIMULATOR ================= -->
+        <section class="dash-sandbox-section" id="dashSandboxSection" aria-labelledby="sandboxTitle">
+            <div>
+                <span class="section-label"><i class="fa-solid fa-terminal"></i> QUICK SIMULATOR</span>
+                <h2 id="sandboxTitle" style="font-size: 24px; margin-top: 6px;">Live In-Dashboard Simulation Console</h2>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                    Simulate algorithms immediately from your dashboard with live console diagnostics.
+                </p>
+            </div>
+
+            <div class="sandbox-control-bar">
+                <label for="dashAlgoSelect" style="font-size: 12px; color: var(--text-secondary);">Algorithm:</label>
+                <select id="dashAlgoSelect" class="dash-select-input">
+                    <option value="binary-search">Binary Search (Target: 23 in [2,5,8,12,16,23,38,56])</option>
+                    <option value="bubble-sort">Bubble Sort (Array: [64, 34, 25, 12, 22, 11, 90])</option>
+                    <option value="two-pointers">Two Pointers (Target Sum: 14 in [1, 3, 5, 9, 11])</option>
+                </select>
+
+                <button type="button" class="dash-run-sim-btn" id="dashRunSandboxBtn">
+                    <i class="fa-solid fa-play"></i> Run Simulation
+                </button>
+            </div>
+
+            <div class="dash-sim-console" id="dashSimConsole">
+                <span class="log-highlight">[Dashboard Console Ready]</span> Select an algorithm and click "Run Simulation" to execute a live test run.
+            </div>
+        </section>
+
+        <!-- ================= FEATURES AVAILABILITY MATRIX ================= -->
+        <section class="features-matrix-section" aria-labelledby="featuresMatrixTitle">
+            
+            <div class="section-heading" style="margin-bottom: 25px;">
+                <div>
+                    <span class="section-label"><i class="fa-solid fa-list-check"></i> ALL PLATFORM FEATURES</span>
+                    <h2 id="featuresMatrixTitle" style="font-size: 32px;">Feature Availability &amp; <span>Access Hub</span></h2>
+                </div>
+                <p>Complete breakdown of all 10 platform features: check capabilities and launch them directly from your dashboard.</p>
+            </div>
+
+            <div class="features-matrix-grid">
+
+                <!-- Feature 1 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-play text-cyan"></i> 1. Interactive Visualizer</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Watch sorting, searching, trees, and graph algorithms execute step-by-step with live color-coded pointer tracking, swap/comparison counters, and variable speed sliders.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Includes Sorting, Searching, Graphs &amp; Trees</span>
+                        <a href="visualizer.html" class="feature-launch-btn">Launch Visualizer <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 2 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-book-open text-purple"></i> 2. Deep Explanation Library</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Study comprehensive conceptual guides with intuitive analogies, line-by-line dry run trace tables, code examples, edge-case breakdowns, and video/audio walkthroughs.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Step-by-step walkthroughs &amp; proof intuition</span>
+                        <a href="explanation.html" class="feature-launch-btn">Open Explanations <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 3 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-code text-green"></i> 3. Hands-On Coding Practice</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Solve curated coding interview problems with an in-browser code editor. Switch between Python, Java, C++, and JS solutions, run real test suites, and reveal progressive hints.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Interactive code editor, hints &amp; test cases</span>
+                        <a href="practice.html" class="feature-launch-btn">Enter Practice Lab <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 4 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-layer-group text-amber"></i> 4. Complete Algorithm Catalog</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Browse a complete catalog of 93 algorithms across 12 categories: Sorting, Searching, Arrays, Linked Lists, Trees, Graphs, Dynamic Programming, Greedy, and Bit Manipulation.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">93 algorithms with instant search &amp; filters</span>
+                        <a href="algorithms.html" class="feature-launch-btn">Browse Catalog <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 5 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-chart-line text-rose"></i> 5. Complexity Benchmarks Matrix</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Compare time and space complexities dynamically. Scale input sizes from N=10 to N=10,000 to see why logarithmic algorithms crush quadratic loops in real-world engineering.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Dynamic Big-O mathematical comparator</span>
+                        <a href="index.html#learning-features" class="feature-launch-btn">Compare Big-O <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 6 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-cubes-stacked text-cyan"></i> 6. Curated DSA Problem Patterns</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Master the 14 core patterns behind 90% of interview problems: Two Pointers, Sliding Window, Monotonic Stack, and Dynamic Programming Memoization with curated problem templates.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Interview blueprints &amp; pattern templates</span>
+                        <a href="index.html#learning-features" class="feature-launch-btn">Explore Patterns <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 7 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-forward-step text-green"></i> 7. Interactive Step-by-Step Tracing</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Pause, step forward, or rewind algorithm execution line-by-line. Inspect pointer mutations, index offsets, and search boundaries in real-time.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Live interactive stepper with pointer bounds</span>
+                        <a href="index.html#learning-features" class="feature-launch-btn">Try Step Tracing <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 8 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-terminal text-amber"></i> 8. Multi-Language Polyglot Lab</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Study algorithms in your language of choice. Toggle between Python, Java, C++, and JavaScript with idiomatic conventions and 1-click clipboard copy.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Python, Java, C++, JS code tabs</span>
+                        <a href="index.html#learning-features" class="feature-launch-btn">Open Polyglot Lab <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 9 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-lightbulb text-purple"></i> 9. Test Runner &amp; Hints Engine</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Execute automated test suites against edge-cases and boundary conditions. Access progressive hints without spoiling answers, verifying time complexity bounds.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Automated test checks &amp; multi-tier hints</span>
+                        <a href="practice.html" class="feature-launch-btn">Open Test Runner <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Feature 10 -->
+                <article class="feature-status-card">
+                    <div>
+                        <div class="feature-status-header">
+                            <h3><i class="fa-solid fa-award text-rose"></i> 10. Skill Badges &amp; Daily Streaks</h3>
+                            <span class="feature-badge-available"><i class="fa-solid fa-check"></i> Available on Website</span>
+                        </div>
+                        <p>
+                            Stay consistent with gamified daily streaks, category completion badges, and a personal mastery dashboard tracking your algorithm readiness score.
+                        </p>
+                    </div>
+                    <div class="feature-status-actions">
+                        <span class="feature-status-info">Streak flame, XP levels &amp; milestone badges</span>
+                        <a href="profile.html" class="feature-launch-btn">View My Badges <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span>Algorithm<span class="logo-highlight">Hub</span></span>
+                </a>
+                <p>Learn. Visualize. Practice. Master algorithms.</p>
+            </div>
+            <div class="footer-links">
+                <div>
+                    <h4>Explore</h4>
+                    <a href="algorithms.html">Algorithms</a>
+                    <a href="explanation.html">Explanation</a>
+                    <a href="visualizer.html">Visualizer</a>
+                </div>
+                <div>
+                    <h4>Practice</h4>
+                    <a href="practice.html">Coding Lab</a>
+                    <a href="profile.html">Dashboard</a>
+                    <a href="about.html">About</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Algorithm Hub &copy; 2026. Built for curious learners.</span>
+            <span>Learn &lt;/&gt; Visualize &lt;/&gt; Master</span>
+        </div>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="learning-dashboard.js"></script>
+</body>
+</html>

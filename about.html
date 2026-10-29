@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how Algorithm Hub helps learners understand algorithms through clear explanations, visualizations, and real code practice.">
+    <meta name="theme-color" content="#070a12">
+    <title>About | Algorithm Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+</head>
+<body class="about-page">
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo" aria-label="Algorithm Hub home">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span>Algorithm<span class="logo-highlight">Hub</span></span>
+            </a>
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="algorithms.html">Algorithms</a>
+                <a href="explanation.html" data-auth="required">Explanation</a>
+                <a href="visualizer.html" data-auth="required">Visualizer</a>
+                <a href="practice.html" data-auth="required">Practice</a>
+                <a href="about.html" class="active" aria-current="page">About</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+                <a href="signin.html" class="nav-button" id="navAccountLink">Sign In</a>
+                <button class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-intro" aria-labelledby="about-title">
+            <div class="about-intro-copy">
+                <span class="about-kicker"><i class="fa-solid fa-compass" aria-hidden="true"></i> ABOUT ALGORITHM HUB</span>
+                <h1 id="about-title">Understand the idea.<br><span>Then write the code.</span></h1>
+                <p>Algorithm Hub is a learning project for exploring algorithms and data structures. It brings clear explanations, visual walkthroughs, coding practice, and a structured learning program into one place.</p>
+                <div class="about-actions">
+                    <a class="about-primary" href="algorithms.html">Explore the library <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="about-secondary" href="signup.html">Create a free account</a>
+                </div>
+            </div>
+            <div class="about-visual" aria-label="Algorithm Hub learning flow: explore, understand, practice">
+                <span class="about-visual-label">A PRACTICAL LEARNING LOOP</span>
+                <div class="about-visual-step"><span>01</span><strong>Explore a concept</strong><i class="fa-solid fa-book-open" aria-hidden="true"></i></div>
+                <div class="about-visual-connector" aria-hidden="true"></div>
+                <div class="about-visual-step"><span>02</span><strong>Follow each step</strong><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
+                <div class="about-visual-connector" aria-hidden="true"></div>
+                <div class="about-visual-step"><span>03</span><strong>Practice the idea</strong><i class="fa-solid fa-terminal" aria-hidden="true"></i></div>
+            </div>
+        </section>
+
+        <section class="about-purpose" aria-labelledby="purpose-title">
+            <div class="about-section-heading">
+                <span class="about-kicker">OUR APPROACH</span>
+                <h2 id="purpose-title">Make the reasoning <span>visible.</span></h2>
+            </div>
+            <p class="purpose-copy">Algorithms can feel abstract when you only see the final code. Algorithm Hub helps learners connect a problem, the decisions an algorithm makes, and the result, then build understanding through practice.</p>
+        </section>
+
+        <section class="about-capabilities" aria-label="What you can do with Algorithm Hub">
+            <a class="about-capability" href="algorithms.html">
+                <span class="capability-index">01 / EXPLORE</span>
+                <span class="capability-icon icon-explain"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+                <h3>Find a topic</h3>
+                <p>Browse a searchable library of algorithms and data structures across core computer science topics.</p>
+                <span class="capability-link">Browse algorithms <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+            </a>
+            <a class="about-capability" href="explanation.html">
+                <span class="capability-index">02 / UNDERSTAND</span>
+                <span class="capability-icon icon-visualize"><i class="fa-solid fa-eye" aria-hidden="true"></i></span>
+                <h3>See how it works</h3>
+                <p>Use explanations and supported visualizations to follow algorithm behavior one step at a time.</p>
+                <span class="capability-link">Explore explanations <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+            </a>
+            <a class="about-capability" href="practice.html">
+                <span class="capability-index">03 / PRACTICE</span>
+                <span class="capability-icon icon-practice"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+                <h3>Try your approach</h3>
+                <p>Work through guided practice in familiar languages and use feedback to refine your understanding.</p>
+                <span class="capability-link">Open the practice lab <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+            </a>
+        </section>
+
+        <section class="about-method" aria-labelledby="method-title">
+            <div class="method-heading">
+                <span class="about-kicker">LEARN AT YOUR PACE</span>
+                <h2 id="method-title">A clear path from first question to practice.</h2>
+            </div>
+            <ol class="method-steps">
+                <li><span>01</span><div><strong>Choose a topic</strong><p>Start with the algorithm or data structure you want to understand.</p></div></li>
+                <li><span>02</span><div><strong>Study the steps</strong><p>Connect the explanation, example, and visualization.</p></div></li>
+                <li><span>03</span><div><strong>Practice and review</strong><p>Use the learning dashboard and practice lab to reinforce concepts.</p></div></li>
+            </ol>
+        </section>
+
+        <section class="about-cta" aria-labelledby="about-cta-title">
+            <div>
+                <span class="about-kicker">START WHERE YOU ARE</span>
+                <h2 id="about-cta-title">Curiosity is enough to begin.</h2>
+                <p>Browse the library, create an account, and build your understanding one concept at a time.</p>
+            </div>
+            <a class="about-primary" href="algorithms.html">Find an algorithm <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"><span class="logo-icon">&lt;/&gt;</span><span>Algorithm<span class="logo-highlight">Hub</span></span></a>
+                <p>Learn. Visualize. Practice. Master algorithms.</p>
+            </div>
+            <div class="footer-links">
+                <div><h4>Explore</h4><a href="algorithms.html">Algorithms</a><a href="explanation.html">Explanations</a><a href="visualizer.html">Visualizer</a></div>
+                <div><h4>Practice</h4><a href="practice.html">Coding lab</a><a href="signup.html">Create account</a><a href="about.html">About Algorithm Hub</a></div>
+            </div>
+        </div>
+        <div class="footer-bottom"><span>Algorithm Hub &copy; 2026</span><span>Built for curious learners.</span></div>
+    </footer>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
