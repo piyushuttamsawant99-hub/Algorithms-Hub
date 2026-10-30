@@ -20,12 +20,12 @@ flowchart LR
 
 | Phase | Key Activities & Objectives | Algorithm Hub Deliverables |
 | :--- | :--- | :--- |
-| **1. Requirements Analysis & Feasibility Study** | - Identification of end-user pain points in computer science education.<br>- Elicitation of functional and non-functional requirements.<br>- Analysis of technical stack feasibility (Vite, Vanilla JS, Express, SQLite, Wandbox API). | - Software Requirement Specification (SRS).<br>- High-level curriculum syllabus (30 days, 6 stages per day).<br>- Algorithm catalog taxonomy (93 algorithms across 12 categories). |
-| **2. Architectural & Detailed System Design** | - Database schema modeling (relational integrity, cascades, indexing).<br>- RESTful API specification and JWT security protocols.<br>- Visualizer Canvas/DOM rendering pipeline and animation state machines. | - System Architecture & Component Diagrams.<br>- Data Flow Diagrams (DFD Level 0, 1, 2).<br>- Entity Relationship Diagram (ERD).<br>- Detailed UML Class and Sequence specifications. |
-| **3. Iterative Implementation (Sprints)** | - **Sprint 1**: Core Algorithm catalog (93 entries) & Markdown explanation rendering.<br>- **Sprint 2**: Interactive visualizers (Sorting, Searching, Trees, Graphs).<br>- **Sprint 3**: Practice Lab & multi-language online compiler integration.<br>- **Sprint 4**: Express backend, SQLite persistence, JWT authentication, and 30-day roadmap engine.<br>- **Sprint 5**: Comprehensive 300-question quiz bank and milestone assessments. | - Vite frontend modular bundle.<br>- REST API micro-service backend.<br>- Seeded curriculum and quiz banks (`curriculum.js`, `quiz-bank.js`). |
-| **4. Verification & Quality Assurance (Testing)** | - Automated unit and integration testing via Node.js test runner.<br>- Curriculum integrity audits (checking question bank IDs, hints, explanations).<br>- Security auditing (bcrypt hashing, JWT revocation list, CORS validation).<br>- Cross-browser smoke testing and responsive viewport validation (375px to 4K). | - Node.js integration test suite (`npm test`).<br>- Catalog complexity validation report.<br>- Verified token lifecycle and isolation tests. |
-| **5. Packaging & Deployment** | - Frontend optimization via Vite production build (`npm run build`).<br>- Environment configuration (`JWT_SECRET`, `FRONTEND_ORIGINS`, `DB_PATH`).<br>- Automated one-click execution scripting (`START-ALGORITHM-HUB.bat`). | - Optimized `dist/` bundle.<br>- Automated execution scripts for local and network testing. |
-| **6. Maintenance & Evolution** | - Defect tracking and complexity edge-case resolution.<br>- Expansion of structured algorithmic complexity analysis.<br>- Scalability improvements for cloud hosting (e.g., PostgreSQL migration, Docker containerization). | - Ongoing version patches, audit logs, and maintenance roadmap. |
+| **1. Requirements Analysis & Feasibility Study** | - Define the catalog, learning curriculum, account, and progress requirements.<br>- Select the browser, Express, SQLite, and Wandbox integration stack. | - Project setup instructions and implemented catalog/curriculum scope. |
+| **2. Architectural & Detailed System Design** | - SQLite schema and API design.<br>- Frontend visualization and animation behavior.<br>- JWT authentication and account-scoped data access. | - Architecture, data-flow, ER, activity, component, object, and use-case diagrams included in this documentation. |
+| **3. Iterative Implementation** | - Algorithm catalog and explanation pages.<br>- Sorting, searching, tree, and graph visualizers.<br>- Browser-based Practice Lab, Express API, SQLite persistence, and 30-day curriculum. | - Vite frontend, Express API, database-backed catalog and learning content. |
+| **4. Verification & Quality Assurance** | - Node.js automated tests for catalog complexity metadata, content migration, API reads, authentication, and learning progression.<br>- JavaScript syntax checks and Vite production build. | - Automated test suite and build checks. Manual browser/device and live Wandbox checks were not run in this review. |
+| **5. Packaging & Local Startup** | - Vite production build configuration.<br>- Runtime settings (`JWT_SECRET`, `FRONTEND_ORIGINS`, `DB_PATH`, `PORT`).<br>- Windows startup script. | - Local startup instructions and launcher script; the project is not deployed as a public service. |
+| **6. Future Maintenance** | - Potential improvements include broader browser testing and deployment hardening. | - Future work; no production deployment is claimed. |
 
 ---
 
@@ -45,20 +45,11 @@ flowchart TD
     System[[0.0 Algorithm Hub Integrated Learning Platform]]
     Storage[(SQLite Database \n algorithm-hub.db)]
 
-    User -->|1. Sign Up / Sign In Credentials| System
-    User -->|2. Algorithm Search & Visualizer Controls| System
-    User -->|3. Code Snippet, Language & Input| System
-    User -->|4. Activity Output & Quiz Answers| System
-
-    System -->|5. Auth Token & Session State| User
-    System -->|6. Step-by-Step Visualization Frames| User
-    System -->|7. Execution Output & Compiler Status| User
-    System -->|8. Daily Unlock State, Scores & Notifications| User
-
-    System -->|HTTP POST: Source Code & Compiler Args| Compiler
-    Compiler -->|JSON: Execution Result, Stdout, Stderr| System
-
-    System <-->|CRUD: Users, Progress, Attempts, Revoked Tokens| Storage
+    User -->|Browse, visualize, register, learn| System
+    System -->|Pages, animation, lesson results| User
+    System <-->|Authenticated /api requests| Storage
+    User -->|Practice Lab browser POST: code, language, stdin| Compiler
+    Compiler -->|JSON compile result| User
 ```
 
 ---
@@ -91,15 +82,13 @@ flowchart TD
     User -->|Speed, Array Size, Step Controls| P3[3.0 Interactive Visualizer Engine]
     P3 -->|Render DOM/SVG State Transitions| User
 
-    User -->|Source Code & Lang| P4[4.0 Practice Lab & Compiler Relay]
-    P4 -->|Payload| Compiler
-    Compiler -->|StdOut / Errors| P4
-    P4 -->|Execution Console Output| User
+    User -->|Source code, language & stdin| P4[4.0 Practice Lab in Browser]
+    P4 -->|Direct HTTPS POST to Wandbox| Compiler
+    Compiler -->|JSON stdout, stderr & status| P4
+    P4 -->|Execution output| User
 
-    User -->|Start Day / Progress Concept| P5[5.0 30-Day Learning Path Controller]
+    User -->|Start Day / Progress Concept| P5[5.0 30-Day Learning Path]
     P5 <-->|Read / Write Status & Unlocks| D2
-    P5 -->|Generate Reminders| D6
-    D6 -->|Persistent Alerts| User
 
     User -->|Submit Activity Output| P6[6.0 Activity Validator]
     P6 -->|Check against Server Test Case| P6
@@ -111,6 +100,10 @@ flowchart TD
     P7 -->|Record Attempt Score| D3
     P7 -->|Update Daily/Milestone Passed Status| D2
     P7 -->|Result Feedback & Explanations| User
+
+    User -->|Load dashboard| P8[8.0 Dashboard & Notifications]
+    P8 <-->|Read / Persist Notifications| D6
+    P8 -->|Dashboard and notifications| User
 ```
 
 ---
@@ -128,7 +121,8 @@ flowchart TD
         P6_1[6.1 Validate Activity Output]
         P7_1[7.1 Grade Daily Quiz]
         P7_2[7.2 Evaluate Milestone Assessment]
-        P5_3[5.3 Unlock Next Day & Issue Alert]
+        P5_3[5.3 Save completion & unlock next day]
+        P8[8.0 Generate dashboard notifications]
     end
 
     DB_LP[(learning_progress)]
@@ -158,17 +152,19 @@ flowchart TD
     P7_2 -->|Grade Assessment Answers| P7_2
     P7_2 -->|Log Assessment Attempt| DB_ASM
 
-    P7_1 & P7_2 -->|Check Passing Gates| P5_3
+    P7_1 & P7_2 -->|Check passing gates| P5_3
     P5_3 -->|Set completedAt = NOW| DB_LP
-    P5_3 -->|Create Success Notification| DB_NT
     P5_3 -->|Unlock Day N+1| Student
+    Student -->|Load dashboard| P8
+    P8 -->|Persist notification records| DB_NT
+    P8 -->|Return notifications| Student
 ```
 
 ---
 
 ### 3.7.2 Entity Relationship Diagram (ERD)
 
-The relational schema is implemented in SQLite with foreign key enforcement and cascading deletion.
+The runtime content and user-data schema is implemented in SQLite with foreign key enforcement and cascading deletion. On startup, backend seed sources are validated and transactionally upserted; API reads use the database tables.
 
 ```mermaid
 erDiagram
@@ -177,11 +173,59 @@ erDiagram
     USERS ||--o{ ACTIVITY_ATTEMPTS : records
     USERS ||--o{ ASSESSMENT_ATTEMPTS : undertakes
     USERS ||--o{ NOTIFICATIONS : receives
+    LESSONS ||--o{ QUIZZES : contains
+    QUIZZES ||--o{ QUIZ_QUESTIONS : contains
+
+    ALGORITHMS {
+        TEXT slug PK "Unique Algorithm Slug"
+        TEXT categoryKey "Catalog Category Key"
+        TEXT categoryLabel "Catalog Category Label"
+        INTEGER position "Order Within Category"
+        TEXT name "Algorithm Name"
+        TEXT description "Card Description"
+        TEXT timeComplexity "Time Complexity"
+        TEXT auxiliarySpace "Auxiliary Space"
+    }
+
+    LESSONS {
+        INTEGER day PK "Day Number 1 to 30"
+        TEXT title "Lesson Title"
+        TEXT level "Difficulty Level"
+        INTEGER minutes "Estimated Minutes"
+        TEXT objectivesJson "Lesson Objectives"
+        TEXT explanation "Lesson Explanation"
+        TEXT exampleJson "Example Input and Output"
+        TEXT steps "Guided Steps"
+        TEXT activity "Practical Activity"
+        TEXT activityInput "Activity Input"
+        TEXT activityHint "Activity Hint"
+        TEXT activityExpectedAnswer "Server-side Expected Result"
+        TEXT linksJson "Lesson Resource Links"
+    }
+
+    QUIZZES {
+        TEXT id PK "Daily Quiz or Assessment ID"
+        TEXT type "daily or assessment"
+        INTEGER day FK "Lesson or Milestone Day"
+        TEXT title "Quiz Title"
+        TEXT daysJson "Days Covered by Assessment"
+    }
+
+    QUIZ_QUESTIONS {
+        TEXT quizId PK, FK "References QUIZZES(id)"
+        TEXT id PK "Question ID"
+        INTEGER position "Question Order"
+        TEXT prompt "Question Text"
+        TEXT optionsJson "Answer Choices"
+        INTEGER answerIndex "Server-side Correct Option"
+        TEXT hint "Question Hint"
+        TEXT explanation "Answer Explanation"
+    }
 
     USERS {
         TEXT id PK "UUID / Unique User ID"
         TEXT name "Full Student Name"
-        TEXT email UK "Unique Email Address"
+        TEXT email UK "Unique Email; no verification workflow"
         TEXT password "Bcrypt Hashed Password"
         TEXT createdAt "ISO-8601 Timestamp"
     }
@@ -218,7 +262,7 @@ erDiagram
     ASSESSMENT_ATTEMPTS {
         TEXT id PK "UUID Assessment Attempt ID"
         TEXT userId FK "References USERS(id)"
-        TEXT assessmentId "e.g. week-1, week-2, week-3, final-capstone"
+        TEXT assessmentId "Assessment identifier"
         REAL score "Score Percentage (0-100)"
         INTEGER passed "1 = Pass (>=70%), 0 = Fail"
         TEXT submittedAt "Submission Timestamp"
@@ -281,7 +325,7 @@ stateDiagram-v2
         CheckActivity --> Stage5_Quiz : Match with Authored Test Case
         
         Stage5_Quiz --> Answer10MCQs : Take 10-Question Daily Quiz
-        Answer10MCQs --> GradeQuiz : POST /api/submit-quiz
+        Answer10MCQs --> GradeQuiz : POST /api/learning/{day}/quiz
         
         state CheckQuizGrade <<choice>>
         GradeQuiz --> CheckQuizGrade
@@ -293,7 +337,7 @@ stateDiagram-v2
         CheckMilestoneDay --> MilestoneAssessment : Day is 7, 14, 21, or 30
         
         MilestoneAssessment --> Take10AssessmentQuestions : 10 Authored Milestone Questions
-        Take10AssessmentQuestions --> GradeAssessment : POST /api/submit-assessment
+        Take10AssessmentQuestions --> GradeAssessment : POST /api/assessments/{assessmentId}/quiz
         
         state CheckAssessmentGrade <<choice>>
         GradeAssessment --> CheckAssessmentGrade
@@ -311,170 +355,71 @@ stateDiagram-v2
 
 ---
 
-### 3.7.4 Class Diagram
+### 3.7.4 Component Diagram
 
-The UML Class Diagram models both backend architectural controllers/services and frontend component modules.
+The implementation uses a multi-page browser frontend, one Express server module, and a SQLite database; the backend does not contain separate controller classes.
 
 ```mermaid
-classDiagram
-    %% Backend Classes
-    class ServerApp {
-        -int PORT
-        -string JWT_SECRET
-        -sqlite3.Database db
-        +initializeDb() void
-        +setupRoutes() void
-        +start() void
-    }
+flowchart LR
+    Student[Student Browser]
+    subgraph Frontend[HTML, CSS and JavaScript]
+        Pages[Application Pages]
+        Dashboard[learning-dashboard.js]
+        Catalog[Algorithm Catalog Client]
+        Practice[practice-app.js]
+    end
+    subgraph Backend[Node.js Backend]
+        API[backend/server.js Express API]
+        Content[backend/content-store.js]
+    end
+    Sources["data/*.js; backend/curriculum.js; backend/quiz-bank.js"]
+    Database[(SQLite database)]
+    Wandbox[Wandbox Compile API]
 
-    class AuthMiddleware {
-        +requireAuth(req, res, next) void
-        +createToken(user) string
-        +verifyToken(token) object
-        +revokeToken(token, expiresAt) void
-    }
-
-    class UserController {
-        +register(req, res) void
-        +login(req, res) void
-        +logout(req, res) void
-        +getMe(req, res) void
-    }
-
-    class CurriculumController {
-        +getLearningProgress(req, res) void
-        +startDay(req, res) void
-        +completeConcept(req, res) void
-        +submitActivity(req, res) void
-        +getNotifications(req, res) void
-        +markNotificationRead(req, res) void
-    }
-
-    class AssessmentController {
-        +submitQuiz(req, res) void
-        +submitAssessment(req, res) void
-        -gradeAnswers(submitted, bank) GradeResult
-    }
-
-    class DatabaseService {
-        -sqlite3.Database db
-        +runDb(sql, params) Promise
-        +getDb(sql, params) Promise
-        +allDb(sql, params) Promise
-    }
-
-    %% Frontend Core Classes
-    class VisualizerCore {
-        -HTMLElement container
-        -Array~int~ stateArray
-        -int animationSpeed
-        -boolean isRunning
-        -boolean isPaused
-        +setSpeed(speed) void
-        +generateRandomArray(size) void
-        +stepForward() void
-        +stepBackward() void
-        +play() void
-        +pause() void
-        +reset() void
-    }
-
-    class SortingVisualizer {
-        +bubbleSort() void
-        +selectionSort() void
-        +insertionSort() void
-        +mergeSort() void
-        +quickSort() void
-        -highlightBars(indices, color) void
-        -swapBars(i, j) void
-    }
-
-    class GraphVisualizer {
-        -Map nodes
-        -Map edges
-        +breadthFirstSearch(startNode) void
-        +depthFirstSearch(startNode) void
-        +dijkstra(startNode, endNode) void
-        -highlightNode(nodeId, state) void
-        -highlightEdge(u, v, state) void
-    }
-
-    class PracticeCompilerClient {
-        -string wandboxApiEndpoint
-        -string selectedLanguage
-        -string sourceCode
-        -string compilerOptions
-        +setLanguage(lang) void
-        +compileAndRun(code, stdin) Promise~ExecutionResult~
-        +formatOutput(result) string
-    }
-
-    class LearningDashboardApp {
-        -string authToken
-        -object studentProfile
-        -Array curriculumDays
-        -int currentActiveDay
-        +loadDashboardData() void
-        +renderProgressBar() void
-        +renderRadarChart() void
-        +handleStageCompletion(day, stage) void
-        +submitDailyQuiz(day, answers) void
-        +submitMilestone(assessmentId, answers) void
-    }
-
-    %% Relationships
-    ServerApp --> AuthMiddleware : uses
-    ServerApp --> UserController : dispatches
-    ServerApp --> CurriculumController : dispatches
-    ServerApp --> AssessmentController : dispatches
-    UserController --> DatabaseService : queries
-    CurriculumController --> DatabaseService : queries
-    AssessmentController --> DatabaseService : queries
-
-    VisualizerCore <|-- SortingVisualizer : inherits
-    VisualizerCore <|-- GraphVisualizer : inherits
-    LearningDashboardApp ..> CurriculumController : consumes API
-    LearningDashboardApp ..> AssessmentController : consumes API
-    PracticeCompilerClient ..> VisualizerCore : complements
+    Student --> Pages
+    Pages --> Dashboard
+    Pages --> Catalog
+    Dashboard -->|Authenticated /api requests| API
+    Catalog -->|Catalog API requests| API
+    API --> Content
+    Content --> Database
+    API --> Database
+    Sources -->|Startup seed and validation| Content
+    Practice -->|Direct HTTPS compile request| Wandbox
+    Wandbox -->|Compile response| Practice
 ```
 
 ---
 
 ### 3.7.5 Object Diagram
 
-This diagram displays a concrete runtime snapshot of system objects during an active student session on Day 1.
+This diagram is an illustrative sample of persisted application data, not a capture of a real student account or runtime session.
 
 ```mermaid
 classDiagram
-    %% Concrete Runtime Instances
-    class currentUser_usr8491 {
-        id = "usr-8491-b3f2"
-        name = "Piyush Sharma"
-        email = "piyush@example.com"
-        createdAt = "2026-10-15T09:30:00Z"
-    }
-
-    class currentSession_jwt {
-        tokenHash = "a7f49c0182bd..."
-        expiresAt = "2026-11-05T09:30:00Z"
-        isValid = true
+    %% Fictional sample data
+    class sampleUser {
+        id = "sample-user-01"
+        name = "Alex Example"
+        email = "alex@example.test"
+        createdAt = "2026-01-15T09:30:00Z"
     }
 
     class day1Progress {
-        userId = "usr-8491-b3f2"
+        userId = "sample-user-01"
         day = 1
-        startedAt = "2026-10-15T09:35:10Z"
-        conceptCompletedAt = "2026-10-15T09:50:22Z"
-        activityCompletedAt = "2026-10-15T10:12:40Z"
+        startedAt = "2026-01-15T09:35:10Z"
+        conceptCompletedAt = "2026-01-15T09:50:22Z"
+        activityCompletedAt = "2026-01-15T10:12:40Z"
         dailyQuizPassed = 1
         latestScore = 90.0
-        completedAt = "2026-10-15T10:25:00Z"
+        completedAt = "2026-01-15T10:25:00Z"
     }
 
     class day2Progress {
-        userId = "usr-8491-b3f2"
+        userId = "sample-user-01"
         day = 2
-        startedAt = "2026-10-15T10:25:05Z"
+        startedAt = "2026-01-15T10:25:05Z"
         conceptCompletedAt = null
         activityCompletedAt = null
         dailyQuizPassed = 0
@@ -483,50 +428,38 @@ classDiagram
     }
 
     class activityAttempt_act99 {
-        id = "act-9941"
-        userId = "usr-8491-b3f2"
+        id = "sample-activity-01"
+        userId = "sample-user-01"
         day = 1
         answer = "3"
         accepted = 1
-        submittedAt = "2026-10-15T10:12:40Z"
+        submittedAt = "2026-01-15T10:12:40Z"
     }
 
     class quizAttempt_qz312 {
-        id = "qa-3120"
-        userId = "usr-8491-b3f2"
+        id = "sample-quiz-01"
+        userId = "sample-user-01"
         day = 1
         score = 90.0
         passed = 1
-        submittedAt = "2026-10-15T10:24:55Z"
+        submittedAt = "2026-01-15T10:24:55Z"
     }
 
     class notification_notif01 {
-        id = "notif-0182"
-        notificationKey = "usr-8491-b3f2_day1_completed"
-        userId = "usr-8491-b3f2"
+        id = "sample-notification-01"
+        notificationKey = "sample-notification-key-01"
+        userId = "sample-user-01"
         day = 1
-        message = "Congratulations! You completed Day 1: Asymptotic Notation. Day 2 is unlocked."
-        createdAt = "2026-10-15T10:25:00Z"
+        message = "Sample notification: Day 1 completed."
+        createdAt = "2026-01-15T10:26:00Z"
         readAt = null
     }
 
-    class visualizerRuntimeInstance {
-        currentAlgorithm = "Binary Search"
-        dataset = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
-        target = 23
-        lowIndex = 4
-        highIndex = 5
-        midIndex = 5
-        state = "ELEMENT_FOUND"
-    }
-
-    currentUser_usr8491 ..> currentSession_jwt : holds
-    currentUser_usr8491 --> day1Progress : tracks
-    currentUser_usr8491 --> day2Progress : tracks
+    sampleUser --> day1Progress : tracks
+    sampleUser --> day2Progress : tracks
     day1Progress --> activityAttempt_act99 : verified by
     day1Progress --> quizAttempt_qz312 : cleared by
-    currentUser_usr8491 --> notification_notif01 : receives
-    currentUser_usr8491 ..> visualizerRuntimeInstance : interacts with
+    sampleUser --> notification_notif01 : receives
 ```
 
 ---
@@ -603,9 +536,9 @@ flowchart LR
 | Diagram Reference | Notation Standard | Primary Engineering Purpose |
 | :--- | :--- | :--- |
 | **3.6 SDLC** | Agile Flow Diagram | Details the 6-phase iterative development and QA methodology. |
-| **3.7.1 DFD (0, 1, 2)** | Yourdon & Coad / Gane & Sarson | Traces data inputs, processes, data stores, and outputs across levels. |
+| **3.7.1 DFD (0, 1, 2)** | Yourdon & Coad / Gane & Sarson | Traces data inputs, processes, data stores, and outputs across levels; Practice Lab calls Wandbox directly from the browser. |
 | **3.7.2 ERD** | Crow's Foot Relational Notation | Represents SQLite tables, PK/FK relationships, and cascade actions. |
 | **3.7.3 Activity Diagram** | UML 2.5 Activity / State Machine | Maps user decision diamonds, stage gating, and milestone checks. |
-| **3.7.4 Class Diagram** | UML 2.5 Class Model | Defines modular object-oriented classes, controllers, and services. |
-| **3.7.5 Object Diagram** | UML 2.5 Instance Snapshot | Shows actual runtime instances, token hashes, and Day 1 attempt data. |
+| **3.7.4 Component Diagram** | Component / data-flow view | Shows the implemented browser, Express API, content store, SQLite, and direct Wandbox connection. |
+| **3.7.5 Object Diagram** | UML 2.5 Instance Snapshot | Shows fictional sample account and Day 1 records; it is not actual runtime data. |
 | **3.7.6 Use Case Diagram** | UML 2.5 Use Case Specification | Illustrates user actors, system boundaries, includes, and extends. |

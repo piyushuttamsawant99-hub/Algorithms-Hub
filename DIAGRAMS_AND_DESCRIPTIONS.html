@@ -162,8 +162,8 @@
 <div class="container">
   <header>
     <h1>Algorithm Hub — Software Engineering Report Artifacts</h1>
-    <p>Complete Architecture Diagrams & Academic Descriptions for Sections 3.6 & 3.7</p>
-    <span class="badge">B.Tech / MCA Project Submission Ready</span>
+    <p>Architecture diagrams and descriptions for Sections 3.6 and 3.7</p>
+    <span class="badge">Reflects the implemented project</span>
   </header>
 
   <!-- 3.6 SDLC -->
@@ -173,107 +173,109 @@
       <span class="tag">Process Model</span>
     </div>
     <div class="image-container">
-      <img src="https://raw.githubusercontent.com/mermaid-js/mermaid/develop/packages/mermaid/src/assets/logo.svg" style="display:none;" alt="">
-      <div class="mermaid-box">
+          <div class="mermaid-box">
         <div class="mermaid">
 flowchart LR
     A["1. Requirement Analysis & Feasibility"] --> B["2. System & Architecture Design"]
     B --> C["3. Iterative Implementation"]
     C --> D["4. Verification & Testing"]
-    D --> E["5. Deployment & Packaging"]
-    E --> F["6. Maintenance & Enhancement"]
+    D --> E["5. Packaging & Local Startup"]
+    E --> F["6. Future Maintenance"]
     F -. Iterative Loop .-> C
         </div>
       </div>
     </div>
     <div class="description-container">
       <h3>Description: Software Development Life Cycle (SDLC)</h3>
-      <p>The engineering of <strong>Algorithm Hub</strong> adopted an <strong>Iterative and Incremental Agile Life Cycle Model</strong>. Due to the high interaction complexity between the dynamic DOM/Canvas algorithm visualization, the external compiler proxy, and the sequential learning management database, an iterative approach offered significant advantages over traditional linear models (such as Waterfall).</p>
+      <p><strong>Algorithm Hub</strong> was developed iteratively. Its implemented parts include browser-based algorithm visualizations, a Practice Lab that calls the external Wandbox API directly, and a sequential learning dashboard backed by SQLite.</p>
       <ul>
-        <li><strong>Phase 1 — Requirement Analysis & Planning:</strong> Identified student requirements in data structures and algorithms pedagogy. Curated a comprehensive catalog of 93 algorithms across 12 distinct DSA domains, and planned the 30-day sequential syllabus.</li>
-        <li><strong>Phase 2 — System & Architectural Design:</strong> Designed the RESTful API contract, multi-page frontend routing, and a normalized relational database schema in SQLite enforcing foreign key cascades. Formulated the animation pipeline for step-by-step state playback.</li>
-        <li><strong>Phase 3 — Iterative Implementation:</strong> Executed across 5 dedicated development sprints, delivering the catalog library, interactive visualizers (Bubble, Merge, Quick, Dijkstra, BST), the remote compiler integration via Wandbox API, and the student learning management engine.</li>
-        <li><strong>Phase 4 — Verification & Testing:</strong> Executed automated backend integration tests validating sequential day unlock logic, activity test case checks, passing score thresholds (&ge; 70%), and JWT token revocation upon logout.</li>
-        <li><strong>Phase 5 — Packaging & Deployment:</strong> Built optimized production assets using Vite and provided one-click initialization scripts (<code>START-ALGORITHM-HUB.bat</code>) for portable execution.</li>
-        <li><strong>Phase 6 — Maintenance & Evolution:</strong> Monitored catalog complexity bounds, corrected recursion stack analysis, and mapped future extensions for containerized cloud deployment.</li>
+        <li><strong>Phase 1 — Requirements:</strong> The project scope includes 93 algorithms across 12 categories and a 30-day curriculum with six learning stages per day.</li>
+        <li><strong>Phase 2 — System Design:</strong> The implementation uses an Express API, SQLite tables with foreign-key constraints, and browser-based visualizers.</li>
+        <li><strong>Phase 3 — Implementation:</strong> Implemented the catalog, interactive visualizers, browser-to-Wandbox Practice Lab integration, and student learning dashboard.</li>
+        <li><strong>Phase 4 — Verification & Testing:</strong> The backend test suite covers progression, activity and quiz validation, milestone assessments, persistence, and logout revocation. Manual browser/device and live Wandbox checks were not run in this review.</li>
+        <li><strong>Phase 5 — Packaging & Local Startup:</strong> Vite provides the production build, and <code>START-ALGORITHM-HUB.bat</code> starts the local frontend and backend. The project is not deployed as a public service.</li>
+        <li><strong>Phase 6 — Future Maintenance:</strong> Potential work includes broader browser/device testing and production deployment hardening.</li>
       </ul>
     </div>
   </div>
 
   <!-- 3.7.1 DFD -->
   <div class="section-card" id="sec-3-7-1">
-    <div class="section-header">
-      <h2>3.7.1 Data Flow Diagrams (DFD)</h2>
-      <span class="tag">Level 0 & Level 1</span>
-    </div>
-    <div class="image-container">
-      <div class="mermaid-box">
-        <div class="mermaid">
+    <div class="section-header"><h2>3.7.1 Data Flow Diagram (DFD Level 1)</h2><span class="tag">Browser, API, database and external compiler</span></div>
+    <div class="image-container"><div class="mermaid-box"><div class="mermaid">
 flowchart TD
-    User([Student / Learner])
-    Compiler([Wandbox Remote Compiler API])
-
-    D1[(D1: Users Store)]
-    D2[(D2: Learning Progress Store)]
-    D3[(D3: Quiz & Assessment Attempts)]
-    D4[(D4: Notifications)]
-
-    User -->|Credentials| P1[1.0 User Authentication & Session]
-    P1 -->|Register / Check Hash| D1
-    P1 -->|Issue JWT Token| User
-
-    User -->|Algorithm Search & Views| P2[2.0 Catalog & Explanation Engine]
-    P2 -->|Content & Complexity| User
-
-    User -->|Animation Play/Step Controls| P3[3.0 Interactive Visualizer Engine]
-    P3 -->|Rendered State Frames| User
-
-    User -->|Code, Lang & Input| P4[4.0 Practice Lab Compiler Relay]
-    P4 -->|HTTP Request| Compiler
-    Compiler -->|Stdout / Errors| P4
-    P4 -->|Terminal Output| User
-
-    User -->|Progress / Complete Concept| P5[5.0 30-Day Curriculum Tracker]
-    P5 <-->|Read & Update State| D2
-    P5 -->|Generate Alerts| D4
-    D4 -->|Alerts Drawer| User
-
-    User -->|10 Answers / Activity| P6[6.0 Quiz & Assessment Grader]
-    P6 -->|Compute Score & Grade| P6
-    P6 -->|Record Score & Unlock| D3
-    P6 -->|Update Pass Status| D2
-    P6 -->|Result & Explanation| User
-        </div>
-      </div>
-    </div>
-    <div class="description-container">
-      <h3>Description: Data Flow Architecture</h3>
-      <p>The <strong>Data Flow Diagram (DFD)</strong> depicts the movement and transformation of data across Algorithm Hub's modular subsystems, illustrating how input provided by external entities produces concrete system responses and updates persistent stores:</p>
-      <ul>
-        <li><strong>Process 1.0 (Authentication & Session):</strong> Receives student signup/signin requests. Passwords are securely hashed with <code>bcrypt</code> and verified against datastore <code>D1 (Users)</code>. Valid sessions receive a signed JSON Web Token (JWT).</li>
-        <li><strong>Process 2.0 & 3.0 (Catalog & Visualizer Engine):</strong> Serves static algorithmic metadata, pseudocode, and structured time/space bounds. The Visualizer processes client control inputs (play, pause, step forward, animation speed) and computes state transitions.</li>
-        <li><strong>Process 4.0 (Practice Lab Compiler Relay):</strong> Encapsulates client source code, language choice, and standard input, relaying it securely via HTTPS to the remote Wandbox compiler service. Execution results, errors, and execution timings are streamed back to the student terminal.</li>
-        <li><strong>Process 5.0 & 6.0 (Curriculum Tracker & Grader):</strong> Enforces the strict sequential unlock rules of the 30-day curriculum. Submissions for daily activities and 10-question multiple-choice quizzes are evaluated against server-side answer keys. Passing scores (&ge; 70%) trigger milestone evaluation and write unlock events to <code>D2 (Learning Progress)</code> and <code>D4 (Notifications)</code>.</li>
-      </ul>
+    Student[Student]
+    Browser[Algorithm Hub frontend in browser]
+    Practice[Practice Lab frontend]
+    API[Express backend API]
+    Database[(SQLite database)]
+    Wandbox[Wandbox compile API]
+    Student --> Browser
+    Browser <-->|/api requests; JWT for protected routes| API
+    API <-->|Users, lessons, quizzes, progress and attempts| Database
+    Browser --> Practice
+    Practice -->|Direct HTTPS POST: code, compiler and stdin| Wandbox
+    Wandbox -->|Compile result JSON| Practice
+    </div></div></div>
+    <div class="description-container"><h3>Description: Data Flow Architecture</h3>
+      <p>The browser sends account and learning requests to the Express API, which reads and updates SQLite. The Practice Lab JavaScript calls <code>https://wandbox.org/api/compile.json</code> directly from the browser. The project backend does not proxy the compiler request and does not receive submitted source code.</p>
     </div>
   </div>
 
   <!-- 3.7.2 ERD -->
   <div class="section-card" id="sec-3-7-2">
-    <div class="section-header">
-      <h2>3.7.2 Entity Relationship Diagram (ERD)</h2>
-      <span class="tag">Database Relational Schema</span>
-    </div>
-    <div class="image-container">
-      <div class="mermaid-box">
-        <div class="mermaid">
+    <div class="section-header"><h2>3.7.2 Entity Relationship Diagram (ERD)</h2><span class="tag">11 implemented SQLite tables</span></div>
+    <div class="image-container"><div class="mermaid-box"><div class="mermaid">
 erDiagram
     USERS ||--o{ LEARNING_PROGRESS : tracks
     USERS ||--o{ QUIZ_ATTEMPTS : submits
     USERS ||--o{ ACTIVITY_ATTEMPTS : records
     USERS ||--o{ ASSESSMENT_ATTEMPTS : undertakes
     USERS ||--o{ NOTIFICATIONS : receives
-
+    LESSONS ||--o{ QUIZZES : references_day
+    QUIZZES ||--o{ QUIZ_QUESTIONS : contains
+    ALGORITHMS {
+        TEXT slug PK
+        TEXT categoryKey
+        TEXT categoryLabel
+        INTEGER position
+        TEXT name
+        TEXT description
+        TEXT timeComplexity
+        TEXT auxiliarySpace
+    }
+    LESSONS {
+        INTEGER day PK
+        TEXT title
+        TEXT level
+        INTEGER minutes
+        TEXT objectivesJson
+        TEXT explanation
+        TEXT exampleJson
+        TEXT steps
+        TEXT activity
+        TEXT activityInput
+        TEXT activityHint
+        TEXT activityExpectedAnswer
+        TEXT linksJson
+    }
+    QUIZZES {
+        TEXT id PK
+        TEXT type
+        INTEGER day FK
+        TEXT title
+        TEXT daysJson
+    }
+    QUIZ_QUESTIONS {
+        TEXT quizId PK, FK
+        TEXT id PK
+        INTEGER position
+        TEXT prompt
+        TEXT optionsJson
+        INTEGER answerIndex
+        TEXT hint
+        TEXT explanation
+    }
     USERS {
         TEXT id PK
         TEXT name
@@ -281,7 +283,6 @@ erDiagram
         TEXT password
         TEXT createdAt
     }
-
     LEARNING_PROGRESS {
         TEXT userId PK, FK
         INTEGER day PK
@@ -292,7 +293,6 @@ erDiagram
         REAL latestScore
         TEXT completedAt
     }
-
     QUIZ_ATTEMPTS {
         TEXT id PK
         TEXT userId FK
@@ -301,7 +301,6 @@ erDiagram
         INTEGER passed
         TEXT submittedAt
     }
-
     ACTIVITY_ATTEMPTS {
         TEXT id PK
         TEXT userId FK
@@ -310,7 +309,6 @@ erDiagram
         INTEGER accepted
         TEXT submittedAt
     }
-
     ASSESSMENT_ATTEMPTS {
         TEXT id PK
         TEXT userId FK
@@ -319,7 +317,6 @@ erDiagram
         INTEGER passed
         TEXT submittedAt
     }
-
     NOTIFICATIONS {
         TEXT id PK
         TEXT notificationKey UK
@@ -329,274 +326,112 @@ erDiagram
         TEXT createdAt
         TEXT readAt
     }
-
     REVOKED_TOKENS {
         TEXT tokenHash PK
         TEXT expiresAt
     }
-        </div>
-      </div>
-    </div>
-    <div class="description-container">
-      <h3>Description: Relational Schema & Entity Relationships</h3>
-      <p>The <strong>Entity Relationship Diagram (ERD)</strong> documents the physical data model implemented in the SQLite database (<code>backend/data/algorithm-hub.db</code>). Relational integrity is enforced using primary keys, foreign keys, and <code>ON DELETE CASCADE</code> actions:</p>
-      <ul>
-        <li><strong>USERS Entity:</strong> The central identity table storing UUIDs (<code>id</code>), student names, unique verified email addresses, bcrypt-hashed credentials, and creation timestamps.</li>
-        <li><strong>LEARNING_PROGRESS Entity:</strong> Maintains composite primary key <code>(userId, day)</code> where <code>day &isin; [1, 30]</code>. Tracks stage completion timestamps (<code>startedAt</code>, <code>conceptCompletedAt</code>, <code>activityCompletedAt</code>, <code>completedAt</code>), quiz status flag (<code>dailyQuizPassed</code>), and recent percentage scores.</li>
-        <li><strong>QUIZ_ATTEMPTS & ASSESSMENT_ATTEMPTS Entities:</strong> Store historical logs of all daily 10-question quiz attempts and separate milestone assessments (Days 7, 14, 21, and 30), enabling longitudinal score trend analysis.</li>
-        <li><strong>ACTIVITY_ATTEMPTS Entity:</strong> Preserves student submissions for hands-on programming challenges, recording the submitted answer and validation outcome (<code>accepted = 1 or 0</code>).</li>
-        <li><strong>NOTIFICATIONS Entity:</strong> Persists personalized alerts and milestone notifications per student with an unread/read state tracker (<code>readAt</code>).</li>
-        <li><strong>REVOKED_TOKENS Entity:</strong> Maintains SHA-256 hashes of invalidated JWT session tokens to prevent replay attacks following user sign-out.</li>
-      </ul>
+    </div></div></div>
+    <div class="description-container"><h3>Description: Relational Schema &amp; Entity Relationships</h3>
+      <p>The implemented SQLite schema has exactly 11 tables: seven account/progress tables and four content tables. <code>LEARNING_PROGRESS</code> uses composite primary key <code>(userId, day)</code>. User-owned progress, attempt, and notification rows reference <code>USERS</code> with cascading deletes. <code>QUIZZES.day</code> is nullable and references <code>LESSONS.day</code>; <code>ASSESSMENT_ATTEMPTS.assessmentId</code> is not a declared foreign key. Email is unique but is not verified by an email workflow.</p>
     </div>
   </div>
 
   <!-- 3.7.3 Activity Diagram -->
   <div class="section-card" id="sec-3-7-3">
-    <div class="section-header">
-      <h2>3.7.3 Activity Diagram</h2>
-      <span class="tag">Behavioral Workflow</span>
-    </div>
-    <div class="image-container">
-      <div class="mermaid-box">
-        <div class="mermaid">
+    <div class="section-header"><h2>3.7.3 Activity Diagram</h2><span class="tag">Curriculum workflow</span></div>
+    <div class="image-container"><div class="mermaid-box"><div class="mermaid">
 flowchart TD
-    Start((Start)) --> AuthCheck{Authenticated?}
-    AuthCheck -- No --> SignIn[Sign In / Sign Up]
-    SignIn --> ValidateCreds{Credentials Valid?}
-    ValidateCreds -- No --> SignIn
-    ValidateCreds -- Yes --> IssueToken[Issue JWT Token]
-    IssueToken --> Dashboard[Open 30-Day Dashboard]
+    Start([Start]) --> AuthCheck{"Authenticated?"}
+    AuthCheck -- No --> Login[Sign in or register]
+    Login --> Dashboard[Open dashboard]
     AuthCheck -- Yes --> Dashboard
-
-    Dashboard --> SelectDay[Select Available Day N]
-    SelectDay --> S1[Stage 1: Read Concept]
-    S1 --> S2[Stage 2: Study Pseudocode & Complexity]
-    S2 --> S3[Stage 3: Interactive Visualizer]
-    S3 --> S4[Stage 4: Complete Hands-on Practice]
-    
-    S4 --> SubmitAct[Submit Activity Expected Output]
-    SubmitAct --> CheckAct{Matches Server Test Case?}
-    CheckAct -- No --> S4
-    CheckAct -- Yes --> S5[Stage 5: Attempt 10-Question Daily Quiz]
-    
-    S5 --> GradeQuiz{Quiz Score >= 70%?}
-    GradeQuiz -- No (Failed) --> S5
-    GradeQuiz -- Yes (Passed) --> MilestoneCheck{Is Milestone Day?\n(Day 7, 14, 21, 30)}
-    
-    MilestoneCheck -- Yes --> MilestoneAssessment[Take 10-Question Milestone Assessment]
-    MilestoneAssessment --> GradeMilestone{Milestone Score >= 70%?}
-    GradeMilestone -- No --> MilestoneAssessment
-    GradeMilestone -- Yes --> S6[Stage 6: Review Key Takeaways]
-    
-    MilestoneCheck -- No --> S6
-    S6 --> CompleteDay[Mark Day Completed in DB]
-    CompleteDay --> UnlockNext[Unlock Day N+1 & Issue Notification]
-    UnlockNext --> EndState(((Day Cleared)))
-        </div>
-      </div>
-    </div>
-    <div class="description-container">
-      <h3>Description: End-to-End Activity Flow</h3>
-      <p>The <strong>UML Activity Diagram</strong> maps the dynamic behavioral logic and sequential workflow experienced by students on the platform:</p>
-      <ul>
-        <li><strong>Authentication Gate:</strong> Visitors can browse the catalog and run visualizers freely. Entering the 30-day curriculum triggers an authentication check; valid JWT tokens grant direct entry to the dashboard.</li>
-        <li><strong>6-Stage Daily Pedagogical Loop:</strong> Every day adheres to a structured learning pipeline: (1) Concept Overview &rarr; (2) Detailed Pseudocode & Invariants &rarr; (3) Interactive Canvas/DOM Visualizer &rarr; (4) Hands-on Challenge &rarr; (5) Graded Quiz &rarr; (6) Summary Review.</li>
-        <li><strong>Verification Gate (Activity):</strong> Stage 4 requires the student to compute or predict an algorithm's output on a concrete test case. Progress is blocked until the output matches the server-side test result.</li>
-        <li><strong>Grading Gate (Daily Quiz):</strong> The student attempts 10 authored multiple-choice questions. A strict threshold (&ge; 70%) must be satisfied to pass; failing attempts display hints and allow retries.</li>
-        <li><strong>Milestone Gate:</strong> On Days 7, 14, 21, and 30, a separate comprehensive assessment is required. The day completes only when both the daily quiz and the milestone exam achieve passing grades, after which Day N+1 unlocks automatically.</li>
-      </ul>
+    Dashboard --> SelectDay[Select available day]
+    SelectDay --> Concept[Review concept and start lesson]
+    Concept --> Activity[Submit activity result]
+    Activity --> ActivityCheck{"Matches server test case?"}
+    ActivityCheck -- No --> Activity
+    ActivityCheck -- Yes --> DailyQuiz[Answer 10 daily questions]
+    DailyQuiz --> DailyCheck{"Score at least 70%?"}
+    DailyCheck -- No --> DailyQuiz
+    DailyCheck -- Yes --> MilestoneCheck{"Day 7, 14, 21 or 30?"}
+    MilestoneCheck -- No --> Complete[Complete day and unlock next day]
+    MilestoneCheck -- Yes --> Assessment[Answer 10 milestone questions]
+    Assessment --> AssessmentCheck{"Score at least 70%?"}
+    AssessmentCheck -- No --> Assessment
+    AssessmentCheck -- Yes --> Complete
+    Complete --> DashboardRefresh[Load dashboard and refresh notifications]
+    </div></div></div>
+    <div class="description-container"><h3>Description: End-to-End Activity Flow</h3>
+      <p>Activity validation and daily quizzes are server-checked. Days 7, 14, 21, and 30 also require a separate milestone assessment. Notifications are generated and persisted when dashboard data is loaded; there is no background notification scheduler.</p>
     </div>
   </div>
 
-  <!-- 3.7.4 Class Diagram -->
+  <!-- 3.7.4 Component Diagram -->
   <div class="section-card" id="sec-3-7-4">
-    <div class="section-header">
-      <h2>3.7.4 Class Diagram</h2>
-      <span class="tag">Static Object-Oriented Structure</span>
-    </div>
-    <div class="image-container">
-      <div class="mermaid-box">
-        <div class="mermaid">
-classDiagram
-    class ServerApp {
-        -int PORT
-        -string JWT_SECRET
-        -sqlite3.Database db
-        +initializeDb() void
-        +setupRoutes() void
-        +start() void
-    }
-
-    class UserController {
-        +register(req, res) void
-        +login(req, res) void
-        +logout(req, res) void
-        +getMe(req, res) void
-    }
-
-    class CurriculumController {
-        +getLearningProgress(req, res) void
-        +startDay(req, res) void
-        +completeConcept(req, res) void
-        +submitActivity(req, res) void
-        +getNotifications(req, res) void
-    }
-
-    class AssessmentController {
-        +submitQuiz(req, res) void
-        +submitAssessment(req, res) void
-        -gradeAnswers(submitted, bank) GradeResult
-    }
-
-    class DatabaseService {
-        -sqlite3.Database db
-        +runDb(sql, params) Promise
-        +getDb(sql, params) Promise
-        +allDb(sql, params) Promise
-    }
-
-    class VisualizerCore {
-        -Array stateArray
-        -int speed
-        -boolean isPlaying
-        +play() void
-        +pause() void
-        +stepForward() void
-        +reset() void
-    }
-
-    class SortingVisualizer {
-        +bubbleSort() void
-        +mergeSort() void
-        +quickSort() void
-    }
-
-    class GraphVisualizer {
-        -Map nodes
-        -Map edges
-        +bfs() void
-        +dfs() void
-        +dijkstra() void
-    }
-
-    class PracticeCompilerClient {
-        -string wandboxUrl
-        -string selectedLang
-        +compileAndRun(code, stdin) Promise
-    }
-
-    class LearningDashboardApp {
-        -string authToken
-        -object studentProfile
-        +loadDashboard() void
-        +renderProgressBar() void
-        +renderRadarChart() void
-    }
-
-    ServerApp --> UserController : dispatches
-    ServerApp --> CurriculumController : dispatches
-    ServerApp --> AssessmentController : dispatches
-    UserController --> DatabaseService : queries
-    CurriculumController --> DatabaseService : queries
-    AssessmentController --> DatabaseService : queries
-
-    VisualizerCore <|-- SortingVisualizer : inherits
-    VisualizerCore <|-- GraphVisualizer : inherits
-    LearningDashboardApp ..> CurriculumController : consumes API
-    PracticeCompilerClient ..> VisualizerCore : complements
-        </div>
-      </div>
-    </div>
-    <div class="description-container">
-      <h3>Description: System Class Structure</h3>
-      <p>The <strong>UML Class Diagram</strong> defines the modular architecture of the codebase across both the backend REST service and frontend client modules:</p>
-      <ul>
-        <li><strong>Backend Controller & Service Layer:</strong> <code>ServerApp</code> orchestrates Express routes and database initialization. Specialized controllers (<code>UserController</code>, <code>CurriculumController</code>, <code>AssessmentController</code>) handle business logic and interact asynchronously with SQLite via <code>DatabaseService</code> wrapper methods.</li>
-        <li><strong>Frontend Visualizer Hierarchy:</strong> <code>VisualizerCore</code> encapsulates animation timers, frame sequencing, and state transitions. Concrete subclasses (<code>SortingVisualizer</code>, <code>GraphVisualizer</code>) inherit core playback capabilities while implementing domain-specific algorithms like Quick Sort, Dijkstra, and BST Traversal.</li>
-        <li><strong>Client Services:</strong> <code>PracticeCompilerClient</code> handles network serialization to the Wandbox remote compiler API, and <code>LearningDashboardApp</code> manages client-side profile caching, progress rendering, and radar chart generation.</li>
-      </ul>
+    <div class="section-header"><h2>3.7.4 Component Diagram</h2><span class="tag">Implemented application components</span></div>
+    <div class="image-container"><div class="mermaid-box"><div class="mermaid">
+flowchart LR
+    Browser[Multi-page browser frontend]
+    Dashboard[learning-dashboard.js]
+    Practice[practice-app.js]
+    API[backend/server.js: Express API]
+    Content[backend/content-store.js]
+    DB[(SQLite)]
+    Seeds[data/*.js, backend/curriculum.js, backend/quiz-bank.js]
+    Wandbox[Wandbox API]
+    Browser --> Dashboard
+    Dashboard -->|/api requests| API
+    API --> Content
+    API --> DB
+    Content --> DB
+    Seeds -->|Startup seed and validation| Content
+    Browser --> Practice
+    Practice -->|Direct browser request| Wandbox
+    Wandbox -->|Compile result| Practice
+    </div></div></div>
+    <div class="description-container"><h3>Description: Implemented Components</h3>
+      <p>The API routes are defined in one Express server module; the repository does not implement separate controller classes or a database connection pool. The Practice Lab communicates directly with Wandbox from the browser.</p>
     </div>
   </div>
 
   <!-- 3.7.5 Object Diagram -->
   <div class="section-card" id="sec-3-7-5">
-    <div class="section-header">
-      <h2>3.7.5 Object Diagram</h2>
-      <span class="tag">Runtime Instance Snapshot</span>
-    </div>
-    <div class="image-container">
-      <div class="mermaid-box">
-        <div class="mermaid">
+    <div class="section-header"><h2>3.7.5 Object Diagram</h2><span class="tag">Fictional example data</span></div>
+    <div class="image-container"><div class="mermaid-box"><div class="mermaid">
 classDiagram
-    class currentUser_usr8491 {
-        id = "usr-8491-b3f2"
-        name = "Piyush Sharma"
-        email = "piyush@example.com"
-        createdAt = "2026-10-15T09:30:00Z"
+    class sampleUser {
+        id = "sample-user-01"
+        name = "Alex Example"
+        email = "alex@example.test"
     }
-
-    class activeSession_jwt {
-        tokenHash = "a7f49c0182bd..."
-        expiresAt = "2026-11-05T09:30:00Z"
-        isValid = true
-    }
-
     class day1Progress {
-        userId = "usr-8491-b3f2"
         day = 1
         dailyQuizPassed = 1
         latestScore = 90.0
-        completedAt = "2026-10-15T10:25:00Z"
+        completedAt = "2026-01-15T10:25:00Z"
     }
-
     class day2Progress {
-        userId = "usr-8491-b3f2"
         day = 2
         dailyQuizPassed = 0
-        latestScore = 0.0
         completedAt = null
     }
-
-    class quizAttempt_qz312 {
-        id = "qa-3120"
+    class quizAttempt_sample {
         day = 1
         score = 90.0
         passed = 1
     }
-
-    class activityAttempt_act99 {
-        id = "act-9941"
+    class activityAttempt_sample {
         day = 1
         answer = "3"
         accepted = 1
     }
-
-    class notif_welcome {
-        id = "notif-0182"
-        day = 1
-        message = "Day 1 completed! Day 2 is unlocked."
-    }
-
-    currentUser_usr8491 ..> activeSession_jwt : holds
-    currentUser_usr8491 --> day1Progress : tracks
-    currentUser_usr8491 --> day2Progress : tracks
-    day1Progress --> activityAttempt_act99 : verified by
-    day1Progress --> quizAttempt_qz312 : cleared by
-    currentUser_usr8491 --> notif_welcome : receives
-        </div>
-      </div>
-    </div>
-    <div class="description-container">
-      <h3>Description: Concrete Runtime Snapshot</h3>
-      <p>The <strong>UML Object Diagram</strong> models a live runtime snapshot of the system, illustrating actual instances and concrete memory/database values during an active student session:</p>
-      <ul>
-        <li><strong>Student Identity (<code>currentUser_usr8491</code>):</strong> Represents student Piyush Sharma with assigned UUID <code>usr-8491-b3f2</code> and email <code>piyush@example.com</code>.</li>
-        <li><strong>Session State (<code>activeSession_jwt</code>):</strong> An active cryptographically signed JWT token with valid expiry date and an intact SHA-256 hash not present in the revocation list.</li>
-        <li><strong>Sequential Progression Objects:</strong> <code>day1Progress</code> has reached completion (<code>dailyQuizPassed = 1</code>, <code>completedAt = "2026-10-15T10:25:00Z"</code>), successfully unlocking <code>day2Progress</code> which is initialized but pending completion.</li>
-        <li><strong>Attempt Artifacts:</strong> Shows <code>activityAttempt_act99</code> with verified answer <code>"3"</code> and <code>quizAttempt_qz312</code> with an authenticated passing score of 90%.</li>
-        <li><strong>Alert Notification:</strong> <code>notif_welcome</code> confirms the automated emission of an unlock notification for Day 2 upon Day 1 clearance.</li>
-      </ul>
+    sampleUser --> day1Progress : tracks
+    sampleUser --> day2Progress : tracks
+    day1Progress --> activityAttempt_sample : verified by
+    day1Progress --> quizAttempt_sample : cleared by
+    </div></div></div>
+    <div class="description-container"><h3>Description: Illustrative Data</h3>
+      <p>Fictional sample data only. The name, reserved <code>.test</code> email domain, and records are examples, not actual student data or a live database capture.</p>
     </div>
   </div>
 

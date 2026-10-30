@@ -22,7 +22,7 @@
 
 ## Automated checks
 
-- From the `backend` directory, run `npm test` for curriculum validation, API progression and account-isolation tests, all four milestone gates, and the 93-entry complexity metadata audit.
+- From the `backend` directory, run `npm test` for SQLite content migration/parity/idempotency, catalog API, curriculum validation, API progression and account-isolation tests, all four milestone gates, and the 93-entry complexity metadata audit.
 - Run `npm run build` from the project root for the Vite production bundle.
 - Run `node --check` on changed JavaScript if further edits are made.
 
@@ -31,7 +31,7 @@
 - Daily quizzes contain 10 questions each (300 total); four distinct milestone assessments contain 10 questions each.
 - Activities validate one submitted result against a server-side expected output; the dashboard does not execute student-submitted code.
 - Automated integration tests exercise Days 7, 14, 21, and 30 separately. Perform the browser checklist above to verify the interactive frontend flow.
-- Only 12 of the 93 catalog items have detailed structured complexity data. For the remaining entries, best/worst/space complexity is explicitly undocumented.
+- All 93 algorithm catalog entries are stored in SQLite and include card-ready time and auxiliary-space metadata.
 - Notifications are generated on dashboard loads. There is no email delivery, scheduled reminder service, deadline, or overdue status.
 - The Practice Lab relies on the external Wandbox service and internet access.
 - This is a local runnable package, not a public production deployment; production security and deployment configuration remain necessary.

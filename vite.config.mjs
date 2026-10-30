@@ -8,14 +8,12 @@ export default defineConfig({
         generateBundle() {
             const dataDirectory = resolve(process.cwd(), "data");
 
-            for (const file of readdirSync(dataDirectory)) {
-                if (file.endsWith(".js")) {
-                    this.emitFile({
-                        type: "asset",
-                        fileName: `data/${file}`,
-                        source: readFileSync(resolve(dataDirectory, file))
-                    });
-                }
+            if (readdirSync(dataDirectory).includes("explanations.js")) {
+                this.emitFile({
+                    type: "asset",
+                    fileName: "data/explanations.js",
+                    source: readFileSync(resolve(dataDirectory, "explanations.js"))
+                });
             }
         }
     }],

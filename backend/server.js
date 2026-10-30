@@ -7,8 +7,15 @@ import { mkdirSync } from 'node:fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createHash, randomUUID } from 'node:crypto';
-import { curriculum, publicDay } from './curriculum.js';
-import { assessments, assessmentDefinitions } from './quiz-bank.js';
+import {
+  getAlgorithmGroups,
+  getAssessmentRecord,
+  getLessonContent,
+  getLessonSummaries,
+  getQuizQuestions,
+  initializeContentStore,
+  publicLesson,
+} from './content-store.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +30,7 @@ mkdirSync(path.dirname(DB_PATH), { recursive: true });
 
 const app = express();
 const db = new sqlite3.Database(DB_PATH);
+db.configure('busyTimeout', 5000);
 
 const allowedOrigins = (process.env.FRONTEND_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:4173,http://127.0.0.1:4173')
   .split(',').map(value => value.trim()).filter(Boolean);
@@ -69,6 +77,8 @@ const allDb = (sql, params = []) => new Promise((resolve, reject) => {
 });
 
 const initializeDb = async () => {
+  await runDb('PRAGMA foreign_keys = ON');
+  await runDb('PRAGMA journal_mode = WAL');
   await runDb(`
     CREATE TABLE IF NOT EXISTS users (
       id TEXT PRIMARY KEY,
@@ -150,6 +160,7 @@ const initializeDb = async () => {
   if (!progressColumns.some(column => column.name === 'dailyQuizPassed')) {
     await runDb('ALTER TABLE learning_progress ADD COLUMN dailyQuizPassed INTEGER NOT NULL DEFAULT 0');
   }
+  await initializeContentStore({ runDb, getDb, allDb });
 };
 
 const createToken = (user) => jwt.sign(
@@ -185,8 +196,10 @@ const getProgress = (userId) => allDb(
   [userId]
 );
 
-const getAssessment = (id) => assessments.find(assessment => assessment.id === id);
-const milestoneForDay = day => ({ 7: 'foundation', 14: 'sorting', 21: 'graphs', 30: 'final' })[day] || null;
+const milestoneForDay = async day => {
+  const assessment = await getDb("SELECT id FROM quizzes WHERE type = 'assessment' AND day = ?", [day]);
+  return assessment?.id || null;
+};
 const hasPassedAssessment = (userId, assessmentId) => getDb(
   'SELECT id FROM assessment_attempts WHERE userId = ? AND assessmentId = ? AND passed = 1 LIMIT 1',
   [userId, assessmentId]
@@ -230,8 +243,40 @@ const dayStatus = (day, progress, currentDay) => {
   return record?.startedAt ? 'In Progress' : 'Available';
 };
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Algorithm Hub backend is running.' });
+app.get('/api/health', async (req, res) => {
+  try {
+    await getDb('SELECT 1');
+    res.json({ status: 'ok', message: 'Algorithm Hub backend and database are running.' });
+  } catch (error) {
+    console.error('Health check database error:', error);
+    res.status(503).json({ status: 'error', message: 'The Algorithm Hub database is unavailable.' });
+  }
+});
+
+app.get('/api/algorithms', async (req, res) => {
+  try {
+    res.json({ groups: await getAlgorithmGroups(allDb) });
+  } catch (error) {
+    console.error('Algorithm catalog load error:', error);
+    res.status(500).json({ message: 'Unable to load the algorithm catalog right now.' });
+  }
+});
+
+app.get('/api/algorithm-groups.js', async (req, res) => {
+  try {
+    const groups = await getAlgorithmGroups(allDb);
+    const serialized = JSON.stringify(groups).replace(/[<>&\u2028\u2029]/g, character => ({
+      '<': '\\u003c',
+      '>': '\\u003e',
+      '&': '\\u0026',
+      '\u2028': '\\u2028',
+      '\u2029': '\\u2029',
+    })[character]);
+    res.type('application/javascript').send(`window.algorithmGroups = ${serialized};`);
+  } catch (error) {
+    console.error('Algorithm catalog script load error:', error);
+    res.status(500).type('text/plain').send('Unable to load the algorithm catalog.');
+  }
 });
 
 app.post('/api/logout', requireAuth, async (req, res) => {
@@ -253,6 +298,10 @@ app.post('/api/logout', requireAuth, async (req, res) => {
 app.get('/api/dashboard', requireAuth, async (req, res) => {
   try {
     const progress = await getProgress(req.user.id);
+    const lessonSummaries = await getLessonSummaries(allDb);
+    const lessonsByDay = new Map(lessonSummaries.map(lesson => [lesson.day, lesson]));
+    const assessmentTitles = new Map((await allDb("SELECT id, title FROM quizzes WHERE type = 'assessment'"))
+      .map(assessment => [assessment.id, assessment.title]));
     await makeDashboardNotifications(req.user.id, progress);
     const attempts = await allDb(
       'SELECT day, score, passed, submittedAt FROM quiz_attempts WHERE userId = ? ORDER BY submittedAt DESC LIMIT 50',
@@ -310,11 +359,11 @@ app.get('/api/dashboard', requireAuth, async (req, res) => {
       quizAttempts: attempts,
       assessmentAttempts: assessmentAttempts.map(attempt => ({
         ...attempt,
-        title: getAssessment(attempt.assessmentId)?.title || attempt.assessmentId,
+        title: assessmentTitles.get(attempt.assessmentId) || attempt.assessmentId,
       })),
       topicPerformance: topicPerformance.map(item => ({
         day: item.day,
-        title: curriculum[item.day - 1].title,
+        title: lessonsByDay.get(item.day)?.title || `Day ${item.day}`,
         average: Math.round(item.average),
         attempts: item.attempts,
       })),
@@ -322,11 +371,12 @@ app.get('/api/dashboard', requireAuth, async (req, res) => {
       progress: Array.from({ length: 30 }, (_, index) => {
         const day = index + 1;
         const record = progress.find(item => item.day === day);
+        const lesson = lessonsByDay.get(day);
         return {
           day,
-          title: curriculum[index].title,
-          level: curriculum[index].level,
-          minutes: curriculum[index].minutes,
+          title: lesson?.title || `Day ${day}`,
+          level: lesson?.level || '',
+          minutes: lesson?.minutes || 0,
           status: dayStatus(day, progress, nextDay),
           startedAt: record?.startedAt || null,
           completedAt: record?.completedAt || null,
@@ -337,7 +387,7 @@ app.get('/api/dashboard', requireAuth, async (req, res) => {
         .filter(item => item.startedAt || item.completedAt)
         .slice(-6)
         .reverse()
-        .map(item => ({ day: item.day, title: curriculum[item.day - 1].title, startedAt: item.startedAt, completedAt: item.completedAt })),
+        .map(item => ({ day: item.day, title: lessonsByDay.get(item.day)?.title || `Day ${item.day}`, startedAt: item.startedAt, completedAt: item.completedAt })),
       notifications,
     });
   } catch (error) {
@@ -351,14 +401,17 @@ app.get('/api/learning/:day', requireAuth, async (req, res) => {
   if (!Number.isInteger(day) || day < 1 || day > 30) return res.status(400).json({ message: 'Choose a learning day from 1 to 30.' });
   try {
     const progress = await getProgress(req.user.id);
+    const lessonContent = await getLessonContent(getDb, allDb, day);
+    if (!lessonContent) return res.status(404).json({ message: 'Learning content not found.' });
+    const lessonSummaries = await getLessonSummaries(allDb);
     const nextDay = progress.filter(item => item.completedAt).length + 1;
     const existing = progress.find(item => item.day === day);
     if (day > nextDay && !existing?.completedAt) return res.status(403).json({ message: 'Complete the previous day to unlock this lesson.' });
-    const assessmentId = milestoneForDay(day);
+    const assessmentId = await milestoneForDay(day);
     const assessmentPassed = assessmentId ? Boolean(await hasPassedAssessment(req.user.id, assessmentId)) : true;
     res.json({
-      lesson: publicDay(day),
-      nextDayTitle: day < 30 ? curriculum[day].title : null,
+      lesson: publicLesson(lessonContent),
+      nextDayTitle: day < 30 ? lessonSummaries.find(lesson => lesson.day === day + 1)?.title || null : null,
       status: dayStatus(day, progress, Math.min(30, nextDay)),
       progress: existing || null,
       assessmentId,
@@ -427,7 +480,9 @@ app.post('/api/learning/:day/activity', requireAuth, async (req, res) => {
     if (!existing.conceptCompletedAt) return res.status(400).json({ message: 'Review and confirm the concept before submitting your activity.' });
     if (existing.completedAt) return res.json({ message: 'This day is already complete.', status: 'Completed' });
     if (existing.activityCompletedAt) return res.json({ message: 'Activity test already passed.', status: 'In Progress' });
-    const expectedAnswer = curriculum[day - 1].activityValidation.expectedAnswer;
+    const lesson = await getLessonContent(getDb, allDb, day);
+    if (!lesson) return res.status(404).json({ message: 'Learning content not found.' });
+    const expectedAnswer = lesson.activityValidation.expectedAnswer;
     const accepted = normalizeActivityAnswer(answer) === normalizeActivityAnswer(expectedAnswer);
     await runDb(
       'INSERT INTO activity_attempts (id, userId, day, answer, accepted, submittedAt) VALUES (?, ?, ?, ?, ?, ?)',
@@ -451,14 +506,15 @@ app.post('/api/learning/:day/quiz', requireAuth, async (req, res) => {
   if (!Number.isInteger(day) || day < 1 || day > 30 || !answers || typeof answers !== 'object' || Array.isArray(answers)) {
     return res.status(400).json({ message: 'Submit answers for this day’s quiz.' });
   }
-  const quiz = curriculum[day - 1].quiz;
-  const keys = Object.keys(answers).sort();
-  const expectedKeys = quiz.map(question => question.id).sort();
-  if (keys.length !== expectedKeys.length || keys.some((key, index) => key !== expectedKeys[index]) ||
-      quiz.some(question => !Number.isInteger(answers[question.id]) || answers[question.id] < 0 || answers[question.id] >= question.options.length)) {
-    return res.status(400).json({ message: 'Answer every quiz question using a valid option.' });
-  }
   try {
+    const quiz = await getQuizQuestions(allDb, `daily-${day}`);
+    if (!quiz.length) return res.status(404).json({ message: 'Quiz content not found.' });
+    const keys = Object.keys(answers).sort();
+    const expectedKeys = quiz.map(question => question.id).sort();
+    if (keys.length !== expectedKeys.length || keys.some((key, index) => key !== expectedKeys[index]) ||
+        quiz.some(question => !Number.isInteger(answers[question.id]) || answers[question.id] < 0 || answers[question.id] >= question.options.length)) {
+      return res.status(400).json({ message: 'Answer every quiz question using a valid option.' });
+    }
     const progress = await getProgress(req.user.id);
     const nextDay = progress.filter(item => item.completedAt).length + 1;
     const existing = progress.find(item => item.day === day);
@@ -479,7 +535,7 @@ app.post('/api/learning/:day/quiz', requireAuth, async (req, res) => {
     const score = Math.round(correct / quiz.length * 100);
     const passed = score >= 70;
     const submittedAt = new Date().toISOString();
-    const assessmentId = milestoneForDay(day);
+    const assessmentId = await milestoneForDay(day);
     const assessmentPassed = assessmentId ? Boolean(await hasPassedAssessment(req.user.id, assessmentId)) : true;
     const completed = passed && assessmentPassed;
     await runDb('INSERT INTO quiz_attempts (id, userId, day, score, passed, submittedAt) VALUES (?, ?, ?, ?, ?, ?)', [
@@ -494,7 +550,7 @@ app.post('/api/learning/:day/quiz', requireAuth, async (req, res) => {
     const message = !passed
       ? 'Not passed yet. Review the explanations and try again.'
       : !assessmentPassed
-        ? `${assessmentDefinitions.find(item => item.id === assessmentId).title} is also required to complete this day.`
+        ? `${(await getAssessmentRecord(getDb, allDb, assessmentId))?.title || 'The milestone assessment'} is also required to complete this day.`
         : `Day ${day} completed. The next lesson is unlocked.`;
     res.json({
       score,
@@ -512,10 +568,10 @@ app.post('/api/learning/:day/quiz', requireAuth, async (req, res) => {
 });
 
 app.get('/api/assessments/:assessmentId', requireAuth, async (req, res) => {
-  const assessment = getAssessment(req.params.assessmentId);
-  if (!assessment) return res.status(404).json({ message: 'Assessment not found.' });
-  const milestoneDay = assessment.days[assessment.days.length - 1];
   try {
+    const assessment = await getAssessmentRecord(getDb, allDb, req.params.assessmentId);
+    if (!assessment) return res.status(404).json({ message: 'Assessment not found.' });
+    const milestoneDay = assessment.days[assessment.days.length - 1];
     const progress = await getProgress(req.user.id);
     const dayProgress = progress.find(item => item.day === milestoneDay);
     if (!dayProgress?.startedAt || !dayProgress.activityCompletedAt || !dayProgress.conceptCompletedAt || !dayProgress.dailyQuizPassed) {
@@ -537,18 +593,19 @@ app.get('/api/assessments/:assessmentId', requireAuth, async (req, res) => {
 });
 
 app.post('/api/assessments/:assessmentId/quiz', requireAuth, async (req, res) => {
-  const assessment = getAssessment(req.params.assessmentId);
   const answers = req.body?.answers;
-  if (!assessment || !answers || typeof answers !== 'object' || Array.isArray(answers)) {
+  if (!answers || typeof answers !== 'object' || Array.isArray(answers)) {
     return res.status(400).json({ message: 'Submit answers for a valid assessment.' });
   }
-  const keys = Object.keys(answers).sort();
-  const expectedKeys = assessment.questions.map(question => question.id).sort();
-  if (keys.length !== expectedKeys.length || keys.some((key, index) => key !== expectedKeys[index]) ||
-      assessment.questions.some(question => !Number.isInteger(answers[question.id]) || answers[question.id] < 0 || answers[question.id] >= question.options.length)) {
-    return res.status(400).json({ message: 'Answer every assessment question using a valid option.' });
-  }
   try {
+    const assessment = await getAssessmentRecord(getDb, allDb, req.params.assessmentId);
+    if (!assessment) return res.status(404).json({ message: 'Assessment not found.' });
+    const keys = Object.keys(answers).sort();
+    const expectedKeys = assessment.questions.map(question => question.id).sort();
+    if (keys.length !== expectedKeys.length || keys.some((key, index) => key !== expectedKeys[index]) ||
+        assessment.questions.some(question => !Number.isInteger(answers[question.id]) || answers[question.id] < 0 || answers[question.id] >= question.options.length)) {
+      return res.status(400).json({ message: 'Answer every assessment question using a valid option.' });
+    }
     const milestoneDay = assessment.days[assessment.days.length - 1];
     const progress = await getProgress(req.user.id);
     const dayProgress = progress.find(item => item.day === milestoneDay);
